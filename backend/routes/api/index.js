@@ -1,7 +1,8 @@
-const router = require("express").Router();
-
-router.post("/test", function (req, res) {
-  res.json({ requestBody: req.body });
+const { requireAuth } = require("../../utils/auth.js");
+router.get("/require-auth", requireAuth, (req, res) => {
+  return res.json(req.user);
 });
+
+router.use(restoreUser);
 
 module.exports = router;
