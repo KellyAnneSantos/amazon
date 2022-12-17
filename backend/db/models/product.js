@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -13,23 +11,79 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Product.init({
-    merchantId: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    department: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    description: DataTypes.STRING,
-    size: DataTypes.BOOLEAN,
-    color: DataTypes.BOOLEAN,
-    freeReturn: DataTypes.BOOLEAN,
-    subscribe: DataTypes.BOOLEAN,
-    essential: DataTypes.BOOLEAN,
-    deliveryPrice: DataTypes.INTEGER,
-    deliveryTime: DataTypes.INTEGER,
-    returnTime: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Product',
-  });
+  Product.init(
+    {
+      merchantId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      name: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          len: [2, 256],
+        },
+      },
+      department: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      price: {
+        allowNull: false,
+        type: DataTypes.FLOAT,
+      },
+      size: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
+      },
+      color: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
+      },
+      dimensions: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          len: [3, 100],
+        },
+      },
+      description: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          len: [1, 256],
+        },
+      },
+      freeReturn: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
+      },
+      essential: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
+      },
+      deliveryPrice: DataTypes.FLOAT,
+      deliveryTime: DataTypes.INTEGER,
+      returnTime: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      previewImage: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          len: [5, 256],
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Product",
+    }
+  );
   return Product;
 };

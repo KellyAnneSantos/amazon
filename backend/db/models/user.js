@@ -130,6 +130,11 @@ module.exports = (sequelize, DataTypes) => {
           len: [10, 10],
         },
       },
+      prime: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
+      },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
         allowNull: false,

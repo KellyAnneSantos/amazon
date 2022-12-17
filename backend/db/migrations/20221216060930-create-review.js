@@ -35,7 +35,6 @@ module.exports = {
         type: Sequelize.STRING(256),
       },
       previewImage: {
-        allowNull: false,
         type: Sequelize.STRING(256),
       },
       body: {
