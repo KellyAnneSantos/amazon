@@ -11,7 +11,7 @@ module.exports = {
       },
       productId: {
         allowNull: false,
-        onDelete: "CASCADE",
+        // onDelete: "CASCADE",
         references: {
           model: "Products",
           key: "id",
@@ -20,7 +20,7 @@ module.exports = {
       },
       orderId: {
         allowNull: false,
-        onDelete: "CASCADE",
+        // onDelete: "CASCADE",
         references: {
           model: "Orders",
           key: "id",

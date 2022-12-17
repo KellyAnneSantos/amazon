@@ -8,7 +8,36 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Product.belongsTo(models.User, {
+        foreignKey: "merchantId",
+      });
+      Product.hasMany(models.Review, {
+        foreignKey: "productId",
+        // onDelete: "CASCADE",
+        // hooks: true,
+      });
+      Product.hasMany(models.Media, {
+        foreignKey: "imageableId",
+        constraints: false,
+        scope: {
+          imageableType: "product",
+        },
+        // onDelete: "CASCADE",
+        // hooks: true,
+      });
+      Product.belongsToMany(models.Order, {
+        through: models.ProductOrder,
+        foreignKey: "productId",
+        otherKey: "orderId",
+      });
+      Product.hasMany(models.ProductOrder, {
+        foreignKey: "productId",
+      });
+      Product.hasMany(models.Description, {
+        foreignKey: "productId",
+        // onDelete: "CASCADE",
+        // hooks: true,
+      });
     }
   }
   Product.init(
