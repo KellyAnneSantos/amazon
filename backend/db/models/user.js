@@ -5,8 +5,26 @@ const bcrypt = require("bcryptjs");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const {
+        id,
+        firstName,
+        lastName,
+        merchant,
+        merchantName,
+        email,
+        phone,
+        prime,
+      } = this;
+      return {
+        id,
+        firstName,
+        lastName,
+        merchant,
+        merchantName,
+        email,
+        phone,
+        prime,
+      };
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
@@ -22,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
       const user = await User.scope("loginUser").findOne({
         where: {
           [Op.or]: {
-            username: credential,
             email: credential,
+            phone: credential,
           },
         },
       });
@@ -31,11 +49,25 @@ module.exports = (sequelize, DataTypes) => {
         return await User.scope("currentUser").findByPk(user.id);
       }
     }
-    static async signup({ username, email, password }) {
+    static async signup({
+      firstName,
+      lastName,
+      merchant,
+      merchantName,
+      email,
+      phone,
+      prime,
+      password,
+    }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
-        username,
+        firstName,
+        lastName,
+        merchant,
+        merchantName,
         email,
+        phone,
+        prime,
         hashedPassword,
       });
       return await User.scope("currentUser").findByPk(user.id);
@@ -44,23 +76,58 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
-      username: {
-        type: DataTypes.STRING,
+      firstName: {
         allowNull: false,
+        type: DataTypes.STRING,
         validate: {
-          len: [4, 30],
-          isNotEmail(value) {
-            if (Validator.isEmail(value)) {
-              throw new Error("Cannot be an email.");
-            }
-          },
+          len: [2, 25],
         },
       },
-      email: {
-        type: DataTypes.STRING,
+      lastName: {
         allowNull: false,
+        type: DataTypes.STRING,
         validate: {
-          len: [3, 256],
+          len: [2, 25],
+        },
+      },
+      merchant: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
+      },
+      merchantName: {
+        type: DataTypes.STRING,
+        unique: true,
+        validate: {
+          len: [2, 256],
+        },
+      },
+      // username: {
+      //   type: DataTypes.STRING,
+      //   allowNull: false,
+      //   validate: {
+      //     len: [4, 30],
+      //     isNotEmail(value) {
+      //       if (Validator.isEmail(value)) {
+      //         throw new Error("Cannot be an email.");
+      //       }
+      //     },
+      //   },
+      // },
+      email: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        unique: true,
+        validate: {
+          len: [10, 256],
+        },
+      },
+      phone: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        unique: true,
+        validate: {
+          len: [10, 10],
         },
       },
       hashedPassword: {
