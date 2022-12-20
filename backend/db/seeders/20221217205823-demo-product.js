@@ -147,8 +147,7 @@ const products = [
     price: 16.15,
     size: true,
     color: false,
-    description:
-      "Ingredients: Alcohol Denat. (SD Alcohol 40), Isobutane, Cyclomethicone, Propane, C12-15 Alkyl Benzoate, Phenyl Trimethicone, Dimethicone Copolyol, Panthenol Ethyl Ether, Parfum (Fragrance), Limonene, Dimethicone, Ethyl Ester of Hydrolyzed Silk Propylene Glycol",
+    description: "4 x 5 x 4 inches; 5.07 Ounces",
     freeReturn: false,
     essential: false,
     previewImage:
