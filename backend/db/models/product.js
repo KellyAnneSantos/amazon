@@ -71,13 +71,20 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: false,
         type: DataTypes.BOOLEAN,
       },
-      dimensions: {
-        allowNull: false,
-        type: DataTypes.STRING,
-        validate: {
-          len: [3, 100],
-        },
-      },
+      // dimensions: {
+      //   allowNull: false,
+      //   type: DataTypes.STRING,
+      //   validate: {
+      //     len: [3, 100],
+      //   },
+      // },
+      // weight: {
+      //   allowNull: false,
+      //   type: DataTypes.STRING,
+      //   validate: {
+      //     len: [4, 100],
+      //   },
+      // },
       description: {
         allowNull: false,
         type: DataTypes.STRING,
@@ -97,10 +104,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       deliveryPrice: DataTypes.FLOAT,
       deliveryTime: DataTypes.INTEGER,
-      returnTime: {
-        allowNull: false,
-        type: DataTypes.INTEGER,
-      },
+      // returnTime: {
+      //   allowNull: false,
+      //   type: DataTypes.INTEGER,
+      // },
       previewImage: {
         allowNull: false,
         type: DataTypes.STRING,

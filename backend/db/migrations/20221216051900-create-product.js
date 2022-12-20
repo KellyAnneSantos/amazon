@@ -93,18 +93,18 @@ module.exports = {
         defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
-      dimensions: {
-        allowNull: false,
-        type: Sequelize.STRING(100),
-      },
-      weight: {
-        allowNull: false,
-        type: Sequelize.STRING(100),
-      },
-      modelNumber: {
-        allowNull: false,
-        type: Sequelize.STRING(100),
-      },
+      // dimensions: {
+      //   allowNull: false,
+      //   type: Sequelize.STRING(100),
+      // },
+      // weight: {
+      //   allowNull: false,
+      //   type: Sequelize.STRING(100),
+      // },
+      // modelNumber: {
+      //   allowNull: false,
+      //   type: Sequelize.STRING(100),
+      // },
       description: {
         allowNull: false,
         type: Sequelize.STRING(256),
@@ -127,10 +127,10 @@ module.exports = {
         // allowNull: false,
         type: Sequelize.INTEGER,
       },
-      returnTime: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
+      // returnTime: {
+      //   allowNull: false,
+      //   type: Sequelize.INTEGER,
+      // },
       previewImage: {
         allowNull: false,
         type: Sequelize.STRING(256),
