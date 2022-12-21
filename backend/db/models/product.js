@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         // onDelete: "CASCADE",
         // hooks: true,
       });
-      Product.hasMany(models.Media, {
+      Product.hasMany(models.Image, {
         foreignKey: "imageableId",
         constraints: false,
         scope: {

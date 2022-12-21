@@ -2,7 +2,7 @@
 const { Model } = require("sequelize");
 const uppercaseFirst = (str) => `${str[0].toUpperCase()}${str.substr(1)}`;
 module.exports = (sequelize, DataTypes) => {
-  class Media extends Model {
+  class Image extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,22 +14,18 @@ module.exports = (sequelize, DataTypes) => {
       return this[mixinMethodName](options);
     }
     static associate(models) {
-      Media.belongsTo(models.Product, {
+      Image.belongsTo(models.Product, {
         foreignKey: "imageableId",
         constraints: false,
       });
-      Media.belongsTo(models.Review, {
+      Image.belongsTo(models.Review, {
         foreignKey: "imageableId",
         constraints: false,
       });
     }
   }
-  Media.init(
+  Image.init(
     {
-      userId: {
-        allowNull: false,
-        type: DataTypes.INTEGER,
-      },
       imageableId: {
         allowNull: false,
         type: DataTypes.INTEGER,
@@ -52,10 +48,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Media",
+      modelName: "Image",
     }
   );
-  Media.addHook("afterFind", (findResult) => {
+  Image.addHook("afterFind", (findResult) => {
     if (!Array.isArray(findResult)) findResult = [findResult];
     for (const instance of findResult) {
       if (
@@ -76,5 +72,5 @@ module.exports = (sequelize, DataTypes) => {
       delete instance.dataValues.review;
     }
   });
-  return Media;
+  return Image;
 };

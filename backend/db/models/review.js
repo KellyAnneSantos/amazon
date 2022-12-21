@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Review.belongsTo(models.Product, {
         foreignKey: "productId",
       });
-      Review.hasMany(models.Media, {
+      Review.hasMany(models.Image, {
         foreignKey: "imageableId",
         constraints: false,
         scope: {

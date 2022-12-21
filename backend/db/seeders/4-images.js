@@ -1,8 +1,8 @@
 "use strict";
 
-const { Media } = require("../models");
+const { Image } = require("../models");
 
-const medias = [
+const images = [
   {
     imageableId: 1,
     imageableType: "product",
@@ -199,8 +199,7 @@ const medias = [
     imageableId: 19,
     imageableType: "review",
     mediaType: "image",
-    mediaUrl:
-      "https://media1.popsugar-assets.com/files/thumbor/Vsfck-yUcXgqtKsEdHmlDVVty2c/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/02/05/054/n/1922564/b3fedf9d78c28abf_netimgEmZEO5/i/For-Never-Getting-Old-Pick-Floerns-Collared-Two-Piece-Pajama-Set.jpg",
+    mediaUrl: "https://i.ebayimg.com/images/g/b5cAAOSwZk5jZQEs/s-l1600.jpg",
   },
   {
     imageableId: 20,
@@ -619,15 +618,14 @@ const medias = [
   },
 ];
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await Media.bulkCreate(medias, {
+    await Image.bulkCreate(images, {
       validate: true,
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Medias", null, {});
+    await queryInterface.bulkDelete("Images", null, {});
   },
 };
