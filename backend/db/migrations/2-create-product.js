@@ -69,7 +69,6 @@ module.exports = {
           "Smart Home",
           "Software",
           "Sports & Outdoors",
-          "Garden & Outdoor",
           "Subscribe & Save",
           "Subscription Boxes",
           "Tools & Home Improvement",
