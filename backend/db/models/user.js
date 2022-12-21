@@ -138,7 +138,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         unique: true,
         validate: {
-          len: [10, 10],
+          len: [7, 7],
         },
       },
       prime: {
