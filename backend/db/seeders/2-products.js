@@ -43,7 +43,7 @@ const products = [
     description: "95% Polyester, 5% Spandex",
     freeReturn: true,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage:
       "https://media.sezane.com/image/upload/c_fill,d_placeholder_dark.png,fl_progressive:semi,h_816,q_auto:best,w_582/qn2qiu86w1zzzxahlfzz.jpg",
   },
@@ -57,7 +57,7 @@ const products = [
     description: "dusbuster Handheld Vacuum, Cordless, Magic Blue",
     freeReturn: true,
     essential: false,
-    prime: false,
+    prime: true,
     previewImage:
       "https://images.thdstatic.com/productImages/7231ad48-5e2e-4b58-affa-1f80c8261710/svn/hoover-upright-vacuums-uh71320-64_1000.jpg",
   },
@@ -72,7 +72,7 @@ const products = [
       "Enjoy twice the storage with 8 GB. Or choose 32 GB to hold more magazines, comics, and audiobooks.",
     freeReturn: true,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage:
       "https://cdn.vox-cdn.com/thumbor/EDin--weesrJrcp1em16A2Dg-cU=/0x0:2040x1360/1200x628/filters:focal(1020x680:1021x681)/cdn.vox-cdn.com/uploads/chorus_asset/file/22954534/cgartenberg_211020_4819_0002.jpg",
   },
@@ -87,7 +87,7 @@ const products = [
       "SIX EGG CAPACITY: Cook up to 6 eggs in soft, medium, or hard boiled firmness, while saving time and water. Eggs come out consistently perfect with shell easy to peel, and clean up is snap.",
     freeReturn: true,
     essential: false,
-    prime: false,
+    prime: true,
     previewImage:
       "https://www.sencor.com/getmedia/3e0eca90-572b-46a0-9d56-5c74d7d0e8b3/40029281.jpg.aspx?width=2100&height=2100&ext=.jpg",
   },
@@ -102,7 +102,7 @@ const products = [
       "Full of inspiration, beautiful photography and travel motivation that ignites the wanderlust spirit, it is the perfect gift for every traveler, adventurer & life seeker.",
     freeReturn: false,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage:
       "https://iajw.org/wp-content/uploads/2019/09/What-is-journal-writing-image-of-blank-journal.jpg",
   },
@@ -146,7 +146,7 @@ const products = [
       "Material: Silk Pajamas for Women made of high-quality imitation silk fabric( Polyester )",
     freeReturn: true,
     essential: false,
-    prime: false,
+    prime: true,
     previewImage:
       "https://m.media-amazon.com/images/I/710k2YNDywL._AC_UY1000_.jpg",
   },
@@ -174,7 +174,7 @@ const products = [
     description: "OR205 Apricot Red(21AD)",
     freeReturn: true,
     essential: false,
-    prime: false,
+    prime: true,
     previewImage:
       "https://cafe24img.poxo.com/beautyboxkorea/web/upload/NNEditor/20201020/4OIN%20Foreul%20Velmower%20Lip%20Tint%204.5g_6_shop2_141922.jpg",
   },
@@ -219,7 +219,7 @@ const products = [
       "PREBIOTICS help maintain the strength of the skin’s protective barrier for a healthy-looking glow.",
     freeReturn: true,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage: "https://i1.perfumesclub.com/grande/178945.jpg",
   },
   {
@@ -233,7 +233,7 @@ const products = [
       "Adjustable Angle Viewing: Multiple Angles could be adjusted (270 degree rotating) to meet your different viewing demand. Makes you hands-free to enjoy your games, videos and Facetime",
     freeReturn: true,
     essential: false,
-    prime: false,
+    prime: true,
     previewImage:
       "https://i.etsystatic.com/26620830/r/il/74942b/2944635458/il_570xN.2944635458_n43d.jpg",
   },
@@ -248,7 +248,7 @@ const products = [
       "100% ARTISANAL CHEESE: Individually oven-baked, hand crafted cheese crunch batches, perfectly aged containing premium ingredients and baked for that savory crunch you love. Perfect low carb snacks for any diet",
     freeReturn: false,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage:
       "https://anitalianinmykitchen.com/wp-content/uploads/2021/08/cheese-crisps-blog.jpg",
   },
@@ -276,7 +276,7 @@ const products = [
     description: "Black Currant Rose",
     freeReturn: true,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage:
       "https://airboss-aircare.com/wp-content/uploads/product/394/closet-air-freshener-lavender.jpg",
   },
@@ -303,7 +303,7 @@ const products = [
     description: "Helps promote green leaves and beautiful blooms",
     freeReturn: false,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage: "https://i.ebayimg.com/images/g/1L0AAOSwo~ViDxsN/s-l400.jpg",
   },
   {
@@ -346,7 +346,7 @@ const products = [
     description: "Perfect for mealtime with infants and toddlers (6+ months)",
     freeReturn: true,
     essential: false,
-    prime: false,
+    prime: true,
     previewImage:
       "https://images.food52.com/JZxJTjOyjdMCj116-6AOhPmoWFk=/1500x0/c5bffd76-2f12-421b-9458-ad526a503cd2--2019-0403_blue-pheasant_natural-seagrass-placemat-set-of-4_family_silo_ty-mecham_001.jpg",
   },
@@ -389,7 +389,7 @@ const products = [
     description: "Power Source Type: Electricity",
     freeReturn: false,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage:
       "https://media.self.com/photos/5f0c9c5e1a6a441deac49659/1:2/w_1898,h_3796,c_limit/hand_held_fan.jpeg",
   },
@@ -418,7 +418,7 @@ const products = [
       "PROMOTES EARLY CHILDHOOD DEVELOPMENT: Designed for layered learning, which gives children the opportunity to do original planning and thinking while creating expressive art, developing hand eye coordination and color recognition. DRIES QUICKLY",
     freeReturn: true,
     essential: false,
-    prime: true,
+    prime: false,
     previewImage:
       "https://www.arrtx.com/wp-content/uploads/2022/08/Markers.jpg",
   },
