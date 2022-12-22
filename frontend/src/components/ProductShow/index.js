@@ -8,9 +8,8 @@ import ReviewItem from "../ReviewItem";
 const ProductShow = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
-  const product = useSelector((state) => state.products[productId]);
-  const reviews =
-    Object.values(useSelector((state) => state?.reviews?.review)) || "";
+  const product = useSelector((state) => state?.products[productId]);
+  let reviews = useSelector((state) => state?.reviews?.review) || "";
 
   useEffect(() => {
     dispatch(fetchProduct(productId));
@@ -20,7 +19,7 @@ const ProductShow = () => {
   return (
     <>
       <span>{product?.department}</span>
-      <img src={product?.previewImage} alt="Product Picture" />
+      <img src={product?.previewImage} alt="Product" />
       <h1>{product?.name}</h1>
       <h2>{product?.User.merchantName}</h2>
       <div>{product?.price}</div>
@@ -31,7 +30,7 @@ const ProductShow = () => {
       </ul>
       <h2>Most recent reviews</h2>
       <div>
-        {reviews?.map((review) => {
+        {Object.values(reviews).map((review) => {
           return <ReviewItem key={review?.id} review={review} />;
         })}
       </div>
