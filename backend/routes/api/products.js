@@ -36,6 +36,9 @@ router.get("/:productId/reviews", async (req, res) => {
         },
         attributes: [],
       },
+      {
+        model: User,
+      },
     ],
   });
 
