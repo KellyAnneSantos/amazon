@@ -1,1 +1,9 @@
-/* TODO Add site wide styles */
+@font-face {
+  font-family: "PT Sans";
+  src: local("PT Sans"),
+    url("./fonts/PT_Sans/PTSans-Regular.ttf") format("truetype");
+}
+
+body {
+  font-family: "PT Sans";
+}
