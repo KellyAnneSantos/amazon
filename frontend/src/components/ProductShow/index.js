@@ -9,7 +9,8 @@ const ProductShow = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const product = useSelector((state) => state.products[productId]);
-  const reviews = useSelector((state) => state?.reviews?.review) || "";
+  const reviews =
+    Object.values(useSelector((state) => state?.reviews?.review)) || "";
 
   useEffect(() => {
     dispatch(fetchProduct(productId));
@@ -29,11 +30,11 @@ const ProductShow = () => {
         <li>{product?.description}</li>
       </ul>
       <h2>Most recent reviews</h2>
-      {/* <div>
+      <div>
         {reviews?.map((review) => {
           return <ReviewItem key={review?.id} review={review} />;
         })}
-      </div> */}
+      </div>
     </>
   );
 };
