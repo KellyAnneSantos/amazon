@@ -130,6 +130,11 @@ module.exports = {
       //   allowNull: false,
       //   type: Sequelize.INTEGER,
       // },
+      prime: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN,
+      },
       previewImage: {
         allowNull: false,
         type: Sequelize.STRING(256),

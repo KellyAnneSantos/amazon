@@ -15,6 +15,8 @@ module.exports = {
           // username: "Demo-lition",
           phone: 9182132,
           prime: true,
+          previewImage:
+            "https://static.hudl.com/users/temp/12975044_0aaeafec97654ae6a681bbfaa43b682a.jpg",
           hashedPassword: bcrypt.hashSync("password"),
         },
         {
@@ -26,6 +28,8 @@ module.exports = {
           // username: "FakeUser1",
           phone: 2353626,
           prime: false,
+          previewImage:
+            "https://livelongerthepodcast.com/wp-content/uploads/2021/07/OJRyan.jpg",
           hashedPassword: bcrypt.hashSync("password2"),
         },
         {
@@ -37,6 +41,7 @@ module.exports = {
           // username: "FakeUser2",
           phone: 6448262,
           prime: false,
+          previewImage: "https://i.ytimg.com/vi/gf-vX3Czzbo/maxresdefault.jpg",
           hashedPassword: bcrypt.hashSync("password3"),
         },
         {
@@ -47,6 +52,8 @@ module.exports = {
           // username: "FakeUser2",
           phone: 9857702,
           prime: false,
+          previewImage:
+            "https://www.nhms.com/images/David%20McGrath%202020%201200x1200b.jpg",
           hashedPassword: bcrypt.hashSync("password4"),
         },
         {
@@ -57,6 +64,8 @@ module.exports = {
           // username: "FakeUser2",
           phone: 5455545,
           prime: false,
+          previewImage:
+            "https://images.findagrave.com/photos250/photos/2020/310/218017858_019d20b7-ce66-4a6b-9960-ce9998681d8b.jpeg",
           hashedPassword: bcrypt.hashSync("password5"),
         },
       ],

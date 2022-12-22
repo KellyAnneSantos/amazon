@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         email,
         phone,
         prime,
+        previewImage,
       } = this;
       return {
         id,
@@ -24,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         email,
         phone,
         prime,
+        previewImage,
       };
     }
     validatePassword(password) {
@@ -68,6 +70,7 @@ module.exports = (sequelize, DataTypes) => {
       email,
       phone,
       prime,
+      previewImage,
       password,
     }) {
       const hashedPassword = bcrypt.hashSync(password);
@@ -79,6 +82,7 @@ module.exports = (sequelize, DataTypes) => {
         email,
         phone,
         prime,
+        previewImage,
         hashedPassword,
       });
       return await User.scope("currentUser").findByPk(user.id);
@@ -145,6 +149,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: false,
         type: DataTypes.BOOLEAN,
+      },
+      previewImage: {
+        type: DataTypes.STRING,
+        validate: {
+          len: [5, 256],
+        },
       },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,

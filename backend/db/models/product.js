@@ -108,6 +108,11 @@ module.exports = (sequelize, DataTypes) => {
       //   allowNull: false,
       //   type: DataTypes.INTEGER,
       // },
+      prime: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
+      },
       previewImage: {
         allowNull: false,
         type: DataTypes.STRING,

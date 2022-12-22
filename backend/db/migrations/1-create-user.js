@@ -45,6 +45,9 @@ module.exports = {
         defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
+      previewImage: {
+        type: Sequelize.STRING(256),
+      },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
         allowNull: false,
