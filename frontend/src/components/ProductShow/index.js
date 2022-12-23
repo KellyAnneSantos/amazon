@@ -39,8 +39,8 @@ const ProductShow = () => {
       <h3>About this item</h3>
       <ul>
         <li>{product?.description}</li>
-        {descriptions.map((description) => (
-          <li>{description.bulletPoint}</li>
+        {descriptions?.map((description) => (
+          <li key={description.id}>{description.bulletPoint}</li>
         ))}
       </ul>
       <h2>Most recent reviews</h2>
