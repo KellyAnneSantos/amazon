@@ -118,7 +118,7 @@ router.get("/:productId", async (req, res) => {
       "updatedAt",
       [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
     ],
-    group: ["Product.id", "Descriptions.id", "User.id"],
+    group: ["Product.id", "Descriptions.id", "User.id", "Reviews.id"],
   });
 
   return res.json(product);
