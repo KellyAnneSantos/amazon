@@ -30,6 +30,28 @@ const aggregateReviews = async (product) => {
   return product;
 };
 
+const mapProducts = async (products) => {
+  for await (const product of products) {
+    const reviews = await Review.findAll({
+      where: {
+        productId: product.id,
+      },
+    });
+    const reviewStars = await Review.findAll({
+      where: {
+        productId: product.id,
+      },
+    });
+    let sum = 0.0;
+    reviewStars.forEach((reviewStar) => {
+      sum += reviewStar.stars;
+    });
+    product.dataValues.numReviews = reviews.length;
+    product.dataValues.avgStarRating = sum / reviews.length;
+  }
+  return products;
+};
+
 router.get("/:productId/images", async (req, res) => {
   let { productId } = req.params;
   productId = parseInt(productId);
@@ -126,9 +148,25 @@ router.get("/:productId", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const Products = await Product.findAll();
+  let products = await Product.findAll({
+    include: [
+      {
+        model: Description,
+      },
+      {
+        model: User,
+      },
+      {
+        model: Review,
+      },
+    ],
+  });
 
-  return res.json({ Products });
+  const productAggregates = await mapProducts(products);
+
+  return res.json({
+    Products: productAggregates,
+  });
 });
 
 module.exports = router;
