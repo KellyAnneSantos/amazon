@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import productReducer from "./productReducer";
 import reviewReducer from "./reviewReducer";
+import imageReducer from "./imageReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   products: productReducer,
   reviews: reviewReducer,
+  images: imageReducer,
 });
 let enhancer;
 
