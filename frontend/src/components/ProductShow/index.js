@@ -5,6 +5,7 @@ import { fetchProduct } from "../../store/productReducer";
 import { fetchReviews } from "../../store/reviewReducer";
 import { fetchImages } from "../../store/imageReducer";
 import ReviewItem from "../ReviewItem";
+import ReviewImages from "../ReviewImages";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,16 @@ const ProductShow = () => {
           <li key={description.id}>{description.bulletPoint}</li>
         ))}
       </ul>
-      <h2>Most recent reviews</h2>
+      <h2>Customer reviews</h2>
+      <h3>{product?.avgStarRating} out of 5</h3>
+      <h4>{product?.numReviews} global ratings</h4>
+      <h4>Reviews with images</h4>
+      <div>
+        {Object.values(reviews).map((review) => {
+          return <ReviewImages key={review?.id} review={review} />;
+        })}
+      </div>
+      <h4>Most recent reviews</h4>
       <div>
         {Object.values(reviews).map((review) => {
           return <ReviewItem key={review?.id} review={review} />;

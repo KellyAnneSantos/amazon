@@ -21,7 +21,7 @@ const aggregateReviews = async (product) => {
       productId: product.id,
     },
   });
-  let sum = 0;
+  let sum = 0.0;
   reviewStars.forEach((reviewStar) => {
     sum += reviewStar.stars;
   });
@@ -123,6 +123,12 @@ router.get("/:productId", async (req, res) => {
   const productPlus = await aggregateReviews(product);
 
   return res.json(productPlus);
+});
+
+router.get("/", async (req, res) => {
+  const Products = await Product.findAll();
+
+  return res.json({ Products });
 });
 
 module.exports = router;
