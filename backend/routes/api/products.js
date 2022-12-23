@@ -8,8 +8,27 @@ const {
   Product,
   Review,
   User,
-  sequelize,
 } = require("../../db/models");
+
+const aggregateReviews = async (product) => {
+  const reviews = await Review.findAll({
+    where: {
+      productId: product.id,
+    },
+  });
+  const reviewStars = await Review.findAll({
+    where: {
+      productId: product.id,
+    },
+  });
+  let sum = 0;
+  reviewStars.forEach((reviewStar) => {
+    sum += reviewStar.stars;
+  });
+  product.dataValues.numReviews = reviews.length;
+  product.dataValues.avgStarRating = sum / reviews.length;
+  return product;
+};
 
 router.get("/:productId/images", async (req, res) => {
   let { productId } = req.params;
@@ -98,31 +117,12 @@ router.get("/:productId", async (req, res) => {
       },
       {
         model: Review,
-        attributes: [],
       },
     ],
-    attributes: [
-      "id",
-      "merchantId",
-      "name",
-      "department",
-      "price",
-      "size",
-      "color",
-      "description",
-      "freeReturn",
-      "deliveryPrice",
-      "deliveryTime",
-      "prime",
-      "previewImage",
-      "createdAt",
-      "updatedAt",
-      [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
-    ],
-    group: ["Product.id", "Descriptions.id", "User.id", "Reviews.id"],
   });
+  const productPlus = await aggregateReviews(product);
 
-  return res.json(product);
+  return res.json(productPlus);
 });
 
 module.exports = router;

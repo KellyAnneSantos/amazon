@@ -31,6 +31,8 @@ const ProductShow = () => {
       </div>
       <h1>{product?.name}</h1>
       <h2>{product?.User.merchantName}</h2>
+      <div>{product?.avgStarRating} stars</div>
+      <div>{product?.numReviews} ratings</div>
       <div>{product?.price}</div>
       {product?.prime && <div>prime</div>}
       {product?.freeReturn && <div>FREE Returns</div>}
