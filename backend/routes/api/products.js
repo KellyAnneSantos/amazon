@@ -98,6 +98,7 @@ router.get("/:productId", async (req, res) => {
       },
       {
         model: Review,
+        attributes: [],
       },
     ],
     attributes: [
