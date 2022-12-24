@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_PRODUCT = "product/load";
 const LOAD_PRODUCTS = "products/load";
+const ADD_PRODUCT = "products/add";
 
 const loadProduct = (payload) => {
   return {
@@ -14,6 +15,13 @@ const loadProducts = (products) => {
   return {
     type: LOAD_PRODUCTS,
     payload: products,
+  };
+};
+
+const addProduct = (product) => {
+  return {
+    type: ADD_PRODUCT,
+    payload: product,
   };
 };
 
@@ -31,6 +39,33 @@ export const fetchProducts = () => async (dispatch) => {
   dispatch(loadProducts(products));
 };
 
+export const fetchAddProduct = (product) => async (dispatch) => {
+  const {
+    name,
+    department,
+    price,
+    description,
+    freeReturn,
+    prime,
+    previewImage,
+  } = product;
+  const response = await csrfFetch("/api/products", {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      department,
+      price,
+      description,
+      freeReturn,
+      prime,
+      previewImage,
+    }),
+  });
+  const data = await response.json();
+  dispatch(addProduct(data));
+  return data;
+};
+
 const productReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
@@ -44,6 +79,10 @@ const productReducer = (state = {}, action) => {
       products.forEach((product) => {
         newState[product.id] = product;
       });
+      return newState;
+    case ADD_PRODUCT:
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
       return newState;
     default:
       return state;

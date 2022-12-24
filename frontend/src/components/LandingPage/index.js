@@ -14,9 +14,12 @@ function LandingPage() {
   return (
     <div>
       {products?.map((product) => (
-        <NavLink to={`/products/${product?.id}`} key={product?.id}>
-          <img src={product?.previewImage} />
-        </NavLink>
+        <div key={product.id}>
+          {product?.department}
+          <NavLink to={`/products/${product?.id}`} key={product?.id}>
+            <img src={product?.previewImage} />
+          </NavLink>
+        </div>
       ))}
     </div>
   );

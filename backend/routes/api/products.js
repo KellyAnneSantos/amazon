@@ -169,4 +169,30 @@ router.get("/", async (req, res) => {
   });
 });
 
+router.post("/", async (req, res) => {
+  const {
+    name,
+    department,
+    price,
+    description,
+    freeReturn,
+    prime,
+    previewImage,
+  } = req.body;
+  const { user } = req;
+  const newProduct = await Product.create({
+    merchantId: user.id,
+    name,
+    department,
+    price,
+    description,
+    freeReturn,
+    prime,
+    previewImage,
+  });
+
+  res.status(201);
+  return res.json(newProduct);
+});
+
 module.exports = router;
