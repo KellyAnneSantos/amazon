@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_PRODUCT = "product/load";
 const LOAD_PRODUCTS = "products/load";
-const ADD_PRODUCT = "products/add";
+const ADD_PRODUCT = "product/add";
 
 const loadProduct = (payload) => {
   return {
@@ -61,9 +61,12 @@ export const fetchAddProduct = (product) => async (dispatch) => {
       previewImage,
     }),
   });
-  const data = await response.json();
-  dispatch(addProduct(data));
-  return data;
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addProduct(data));
+    return data;
+  }
 };
 
 const productReducer = (state = {}, action) => {

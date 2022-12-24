@@ -115,6 +115,34 @@ router.get("/:productId/reviews", async (req, res) => {
   });
 });
 
+router.post("/:productId/reviews", async (req, res) => {
+  const { stars, headline, previewImage, body } = req.body;
+  let { productId } = req.params;
+  productId = parseInt(productId);
+  const { user } = req;
+
+  const product = await Product.findByPk(productId);
+
+  if (!product) {
+    res.status(404);
+    return res.json({
+      message: "Product couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const review = await Review.create({
+    userId: user.id,
+    productId,
+    stars,
+    headline,
+    previewImage,
+    body,
+  });
+
+  return res.json(review);
+});
+
 router.get("/:productId", async (req, res) => {
   let { productId } = req.params;
   productId = parseInt(productId);

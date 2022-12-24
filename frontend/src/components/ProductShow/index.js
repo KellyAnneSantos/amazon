@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchProduct } from "../../store/productReducer";
 import { fetchReviews } from "../../store/reviewReducer";
@@ -47,6 +47,11 @@ const ProductShow = () => {
       <h2>Customer reviews</h2>
       <h3>{product?.avgStarRating} out of 5</h3>
       <h4>{product?.numReviews} global ratings</h4>
+      <h4>Review this product</h4>
+      <p>Share your thoughts with other customers</p>
+      <NavLink to={`/products/${product?.id}/reviews/new`}>
+        <button>Write a customer review</button>
+      </NavLink>
       <h4>Reviews with images</h4>
       <div>
         {Object.values(reviews).map((review) => {

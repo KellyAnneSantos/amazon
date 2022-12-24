@@ -2,8 +2,8 @@ const ReviewItem = ({ review }) => {
   const images = review.Images;
   return (
     <>
-      <img src={review.User.previewImage} alt="User" />
-      <h6>{review.User.firstName}</h6>
+      <img src={review.User?.previewImage} alt="User" />
+      <h6>{review.User?.firstName}</h6>
       <h5>{review.stars} stars</h5>
       <h5>{review.headline}</h5>
       <h6>Reviewed on {review.updatedAt}</h6>
