@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { Product, Review, User } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -26,6 +26,25 @@ const validateSignup = [
     .withMessage("Password must be 6 characters or more."),
   handleValidationErrors,
 ];
+
+router.get("/current/reviews", async (req, res) => {
+  const { user } = req;
+
+  const Reviews = await Review.findAll({
+    where: {
+      userId: user.id,
+    },
+    include: [
+      {
+        model: User,
+      },
+    ],
+  });
+
+  return res.json({
+    Reviews,
+  });
+});
 
 router.post("/", validateSignup, async (req, res) => {
   const { email, password, phone } = req.body;

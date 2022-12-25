@@ -11,7 +11,7 @@ const ProductShow = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const product = useSelector((state) => state?.products[productId]);
-  let reviews = useSelector((state) => state?.reviews?.review) || "";
+  let reviews = useSelector((state) => state?.reviews) || "";
   let images = useSelector((state) => state?.images?.image) || "";
   const descriptions = product?.Descriptions;
 
@@ -27,7 +27,7 @@ const ProductShow = () => {
       <img src={product?.previewImage} alt="Product" />
       <div>
         {Object.values(images).map((image) => {
-          return <img src={image?.mediaUrl} key={image?.id} />;
+          return <img src={image?.mediaUrl} key={image?.id} alt="Product" />;
         })}
       </div>
       <h1>{product?.name}</h1>
