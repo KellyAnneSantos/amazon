@@ -34,7 +34,7 @@ function App() {
           <Route path="/products/:productId">
             <ProductShow />
           </Route>
-          <Route path="/reviews/:reviewId">
+          <Route path="/reviews/:reviewId/edit">
             <EditReviewForm />
           </Route>
           <Route path="/profile/:userId">

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchUserReviews } from "../../store/reviewReducer";
 import { fetchUser } from "../../store/userReducer";
-import MyReviewItems from "../MyReviewItems";
+import ProfileReviewItems from "../ProfileReviewItems";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const ProfilePage = () => {
       <img src={profileUser?.previewImage} alt="User" />
       <div>
         {Object.values(reviews).map((review) => {
-          return <MyReviewItems key={review?.id} review={review} />;
+          return <ProfileReviewItems key={review?.id} review={review} />;
         })}
       </div>
     </>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchEditReview } from "../../store/reviewReducer";
+import ReviewProductItem from "../ReviewProductItem";
 
 const EditReviewForm = () => {
   const { reviewId } = useParams();
@@ -21,18 +22,19 @@ const EditReviewForm = () => {
     review = { ...review, stars, headline, previewImage, body };
     setErrors([]);
 
-    const response = await dispatch(fetchEditReview(review)).catch(
+    const response = await dispatch(fetchEditReview(review, review?.id)).catch(
       async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       }
     );
 
-    if (response) history.push(`/products/${review.productId}`);
+    if (response) history.push(`/products/${review?.productId}`);
   };
 
   return (
     <>
+      <ReviewProductItem productId={review?.productId} />
       <form onSubmit={handleSubmit}>
         <label>
           Stars
@@ -71,6 +73,7 @@ const EditReviewForm = () => {
         </label>
         <button type="submit">Submit</button>
       </form>
+      {/* <MyReviewsPage user={review?.User} /> */}
     </>
   );
 };

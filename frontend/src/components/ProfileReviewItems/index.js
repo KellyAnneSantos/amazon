@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import ProductItem from "../ProductItem";
+import ProfileProductItem from "../ProfileProductItem";
 
-const MyReviewItems = ({ review }) => {
+const ProfileReviewItems = ({ review }) => {
   return (
     <>
       <img src={review.User?.previewImage} alt="User" />
@@ -14,9 +14,9 @@ const MyReviewItems = ({ review }) => {
       <h5>{review.stars} star(s)</h5>
       <h5>{review.headline}</h5>
       <p>{review.body}</p>
-      <ProductItem productId={review.productId} />
+      <ProfileProductItem productId={review.productId} />
     </>
   );
 };
 
-export default MyReviewItems;
+export default ProfileReviewItems;

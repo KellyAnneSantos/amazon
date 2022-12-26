@@ -9,9 +9,9 @@ router.put("/:reviewId", async (req, res) => {
   const { stars, headline, previewImage, body } = req.body;
   const { user } = req;
 
-  const reviews = await Review.findByPk(reviewId);
+  const review = await Review.findByPk(reviewId);
 
-  if (!reviews) {
+  if (!review) {
     res.status(404);
     return res.json({
       message: "Review couldn't be found",
@@ -19,15 +19,15 @@ router.put("/:reviewId", async (req, res) => {
     });
   }
 
-  if (user.id === reviews.userId) {
-    await reviews.update({
+  if (user.id === review.userId) {
+    await review.update({
       stars,
       headline,
       previewImage,
       body,
     });
 
-    return res.json(reviews);
+    return res.json(review);
   } else {
     res.status(403);
     return res.json({

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMyReviews } from "../../store/reviewReducer";
-import MyReviewItems from "../MyReviewItems";
+import ProfileReviewItems from "../ProfileReviewItems";
 
 const AccountPage = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const AccountPage = () => {
       <img src={user?.previewImage} alt="User" />
       <div>
         {Object.values(reviews).map((review) => {
-          return <MyReviewItems key={review?.id} review={review} />;
+          return <ProfileReviewItems key={review?.id} review={review} />;
         })}
       </div>
     </>

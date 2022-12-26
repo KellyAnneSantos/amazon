@@ -20,6 +20,10 @@ const ReviewItem = ({ review }) => {
           <img src={image?.mediaUrl} key={image?.id} alt="Product" />
         ))}
       </div>
+      <NavLink to={`/reviews/${review.id}/edit`}>
+        <button>Edit</button>
+      </NavLink>
+      <button>Delete</button>
     </>
   );
 };
