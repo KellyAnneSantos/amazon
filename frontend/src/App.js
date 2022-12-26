@@ -11,6 +11,7 @@ import CreateProductForm from "./components/CreateProductForm";
 import AddReviewForm from "./components/AddReviewForm";
 import EditReviewForm from "./components/EditReviewForm";
 import AccountPage from "./components/AccountPage";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/reviews/:reviewId">
             <EditReviewForm />
+          </Route>
+          <Route path="/profile/:userId">
+            <ProfilePage />
           </Route>
           <Route path="/my/profile">
             <AccountPage />

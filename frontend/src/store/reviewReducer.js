@@ -4,6 +4,7 @@ const LOAD_REVIEWS = "reviews/load";
 const ADD_REVIEW = "review/add";
 const EDIT_REVIEW = "review/edit";
 const LOAD_MY_REVIEWS = "reviews/loadMine";
+const LOAD_USER_REVIEWS = "reviews/loadUsers";
 
 const loadReviews = (payload) => {
   return {
@@ -29,6 +30,13 @@ const editReview = (payload) => {
 const loadMyReviews = (payload) => {
   return {
     type: LOAD_MY_REVIEWS,
+    payload,
+  };
+};
+
+const loadUserReviews = (payload) => {
+  return {
+    type: LOAD_USER_REVIEWS,
     payload,
   };
 };
@@ -83,6 +91,15 @@ export const fetchMyReviews = () => async (dispatch) => {
   }
 };
 
+export const fetchUserReviews = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/users/${id}/reviews`);
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadUserReviews(data));
+  }
+};
+
 let newState = {};
 
 const reviewReducer = (state = newState, action) => {
@@ -104,6 +121,12 @@ const reviewReducer = (state = newState, action) => {
         [action.payload.id]: action.payload,
       };
     case LOAD_MY_REVIEWS:
+      newState = {};
+      action.payload.Reviews.forEach((review) => {
+        newState[review.id] = review;
+      });
+      return newState;
+    case LOAD_USER_REVIEWS:
       newState = {};
       action.payload.Reviews.forEach((review) => {
         newState[review.id] = review;

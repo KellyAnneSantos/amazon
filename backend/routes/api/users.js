@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { Product, Review, User } = require("../../db/models");
+const { Image, Review, User } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -36,6 +36,9 @@ router.get("/current/reviews", async (req, res) => {
     },
     include: [
       {
+        model: Image,
+      },
+      {
         model: User,
       },
     ],
@@ -44,6 +47,60 @@ router.get("/current/reviews", async (req, res) => {
   return res.json({
     Reviews,
   });
+});
+
+router.get("/:userId/reviews", async (req, res) => {
+  let { userId } = req.params;
+  userId = parseInt(userId);
+
+  const user = await User.findByPk(userId);
+
+  if (!user) {
+    res.status(404);
+    return res.json({
+      message: "User couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const Reviews = await Review.findAll({
+    where: {
+      userId,
+    },
+    include: [
+      {
+        model: Image,
+      },
+      {
+        model: User,
+      },
+    ],
+  });
+
+  return res.json({
+    Reviews,
+  });
+});
+
+router.get("/:userId", async (req, res) => {
+  let { userId } = req.params;
+  userId = parseInt(userId);
+
+  const user = await User.findByPk(userId, {
+    attributes: [
+      "id",
+      "firstName",
+      "lastName",
+      "merchant",
+      "merchantName",
+      "email",
+      "phone",
+      "prime",
+      "previewImage",
+    ],
+  });
+
+  return res.json(user);
 });
 
 router.post("/", validateSignup, async (req, res) => {
