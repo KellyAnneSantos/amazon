@@ -6,7 +6,7 @@ import ProfileReviewItems from "../ProfileReviewItems";
 const AccountPage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const reviews = useSelector((state) => state?.reviews);
+  const reviews = Object.values(useSelector((state) => state?.reviews));
 
   useEffect(() => {
     dispatch(fetchMyReviews());
@@ -16,7 +16,7 @@ const AccountPage = () => {
     <>
       <img src={user?.previewImage} alt="User" />
       <div>
-        {Object.values(reviews).map((review) => {
+        {reviews?.map((review) => {
           return <ProfileReviewItems key={review?.id} review={review} />;
         })}
       </div>

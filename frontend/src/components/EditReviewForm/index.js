@@ -73,7 +73,6 @@ const EditReviewForm = () => {
         </label>
         <button type="submit">Submit</button>
       </form>
-      {/* <MyReviewsPage user={review?.User} /> */}
     </>
   );
 };

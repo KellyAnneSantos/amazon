@@ -1,8 +1,19 @@
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { fetchDeleteReview } from "../../store/reviewReducer";
 
 const ReviewItem = ({ review }) => {
+  const dispatch = useDispatch();
+
   const images = review.Images;
   const id = review.User?.id;
+
+  const deleteReview = async (e) => {
+    e.preventDefault();
+
+    await dispatch(fetchDeleteReview(review.id));
+  };
+
   return (
     <>
       <NavLink to={`/profile/${id}`}>
@@ -23,7 +34,7 @@ const ReviewItem = ({ review }) => {
       <NavLink to={`/reviews/${review.id}/edit`}>
         <button>Edit</button>
       </NavLink>
-      <button>Delete</button>
+      <button onClick={deleteReview}>Delete</button>
     </>
   );
 };

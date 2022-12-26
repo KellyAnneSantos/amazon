@@ -5,6 +5,7 @@ const ADD_REVIEW = "review/add";
 const EDIT_REVIEW = "review/edit";
 const LOAD_MY_REVIEWS = "reviews/loadMine";
 const LOAD_USER_REVIEWS = "reviews/loadUsers";
+const DELETE_REVIEW = "review/delete";
 
 const loadReviews = (payload) => {
   return {
@@ -37,6 +38,13 @@ const loadMyReviews = (payload) => {
 const loadUserReviews = (payload) => {
   return {
     type: LOAD_USER_REVIEWS,
+    payload,
+  };
+};
+
+const deleteReview = (payload) => {
+  return {
+    type: DELETE_REVIEW,
     payload,
   };
 };
@@ -100,6 +108,16 @@ export const fetchUserReviews = (id) => async (dispatch) => {
   }
 };
 
+export const fetchDeleteReview = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reviews/${id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteReview(id));
+  }
+};
+
 let newState = {};
 
 const reviewReducer = (state = newState, action) => {
@@ -131,6 +149,10 @@ const reviewReducer = (state = newState, action) => {
       action.payload.Reviews.forEach((review) => {
         newState[review.id] = review;
       });
+      return newState;
+    case DELETE_REVIEW:
+      newState = { ...state };
+      delete newState[action.payload];
       return newState;
     default:
       return state;
