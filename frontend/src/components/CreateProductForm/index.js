@@ -36,7 +36,7 @@ const CreateProductForm = () => {
       }
     );
 
-    if (response) history.push(`/manage-inventory`);
+    if (response) history.push(`/inventory`);
   };
 
   return (

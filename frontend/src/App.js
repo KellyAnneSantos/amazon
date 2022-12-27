@@ -14,6 +14,7 @@ import AccountPage from "./components/AccountPage";
 import ProfilePage from "./components/ProfilePage";
 import AddImageForm from "./components/AddImageForm";
 import MyInventoryPage from "./components/MyInventoryPage";
+import EditProductForm from "./components/EditProductForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
           <Route path="/products/:productId/reviews/new">
             <AddReviewForm />
           </Route>
+          <Route path="/products/:productId/edit">
+            <EditProductForm />
+          </Route>
           <Route path="/products/:productId">
             <ProductShow />
           </Route>
@@ -48,7 +52,7 @@ function App() {
           <Route path="/my/profile">
             <AccountPage />
           </Route>
-          <Route path="/manage-inventory">
+          <Route path="/inventory">
             <MyInventoryPage />
           </Route>
           <Route path="/login">

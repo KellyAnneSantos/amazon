@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { fetchAddImage, fetchImages } from "../../store/imageReducer";
 import { fetchProduct } from "../../store/productReducer";
 
 const AddImageForm = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const product = useSelector((state) => state?.products[productId]);
   let images = useSelector((state) => state?.images) || "";
@@ -34,7 +33,11 @@ const AddImageForm = () => {
 
   return (
     <>
+      <NavLink to={`/products/${product?.id}/edit`}>
+        <h1>Vital Info</h1>
+      </NavLink>
       <h1>Images</h1>
+      <h1>Description</h1>
       <img src={product?.previewImage} />
       <div>
         {Object.values(images)?.map((image) => {

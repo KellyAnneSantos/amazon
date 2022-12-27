@@ -4,6 +4,7 @@ const LOAD_PRODUCT = "product/load";
 const LOAD_PRODUCTS = "products/load";
 const ADD_PRODUCT = "product/add";
 const LOAD_MY_PRODUCTS = "products/loadMine";
+const EDIT_PRODUCT = "product/edit";
 
 const loadProduct = (payload) => {
   return {
@@ -23,6 +24,20 @@ const addProduct = (product) => {
   return {
     type: ADD_PRODUCT,
     payload: product,
+  };
+};
+
+const loadMyProducts = (products) => {
+  return {
+    type: ADD_PRODUCT,
+    payload: products,
+  };
+};
+
+const editProduct = (id) => {
+  return {
+    type: EDIT_PRODUCT,
+    payload: id,
   };
 };
 
@@ -70,6 +85,23 @@ export const fetchAddProduct = (product) => async (dispatch) => {
   }
 };
 
+export const fetchMyProducts = () => async (dispatch) => {
+  const res = await csrfFetch("/api/users/current/products");
+  const products = await res.json();
+
+  dispatch(loadMyProducts(products));
+};
+
+export const fetchEditProduct = (product) => async (dispatch) => {
+  const res = await csrfFetch(`/api/products/${product.id}`, {
+    method: "PUT",
+    body: JSON.stringify(product),
+  });
+  const data = await res.json();
+  dispatch(editProduct(data));
+  return data;
+};
+
 const productReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
@@ -85,6 +117,17 @@ const productReducer = (state = {}, action) => {
       });
       return newState;
     case ADD_PRODUCT:
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
+      return newState;
+    case LOAD_MY_PRODUCTS:
+      newState = {};
+      const myProducts = action.payload.Products;
+      myProducts.forEach((product) => {
+        newState[product.id] = product;
+      });
+      return newState;
+    case EDIT_PRODUCT:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
       return newState;

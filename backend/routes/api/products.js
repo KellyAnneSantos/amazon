@@ -201,6 +201,50 @@ router.get("/:productId", async (req, res) => {
   return res.json(productPlus);
 });
 
+router.put("/:productId", async (req, res) => {
+  const { user } = req;
+  let {
+    name,
+    department,
+    price,
+    description,
+    freeReturn,
+    prime,
+    previewImage,
+  } = req.body;
+  let { productId } = req.params;
+
+  const product = await Product.findByPk(productId);
+
+  if (!product) {
+    res.status(404);
+    return res.json({
+      message: "Product couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  if (user.id === product.userId) {
+    product.update({
+      name,
+      department,
+      price,
+      description,
+      freeReturn,
+      prime,
+      previewImage,
+    });
+
+    return res.json(product);
+  } else {
+    res.status(403);
+    return res.json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
+});
+
 router.get("/", async (req, res) => {
   let products = await Product.findAll({
     include: [
