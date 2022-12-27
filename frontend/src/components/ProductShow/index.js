@@ -12,7 +12,7 @@ const ProductShow = () => {
   const { productId } = useParams();
   const product = useSelector((state) => state?.products[productId]);
   let reviews = useSelector((state) => state?.reviews) || "";
-  let images = useSelector((state) => state?.images?.image) || "";
+  let images = useSelector((state) => state?.images) || "";
   const descriptions = product?.Descriptions;
 
   useEffect(() => {

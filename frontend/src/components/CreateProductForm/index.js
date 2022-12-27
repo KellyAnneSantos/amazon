@@ -36,11 +36,12 @@ const CreateProductForm = () => {
       }
     );
 
-    if (response) history.push("/");
+    if (response) history.push(`/manage-inventory`);
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>Vital Info</h1>
       <label>
         Name
         <input

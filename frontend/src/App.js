@@ -12,6 +12,8 @@ import AddReviewForm from "./components/AddReviewForm";
 import EditReviewForm from "./components/EditReviewForm";
 import AccountPage from "./components/AccountPage";
 import ProfilePage from "./components/ProfilePage";
+import AddImageForm from "./components/AddImageForm";
+import MyInventoryPage from "./components/MyInventoryPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +30,9 @@ function App() {
           <Route path="/products/new">
             <CreateProductForm />
           </Route>
+          <Route path="/products/:productId/images/new">
+            <AddImageForm />
+          </Route>
           <Route path="/products/:productId/reviews/new">
             <AddReviewForm />
           </Route>
@@ -42,6 +47,9 @@ function App() {
           </Route>
           <Route path="/my/profile">
             <AccountPage />
+          </Route>
+          <Route path="/manage-inventory">
+            <MyInventoryPage />
           </Route>
           <Route path="/login">
             <LoginFormPage />

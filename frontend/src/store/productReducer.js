@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_PRODUCT = "product/load";
 const LOAD_PRODUCTS = "products/load";
 const ADD_PRODUCT = "product/add";
+const LOAD_MY_PRODUCTS = "products/loadMine";
 
 const loadProduct = (payload) => {
   return {

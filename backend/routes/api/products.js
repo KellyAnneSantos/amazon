@@ -78,6 +78,32 @@ router.get("/:productId/images", async (req, res) => {
   });
 });
 
+router.post("/:productId/images", async (req, res) => {
+  const { mediaUrl } = req.body;
+  let { productId } = req.params;
+  productId = parseInt(productId);
+  const { user } = req;
+
+  const product = await Product.findByPk(productId);
+
+  if (!product) {
+    res.status(404);
+    return res.json({
+      message: "Product couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const image = await Image.create({
+    imageableId: productId,
+    imageableType: "product",
+    mediaType: "image",
+    mediaUrl,
+  });
+
+  return res.json(image);
+});
+
 router.get("/:productId/reviews", async (req, res) => {
   let { productId } = req.params;
   productId = parseInt(productId);

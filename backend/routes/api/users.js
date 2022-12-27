@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { Image, Review, User } = require("../../db/models");
+const { Image, Product, Review, User } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -27,6 +27,28 @@ const validateSignup = [
   handleValidationErrors,
 ];
 
+const mapProducts = async (products) => {
+  for await (const product of products) {
+    const reviews = await Review.findAll({
+      where: {
+        productId: product.id,
+      },
+    });
+    const reviewStars = await Review.findAll({
+      where: {
+        productId: product.id,
+      },
+    });
+    let sum = 0.0;
+    reviewStars.forEach((reviewStar) => {
+      sum += reviewStar.stars;
+    });
+    product.dataValues.numReviews = reviews.length;
+    product.dataValues.avgStarRating = sum / reviews.length;
+  }
+  return products;
+};
+
 router.get("/current/reviews", async (req, res) => {
   const { user } = req;
 
@@ -46,6 +68,33 @@ router.get("/current/reviews", async (req, res) => {
 
   return res.json({
     Reviews,
+  });
+});
+
+router.get("/current/products", async (req, res) => {
+  const { user } = req;
+
+  let products = await Product.findAll({
+    where: {
+      merchantId: user.id,
+    },
+    include: [
+      {
+        model: Description,
+      },
+      {
+        model: User,
+      },
+      {
+        model: Review,
+      },
+    ],
+  });
+
+  const productAggregates = await mapProducts(products);
+
+  return res.json({
+    Products: productAggregates,
   });
 });
 
