@@ -1,7 +1,13 @@
 const express = require("express");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { Image, Product, Review, User } = require("../../db/models");
+const {
+  Description,
+  Image,
+  Product,
+  Review,
+  User,
+} = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 

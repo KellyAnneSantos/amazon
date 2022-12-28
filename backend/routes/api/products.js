@@ -224,7 +224,7 @@ router.put("/:productId", async (req, res) => {
     });
   }
 
-  if (user.id === product.userId) {
+  if (user.id === product.merchantId) {
     product.update({
       name,
       department,

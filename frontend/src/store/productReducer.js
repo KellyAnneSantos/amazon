@@ -27,10 +27,10 @@ const addProduct = (product) => {
   };
 };
 
-const loadMyProducts = (products) => {
+const loadMyProducts = (payload) => {
   return {
-    type: ADD_PRODUCT,
-    payload: products,
+    type: LOAD_MY_PRODUCTS,
+    payload,
   };
 };
 

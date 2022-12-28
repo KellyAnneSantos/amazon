@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import { fetchEditReview } from "../../store/reviewReducer";
+import { fetchEditProduct } from "../../store/productReducer";
 
 const EditProductForm = () => {
   const { productId } = useParams();
@@ -34,7 +34,7 @@ const EditProductForm = () => {
     setErrors([]);
 
     const response = await dispatch(
-      fetchEditReview(product, product?.id)
+      fetchEditProduct(product, product?.id)
     ).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);

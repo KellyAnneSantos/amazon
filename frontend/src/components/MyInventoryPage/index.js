@@ -24,7 +24,7 @@ const MyInventoryPage = () => {
       <h3>Price</h3>
       <div>
         {products?.map((product) => {
-          return <InventoryProducts key={product?.id} product={product} />;
+          return <InventoryProducts key={product.id} product={product} />;
         })}
       </div>
     </>

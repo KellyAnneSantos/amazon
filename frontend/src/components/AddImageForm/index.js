@@ -17,7 +17,7 @@ const AddImageForm = () => {
   useEffect(() => {
     dispatch(fetchProduct(productId));
     dispatch(fetchImages(productId));
-  }, [dispatch]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,10 +25,13 @@ const AddImageForm = () => {
     let image = { mediaUrl };
     setErrors([]);
 
-    const response = await dispatch(fetchAddImage(image)).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+    const response = await dispatch(fetchAddImage(image, productId)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+    setMediaUrl("");
   };
 
   return (
