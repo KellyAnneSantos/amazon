@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { fetchAddImage, fetchImages } from "../../store/imageReducer";
 import { fetchProduct } from "../../store/productReducer";
+import ImageItem from "../ImageItem";
 
 const AddImageForm = () => {
   const { productId } = useParams();
@@ -42,9 +43,12 @@ const AddImageForm = () => {
       <h1>Images</h1>
       <h1>Description</h1>
       <img src={product?.previewImage} />
+      <NavLink to={`/products/${product?.id}/edit`}>
+        <button>Delete</button>
+      </NavLink>
       <div>
         {Object.values(images)?.map((image) => {
-          return <img src={image?.mediaUrl} key={image?.id} alt="Product" />;
+          return <ImageItem key={image?.id} image={image} />;
         })}
       </div>
       <form onSubmit={handleSubmit}>

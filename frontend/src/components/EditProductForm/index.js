@@ -78,7 +78,6 @@ const EditProductForm = () => {
             onChange={(e) => setDescription(e.target.value)}
             required
           />
-          <button type="submit">Submit</button>
         </label>
         <label>
           Free Return?

@@ -26,6 +26,7 @@ const ReviewItem = ({ review }) => {
       <h5>{review.headline}</h5>
       <h6>Reviewed on {review.updatedAt}</h6>
       <p>{review.body}</p>
+      <img src={review.previewImage} alt="Review" />
       <div>
         {images?.map((image) => (
           <img src={image?.mediaUrl} key={image?.id} alt="Product" />
