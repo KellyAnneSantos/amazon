@@ -40,16 +40,18 @@ const EditProductForm = () => {
       if (data && data.errors) setErrors(data.errors);
     });
 
-    if (response) history.push(`/products/${product?.id}/images/new`);
+    if (response) history.push(`/products/${product?.id}/images`);
   };
 
   return (
     <>
       <h1>Vital Info</h1>
-      <NavLink to={`/products/${product?.id}/images/new`}>
+      <NavLink to={`/products/${product?.id}/images`}>
         <h1>Images</h1>
       </NavLink>
-      <h1>Description</h1>
+      <NavLink to={`/products/${product?.id}/descriptions`}>
+        <h1>Description</h1>
+      </NavLink>
       <form onSubmit={handleSubmit}>
         <label>
           Name

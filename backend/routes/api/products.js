@@ -52,6 +52,56 @@ const mapProducts = async (products) => {
   return products;
 };
 
+router.get("/:productId/descriptions", async (req, res) => {
+  let { productId } = req.params;
+  productId = parseInt(productId);
+
+  const product = await Product.findByPk(productId);
+
+  if (!product) {
+    res.status(404);
+    return res.json({
+      message: "Product couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const Descriptions = await Description.findAll({
+    where: {
+      productId,
+    },
+  });
+
+  return res.json({
+    Descriptions,
+  });
+});
+
+router.post("/:productId/descriptions", async (req, res) => {
+  const { bulletPoint } = req.body;
+  let { productId } = req.params;
+  productId = parseInt(productId);
+  const { user } = req;
+
+  const product = await Product.findByPk(productId);
+
+  if (!product) {
+    res.status(404);
+    return res.json({
+      message: "Product couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const description = await Description.create({
+    merchantId: user.id,
+    productId,
+    bulletPoint,
+  });
+
+  return res.json(description);
+});
+
 router.get("/:productId/images", async (req, res) => {
   let { productId } = req.params;
   productId = parseInt(productId);

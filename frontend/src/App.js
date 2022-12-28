@@ -12,9 +12,10 @@ import AddReviewForm from "./components/AddReviewForm";
 import EditReviewForm from "./components/EditReviewForm";
 import AccountPage from "./components/AccountPage";
 import ProfilePage from "./components/ProfilePage";
-import AddImageForm from "./components/AddImageForm";
+import AddProductImage from "./components/AddProductImage";
 import MyInventoryPage from "./components/MyInventoryPage";
 import EditProductForm from "./components/EditProductForm";
+import DescriptionsTab from "./components/DescriptionsTab";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,14 +32,17 @@ function App() {
           <Route path="/products/new">
             <CreateProductForm />
           </Route>
-          <Route path="/products/:productId/images/new">
-            <AddImageForm />
-          </Route>
           <Route path="/products/:productId/reviews/new">
             <AddReviewForm />
           </Route>
+          <Route path="/products/:productId/descriptions">
+            <DescriptionsTab />
+          </Route>
           <Route path="/products/:productId/edit">
             <EditProductForm />
+          </Route>
+          <Route path="/products/:productId/images">
+            <AddProductImage />
           </Route>
           <Route path="/products/:productId">
             <ProductShow />

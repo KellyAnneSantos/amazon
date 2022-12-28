@@ -8,7 +8,7 @@ import {
 import { fetchProduct } from "../../store/productReducer";
 import ImageItem from "../ImageItem";
 
-const AddImageForm = () => {
+const AddProductImage = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
 
@@ -44,7 +44,9 @@ const AddImageForm = () => {
         <h1>Vital Info</h1>
       </NavLink>
       <h1>Images</h1>
-      <h1>Description</h1>
+      <NavLink to={`/products/${product?.id}/descriptions`}>
+        <h1>Description</h1>
+      </NavLink>
       <img src={product?.previewImage} />
       <NavLink to={`/products/${product?.id}/edit`}>
         <button>Delete</button>
@@ -70,4 +72,4 @@ const AddImageForm = () => {
   );
 };
 
-export default AddImageForm;
+export default AddProductImage;
