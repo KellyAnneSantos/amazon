@@ -12,10 +12,10 @@ import AddReviewForm from "./components/AddReviewForm";
 import EditReviewForm from "./components/EditReviewForm";
 import AccountPage from "./components/AccountPage";
 import ProfilePage from "./components/ProfilePage";
-import AddProductImage from "./components/AddProductImage";
+import ImagesTab from "./components/ImagesTab";
 import MyInventoryPage from "./components/MyInventoryPage";
-import EditProductForm from "./components/EditProductForm";
-import DescriptionsTab from "./components/DescriptionsTab";
+import VitalInfoTab from "./components/VitalInfoTab";
+import DescriptionTab from "./components/DescriptionTab";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,13 +36,13 @@ function App() {
             <AddReviewForm />
           </Route>
           <Route path="/products/:productId/descriptions">
-            <DescriptionsTab />
+            <DescriptionTab />
           </Route>
           <Route path="/products/:productId/edit">
-            <EditProductForm />
+            <VitalInfoTab />
           </Route>
           <Route path="/products/:productId/images">
-            <AddProductImage />
+            <ImagesTab />
           </Route>
           <Route path="/products/:productId">
             <ProductShow />

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { fetchEditProduct } from "../../store/productReducer";
 
-const EditProductForm = () => {
+const VitalInfoTab = () => {
   const { productId } = useParams();
   let product = useSelector((state) => state.products[productId]);
 
@@ -112,4 +112,4 @@ const EditProductForm = () => {
   );
 };
 
-export default EditProductForm;
+export default VitalInfoTab;

@@ -8,7 +8,7 @@ import {
 import { fetchProduct } from "../../store/productReducer";
 import ImageItem from "../ImageItem";
 
-const AddProductImage = () => {
+const ImagesTab = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
 
@@ -72,4 +72,4 @@ const AddProductImage = () => {
   );
 };
 
-export default AddProductImage;
+export default ImagesTab;

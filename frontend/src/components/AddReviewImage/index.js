@@ -9,14 +9,12 @@ import ImageItem from "../ImageItem";
 const AddReviewImage = ({ reviewId }) => {
   const dispatch = useDispatch();
 
-  // const product = useSelector((state) => state?.products[productId]);
   let images = useSelector((state) => state?.images) || "";
 
   const [mediaUrl, setMediaUrl] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    // dispatch(fetchProduct(productId));
     dispatch(fetchReviewImages(reviewId));
   }, []);
 

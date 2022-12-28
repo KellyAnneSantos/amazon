@@ -9,7 +9,6 @@ import ReviewProductItem from "../ReviewProductItem";
 const EditReviewForm = () => {
   const { reviewId } = useParams();
   let review = useSelector((state) => state.reviews[reviewId]);
-  // let images = useSelector((state) => state?.images) || "";
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -70,11 +69,6 @@ const EditReviewForm = () => {
           />
         </label>
         <img src={review?.previewImage} />
-        {/* <div>
-          {Object.values(images)?.map((image) => {
-            return <ImageItem key={image?.id} image={image} />;
-          })}
-        </div> */}
         <label>
           Body
           <input
