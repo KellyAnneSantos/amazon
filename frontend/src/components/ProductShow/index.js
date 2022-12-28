@@ -3,7 +3,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchProduct } from "../../store/productReducer";
 import { fetchReviews } from "../../store/reviewReducer";
-import { fetchImages } from "../../store/imageReducer";
+import { fetchProductImages } from "../../store/imageReducer";
 import ReviewItem from "../ReviewItem";
 import ReviewImages from "../ReviewImages";
 
@@ -18,7 +18,7 @@ const ProductShow = () => {
   useEffect(() => {
     dispatch(fetchProduct(productId));
     dispatch(fetchReviews(productId));
-    dispatch(fetchImages(productId));
+    dispatch(fetchProductImages(productId));
   }, [dispatch, productId]);
 
   return (

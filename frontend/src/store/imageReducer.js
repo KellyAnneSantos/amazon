@@ -1,19 +1,21 @@
 import { csrfFetch } from "./csrf";
 
-const LOAD_IMAGES = "images/load";
-const ADD_IMAGE = "image/add";
+const LOAD_PRODUCT_IMAGES = "images/loadToProduct";
+const ADD_PRODUCT_IMAGE = "image/addToProduct";
 const DELETE_IMAGE = "image/delete";
+const ADD_REVIEW_IMAGE = "image/addToReview";
+const LOAD_REVIEW_IMAGES = "images/loadToReview";
 
-const loadImages = (payload) => {
+const loadProductImages = (payload) => {
   return {
-    type: LOAD_IMAGES,
+    type: LOAD_PRODUCT_IMAGES,
     payload,
   };
 };
 
-const addImage = (payload) => {
+const addProductImage = (payload) => {
   return {
-    type: ADD_IMAGE,
+    type: ADD_PRODUCT_IMAGE,
     payload,
   };
 };
@@ -25,16 +27,30 @@ const deleteImage = (payload) => {
   };
 };
 
-export const fetchImages = (id) => async (dispatch) => {
+const addReviewImage = (payload) => {
+  return {
+    type: ADD_REVIEW_IMAGE,
+    payload,
+  };
+};
+
+const loadReviewImages = (payload) => {
+  return {
+    type: LOAD_REVIEW_IMAGES,
+    payload,
+  };
+};
+
+export const fetchProductImages = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/products/${id}/images`);
 
   if (res.ok) {
     const data = await res.json();
-    dispatch(loadImages(data));
+    dispatch(loadProductImages(data));
   }
 };
 
-export const fetchAddImage = (image, id) => async (dispatch) => {
+export const fetchAddProductImage = (image, id) => async (dispatch) => {
   const res = await csrfFetch(`/api/products/${id}/images`, {
     method: "POST",
     headers: {
@@ -45,7 +61,7 @@ export const fetchAddImage = (image, id) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    dispatch(addImage(data));
+    dispatch(addProductImage(data));
     return data;
   }
 };
@@ -60,17 +76,42 @@ export const fetchDeleteImage = (id) => async (dispatch) => {
   }
 };
 
+export const fetchAddReviewImage = (image, id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reviews/${id}/images`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(image),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(addReviewImage(data));
+    return data;
+  }
+};
+
+export const fetchReviewImages = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reviews/${id}/images`);
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadReviewImages(data));
+  }
+};
+
 let newState = {};
 
 const imageReducer = (state = newState, action) => {
   switch (action.type) {
-    case LOAD_IMAGES:
+    case LOAD_PRODUCT_IMAGES:
       newState = {};
       action.payload.Images.forEach((image) => {
         newState[image.id] = image;
       });
       return newState;
-    case ADD_IMAGE:
+    case ADD_PRODUCT_IMAGE:
       return {
         ...state,
         [action.payload.id]: action.payload,
@@ -78,6 +119,17 @@ const imageReducer = (state = newState, action) => {
     case DELETE_IMAGE:
       newState = { ...state };
       delete newState[action.payload];
+      return newState;
+    case ADD_REVIEW_IMAGE:
+      return {
+        ...state,
+        [action.payload.id]: action.payload,
+      };
+    case LOAD_REVIEW_IMAGES:
+      newState = {};
+      action.payload.Images.forEach((image) => {
+        newState[image.id] = image;
+      });
       return newState;
     default:
       return state;

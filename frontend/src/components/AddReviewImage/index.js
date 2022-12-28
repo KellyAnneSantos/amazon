@@ -1,26 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
 import {
-  fetchAddProductImage,
-  fetchProductImages,
+  fetchAddReviewImage,
+  fetchReviewImages,
 } from "../../store/imageReducer";
-import { fetchProduct } from "../../store/productReducer";
 import ImageItem from "../ImageItem";
 
-const AddImageForm = () => {
-  const { productId } = useParams();
+const AddReviewImage = ({ reviewId }) => {
   const dispatch = useDispatch();
 
-  const product = useSelector((state) => state?.products[productId]);
+  // const product = useSelector((state) => state?.products[productId]);
   let images = useSelector((state) => state?.images) || "";
 
   const [mediaUrl, setMediaUrl] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchProduct(productId));
-    dispatch(fetchProductImages(productId));
+    // dispatch(fetchProduct(productId));
+    dispatch(fetchReviewImages(reviewId));
   }, []);
 
   const handleSubmit = async (e) => {
@@ -29,26 +26,17 @@ const AddImageForm = () => {
     let image = { mediaUrl };
     setErrors([]);
 
-    const response = await dispatch(
-      fetchAddProductImage(image, productId)
-    ).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+    const response = await dispatch(fetchAddReviewImage(image, reviewId)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
     setMediaUrl("");
   };
 
   return (
     <>
-      <NavLink to={`/products/${product?.id}/edit`}>
-        <h1>Vital Info</h1>
-      </NavLink>
-      <h1>Images</h1>
-      <h1>Description</h1>
-      <img src={product?.previewImage} />
-      <NavLink to={`/products/${product?.id}/edit`}>
-        <button>Delete</button>
-      </NavLink>
       <div>
         {Object.values(images)?.map((image) => {
           return <ImageItem key={image?.id} image={image} />;
@@ -70,4 +58,4 @@ const AddImageForm = () => {
   );
 };
 
-export default AddImageForm;
+export default AddReviewImage;

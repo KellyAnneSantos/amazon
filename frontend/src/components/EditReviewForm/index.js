@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { fetchReviewImages } from "../../store/imageReducer";
 import { fetchEditReview } from "../../store/reviewReducer";
+import AddReviewImage from "../AddReviewImage";
 import ReviewProductItem from "../ReviewProductItem";
 
 const EditReviewForm = () => {
   const { reviewId } = useParams();
   let review = useSelector((state) => state.reviews[reviewId]);
+  // let images = useSelector((state) => state?.images) || "";
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -16,6 +19,10 @@ const EditReviewForm = () => {
   const [previewImage, setPreviewImage] = useState(review?.previewImage);
   const [body, setBody] = useState(review?.body);
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    dispatch(fetchReviewImages(reviewId));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,6 +69,12 @@ const EditReviewForm = () => {
             onChange={(e) => setPreviewImage(e.target.value)}
           />
         </label>
+        <img src={review?.previewImage} />
+        {/* <div>
+          {Object.values(images)?.map((image) => {
+            return <ImageItem key={image?.id} image={image} />;
+          })}
+        </div> */}
         <label>
           Body
           <input
@@ -73,6 +86,7 @@ const EditReviewForm = () => {
         </label>
         <button type="submit">Submit</button>
       </form>
+      <AddReviewImage reviewId={reviewId} />
     </>
   );
 };
