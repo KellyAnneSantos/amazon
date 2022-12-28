@@ -4,7 +4,9 @@ const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const {
   Description,
   Image,
+  Order,
   Product,
+  ProductOrder,
   Review,
   User,
 } = require("../../db/models");
@@ -54,6 +56,55 @@ const mapProducts = async (products) => {
   }
   return products;
 };
+
+const mapOrders = async (orders) => {
+  for await (const order of orders) {
+    const productOrders = await ProductOrder.findAll({
+      where: {
+        orderId: order.id,
+      },
+    });
+    let sum = 0.0;
+    for await (const productOrder of productOrders) {
+      const product = await Product.findOne({
+        where: {
+          productId: productOrder.productId,
+        },
+      });
+      let i = 0;
+      while (i < productOrder.quantity) {
+        sum += product.price;
+      }
+    }
+    order.dataValues.total = sum;
+  }
+  return orders;
+};
+
+router.get("/current/orders", async (req, res) => {
+  const { user } = req;
+
+  // let orders = await Order.findAll({
+  let Orders = await Order.findAll({
+    where: {
+      userId: user.id,
+      status: "ordered",
+    },
+    include: [
+      {
+        model: Product,
+        through: { attributes: ["quantity"] },
+      },
+    ],
+  });
+
+  // const orderAggregates = await mapOrders(orders);
+
+  return res.json({
+    // Orders: orderAggregates,
+    Orders,
+  });
+});
 
 router.get("/current/reviews", async (req, res) => {
   const { user } = req;

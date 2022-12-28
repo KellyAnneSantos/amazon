@@ -6,6 +6,7 @@ import reviewReducer from "./reviewReducer";
 import imageReducer from "./imageReducer";
 import userReducer from "./userReducer";
 import descriptionReducer from "./descriptionReducer";
+import orderReducer from "./orderReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   images: imageReducer,
   users: userReducer,
   descriptions: descriptionReducer,
+  orders: orderReducer,
 });
 let enhancer;
 

@@ -16,6 +16,7 @@ import ImagesTab from "./components/ImagesTab";
 import MyInventoryPage from "./components/MyInventoryPage";
 import VitalInfoTab from "./components/VitalInfoTab";
 import DescriptionTab from "./components/DescriptionTab";
+import MyOrdersPage from "./components/MyOrdersPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path="/profile/:userId">
             <ProfilePage />
+          </Route>
+          <Route path="/my/orders">
+            <MyOrdersPage />
           </Route>
           <Route path="/my/profile">
             <AccountPage />

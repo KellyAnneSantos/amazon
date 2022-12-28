@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
             <NavLink to="/inventory">Manage Inventory</NavLink>
           </li>
           <li>
-            <NavLink to="/orders">Orders</NavLink>
+            <NavLink to="/my/orders">Orders</NavLink>
           </li>
           <li>
             <NavLink to="/subscriptions">Subscribe & Save Items</NavLink>
