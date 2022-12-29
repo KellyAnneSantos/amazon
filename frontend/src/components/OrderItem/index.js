@@ -1,15 +1,11 @@
 import ProductOrderItem from "../ProductOrderItem";
 
 const OrderItem = ({ order }) => {
-  const products = order.Products;
+  const productOrders = order.ProductOrders;
 
   let sum = 0.0;
-  for (const product of products) {
-    let productOrders = Object.values(product.ProductOrder);
-    for (const productOrder of productOrders) {
-      sum += productOrder;
-    }
-    sum *= product.price;
+  for (const productOrder of productOrders) {
+    sum += productOrder.quantity * productOrder.Product.price;
   }
 
   return (
@@ -19,8 +15,13 @@ const OrderItem = ({ order }) => {
       <p>TOTAL</p>
       <p>{sum}</p>
       <div>
-        {products?.map((product) => {
-          return <ProductOrderItem key={product?.id} product={product} />;
+        {productOrders?.map((productOrder) => {
+          return (
+            <ProductOrderItem
+              key={productOrder?.id}
+              productOrder={productOrder}
+            />
+          );
         })}
       </div>
     </>
