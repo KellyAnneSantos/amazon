@@ -5,6 +5,7 @@ const LOAD_PRODUCTS = "products/load";
 const ADD_PRODUCT = "product/add";
 const LOAD_MY_PRODUCTS = "products/loadMine";
 const EDIT_PRODUCT = "product/edit";
+const SEARCH_PRODUCTS = "products/search";
 
 const loadProduct = (payload) => {
   return {
@@ -38,6 +39,13 @@ const editProduct = (id) => {
   return {
     type: EDIT_PRODUCT,
     payload: id,
+  };
+};
+
+const searchProducts = (payload) => {
+  return {
+    type: SEARCH_PRODUCTS,
+    payload,
   };
 };
 
@@ -102,6 +110,18 @@ export const fetchEditProduct = (product) => async (dispatch) => {
   return data;
 };
 
+export const fetchSearchProducts = (query) => async (dispatch) => {
+  const { name, department, page, size } = query;
+  const res = await csrfFetch(
+    `/api/products?name=${name}&department=${department}&page=${page}&size=${size}`
+  );
+
+  if (res.ok) {
+    const products = await res.json();
+    dispatch(searchProducts(products));
+  }
+};
+
 const productReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
@@ -130,6 +150,13 @@ const productReducer = (state = {}, action) => {
     case EDIT_PRODUCT:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
+      return newState;
+    case SEARCH_PRODUCTS:
+      newState = {};
+      const searchProducts = action.payload.Products;
+      searchProducts.forEach((searchProduct) => {
+        newState[searchProduct.id] = searchProduct;
+      });
       return newState;
     default:
       return state;

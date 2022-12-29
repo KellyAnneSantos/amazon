@@ -7,8 +7,10 @@ const {
   Image,
   Product,
   Review,
+  sequelize,
   User,
 } = require("../../db/models");
+const { environment } = require("../../config");
 
 const aggregateReviews = async (product) => {
   const reviews = await Review.findAll({
@@ -296,7 +298,59 @@ router.put("/:productId", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+  let { name, department, page, size } = req.query;
+
+  let where = {};
+  let pagination = {};
+  const isProduction = environment === "production";
+
+  if (isProduction) {
+    if (name) {
+      where.name = { [Op.iLike]: `%${name}%` };
+    }
+  } else {
+    if (name) {
+      where.name = { [Op.like]: `%${name}%` };
+    }
+  }
+
+  if (department) {
+    where.department = department;
+  }
+
+  if (!page) {
+    page = 0;
+  }
+
+  if (!size) {
+    size = 20;
+  }
+
+  page = parseInt(page);
+  size = parseInt(size);
+
+  if (Number.isNaN(page) || page < 0 || page > 10) {
+    page = 0;
+  } else {
+    page = page;
+  }
+
+  if (Number.isNaN(size) || size < 0 || size > 100) {
+    size = 100;
+  } else {
+    size = size;
+  }
+
+  if (page > 0) {
+    pagination.limit = size;
+    pagination.offset = size * (page - 1);
+  } else {
+    pagination.limit = size;
+  }
+
   let products = await Product.findAll({
+    where,
+    ...pagination,
     include: [
       {
         model: Description,
@@ -314,6 +368,8 @@ router.get("/", async (req, res) => {
 
   return res.json({
     Products: productAggregates,
+    page,
+    size,
   });
 });
 

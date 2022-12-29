@@ -11,13 +11,14 @@ const ProductOrderItem = ({ productOrder }) => {
 
   useEffect(() => {
     dispatch(fetchProduct(productOrder.productId));
-  });
+  }, []);
 
   return (
     <>
       <NavLink to={`/products/${productOrder.productId}`}>
         <img src={product?.previewImage} alt="Product" />
       </NavLink>
+      <span>{productOrder.quantity}</span>
       <NavLink to={`/products/${productOrder.productid}`}>
         <p>{product?.name}</p>
       </NavLink>
