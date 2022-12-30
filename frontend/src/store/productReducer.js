@@ -111,11 +111,42 @@ export const fetchEditProduct = (product) => async (dispatch) => {
 };
 
 export const fetchSearchProducts = (query) => async (dispatch) => {
-  const { name, department, page, size } = query;
-  const res = await csrfFetch(
-    `/api/products?name=${name}&department=${department}&page=${page}&size=${size}`
-  );
+  const { name, prime, department, minPrice, maxPrice } = query;
 
+  let nameVar = `name=${name}`;
+
+  let primeVar;
+  if (prime) {
+    primeVar = `&prime=${prime}`;
+  } else {
+    primeVar = "";
+  }
+
+  let depVar;
+  if (department) {
+    depVar = `&department=${department}`;
+  } else {
+    depVar = "";
+  }
+
+  let minVar;
+  if (minPrice) {
+    minVar = `&minPrice=${minPrice}`;
+  } else {
+    minVar = "";
+  }
+
+  let maxVar;
+  if (maxPrice) {
+    maxVar = `&maxPrice=${maxPrice}`;
+  } else {
+    maxVar = "";
+  }
+
+  const res = await csrfFetch(
+    `/api/products?${nameVar}${primeVar}${depVar}${minVar}${maxVar}`
+  );
+  console.log(res);
   if (res.ok) {
     const products = await res.json();
     dispatch(searchProducts(products));

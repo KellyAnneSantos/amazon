@@ -10,6 +10,7 @@ const {
   sequelize,
   User,
 } = require("../../db/models");
+const { Op } = require("sequelize");
 const { environment } = require("../../config");
 
 const aggregateReviews = async (product) => {
@@ -298,7 +299,7 @@ router.put("/:productId", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  let { name, department, page, size } = req.query;
+  let { name, prime, department, minPrice, maxPrice, page, size } = req.query;
 
   let where = {};
   let pagination = {};
@@ -314,8 +315,26 @@ router.get("/", async (req, res) => {
     }
   }
 
+  if (prime) {
+    where.prime = true;
+  }
+
   if (department) {
     where.department = department;
+  }
+
+  if (minPrice && !maxPrice) {
+    where.price = {
+      [Op.gte]: minPrice,
+    };
+  } else if (maxPrice && !minPrice) {
+    where.price = {
+      [Op.lte]: maxPrice,
+    };
+  } else if (maxPrice && minPrice) {
+    where.price = {
+      [Op.between]: [minPrice, maxPrice],
+    };
   }
 
   if (!page) {
@@ -323,7 +342,7 @@ router.get("/", async (req, res) => {
   }
 
   if (!size) {
-    size = 20;
+    size = 500000;
   }
 
   page = parseInt(page);
@@ -335,8 +354,8 @@ router.get("/", async (req, res) => {
     page = page;
   }
 
-  if (Number.isNaN(size) || size < 0 || size > 100) {
-    size = 100;
+  if (Number.isNaN(size) || size < 0 || size > 500000) {
+    size = 500000;
   } else {
     size = size;
   }
