@@ -26,27 +26,27 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      size: {
-        type: DataTypes.STRING,
-        validate: {
-          len: [1, 25],
-        },
-      },
-      color: {
-        type: DataTypes.STRING,
-        validate: {
-          len: [1, 25],
-        },
-      },
-      deliveryPrice: {
-        type: DataTypes.FLOAT,
-      },
-      deliveryTime: DataTypes.INTEGER,
-      amazonPackaging: {
-        allowNull: false,
-        defaultValue: false,
-        type: DataTypes.BOOLEAN,
-      },
+      // size: {
+      //   type: DataTypes.STRING,
+      //   validate: {
+      //     len: [1, 25],
+      //   },
+      // },
+      // color: {
+      //   type: DataTypes.STRING,
+      //   validate: {
+      //     len: [1, 25],
+      //   },
+      // },
+      // deliveryPrice: {
+      //   type: DataTypes.FLOAT,
+      // },
+      // deliveryTime: DataTypes.INTEGER,
+      // amazonPackaging: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: DataTypes.BOOLEAN,
+      // },
     },
     {
       sequelize,

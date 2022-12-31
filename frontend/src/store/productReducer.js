@@ -146,7 +146,7 @@ export const fetchSearchProducts = (query) => async (dispatch) => {
   const res = await csrfFetch(
     `/api/products?${nameVar}${primeVar}${depVar}${minVar}${maxVar}`
   );
-  console.log(res);
+
   if (res.ok) {
     const products = await res.json();
     dispatch(searchProducts(products));

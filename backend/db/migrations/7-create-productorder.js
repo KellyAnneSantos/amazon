@@ -31,25 +31,25 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      size: {
-        type: Sequelize.STRING(25),
-      },
-      color: {
-        type: Sequelize.STRING(25),
-      },
-      deliveryPrice: {
-        // allowNull: false,
-        type: Sequelize.FLOAT,
-      },
-      deliveryTime: {
-        // allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      amazonPackaging: {
-        allowNull: false,
-        defaultValue: false,
-        type: Sequelize.BOOLEAN,
-      },
+      // size: {
+      //   type: Sequelize.STRING(25),
+      // },
+      // color: {
+      //   type: Sequelize.STRING(25),
+      // },
+      // deliveryPrice: {
+      // allowNull: false,
+      //   type: Sequelize.FLOAT,
+      // },
+      // deliveryTime: {
+      // allowNull: false,
+      //   type: Sequelize.INTEGER,
+      // },
+      // amazonPackaging: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: Sequelize.BOOLEAN,
+      // },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),

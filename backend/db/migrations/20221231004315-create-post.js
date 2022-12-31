@@ -2,14 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Reviews", {
+    await queryInterface.createTable("Posts", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      influencerId: {
         allowNull: false,
         references: {
           model: "Users",
@@ -17,28 +17,11 @@ module.exports = {
         },
         type: Sequelize.INTEGER,
       },
-      productId: {
-        allowNull: false,
-        onDelete: "CASCADE",
-        references: {
-          model: "Products",
-          key: "id",
-        },
-        type: Sequelize.INTEGER,
-      },
-      stars: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      headline: {
+      caption: {
         allowNull: false,
         type: Sequelize.STRING(256),
       },
       previewImage: {
-        allowNull: false,
-        type: Sequelize.STRING(256),
-      },
-      body: {
         allowNull: false,
         type: Sequelize.STRING(256),
       },
@@ -55,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Reviews");
+    await queryInterface.dropTable("Posts");
   },
 };

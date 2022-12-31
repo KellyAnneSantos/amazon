@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Reviews", {
+    await queryInterface.createTable("Helpfuls", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,44 +17,32 @@ module.exports = {
         },
         type: Sequelize.INTEGER,
       },
-      productId: {
-        allowNull: false,
-        onDelete: "CASCADE",
-        references: {
-          model: "Products",
-          key: "id",
-        },
-        type: Sequelize.INTEGER,
-      },
-      stars: {
+      helpableId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      headline: {
+      helpfulType: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.ENUM("review", "answer"),
       },
-      previewImage: {
+      helpfulStatus: {
         allowNull: false,
-        type: Sequelize.STRING(256),
-      },
-      body: {
-        allowNull: false,
-        type: Sequelize.STRING(256),
+        defaultValue: false,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Reviews");
+    await queryInterface.dropTable("Helpfuls");
   },
 };

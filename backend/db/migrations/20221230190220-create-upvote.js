@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Reviews", {
+    await queryInterface.createTable("Upvotes", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,30 +17,19 @@ module.exports = {
         },
         type: Sequelize.INTEGER,
       },
-      productId: {
+      questionId: {
         allowNull: false,
         onDelete: "CASCADE",
         references: {
-          model: "Products",
+          model: "Questions",
           key: "id",
         },
         type: Sequelize.INTEGER,
       },
-      stars: {
+      upvoteStatus: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      headline: {
-        allowNull: false,
-        type: Sequelize.STRING(256),
-      },
-      previewImage: {
-        allowNull: false,
-        type: Sequelize.STRING(256),
-      },
-      body: {
-        allowNull: false,
-        type: Sequelize.STRING(256),
+        defaultValue: false,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
@@ -55,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Reviews");
+    await queryInterface.dropTable("Upvotes");
   },
 };

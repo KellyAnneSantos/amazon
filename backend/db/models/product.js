@@ -38,6 +38,32 @@ module.exports = (sequelize, DataTypes) => {
         // onDelete: "CASCADE",
         // hooks: true,
       });
+      Product.hasMany(models.Question, {
+        foreignKey: "productId",
+        // onDelete: "CASCADE",
+        // hooks: true,
+      });
+      Product.belongsToMany(models.Wishlist, {
+        through: models.WishlistProduct,
+        foreignKey: "productId",
+        otherKey: "wishlistId",
+      });
+      Product.hasMany(models.WishlistProduct, {
+        foreignKey: "productId",
+      });
+      Product.belongsToMany(models.IdeaList, {
+        through: models.IdeaListProduct,
+        foreignKey: "productId",
+        otherKey: "ideaListId",
+      });
+      Product.hasMany(models.IdeaListProduct, {
+        foreignKey: "productId",
+      });
+      Product.belongsToMany(models.Post, {
+        through: models.PostProduct,
+        foreignKey: "productId",
+        otherKey: "postId",
+      });
     }
   }
   Product.init(
@@ -61,16 +87,16 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.FLOAT,
       },
-      size: {
-        allowNull: false,
-        defaultValue: false,
-        type: DataTypes.BOOLEAN,
-      },
-      color: {
-        allowNull: false,
-        defaultValue: false,
-        type: DataTypes.BOOLEAN,
-      },
+      // size: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: DataTypes.BOOLEAN,
+      // },
+      // color: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: DataTypes.BOOLEAN,
+      // },
       // dimensions: {
       //   allowNull: false,
       //   type: DataTypes.STRING,
@@ -97,13 +123,13 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: false,
         type: DataTypes.BOOLEAN,
       },
-      essential: {
-        allowNull: false,
-        defaultValue: false,
-        type: DataTypes.BOOLEAN,
-      },
-      deliveryPrice: DataTypes.FLOAT,
-      deliveryTime: DataTypes.INTEGER,
+      // essential: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: DataTypes.BOOLEAN,
+      // },
+      // deliveryPrice: DataTypes.FLOAT,
+      // deliveryTime: DataTypes.INTEGER,
       // returnTime: {
       //   allowNull: false,
       //   type: DataTypes.INTEGER,
@@ -113,6 +139,11 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: false,
         type: DataTypes.BOOLEAN,
       },
+      // song: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: DataTypes.BOOLEAN,
+      // },
       previewImage: {
         allowNull: false,
         type: DataTypes.STRING,

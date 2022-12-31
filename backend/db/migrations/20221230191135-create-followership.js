@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Reviews", {
+    await queryInterface.createTable("Followerships", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,30 +17,18 @@ module.exports = {
         },
         type: Sequelize.INTEGER,
       },
-      productId: {
+      followsUserId: {
         allowNull: false,
-        onDelete: "CASCADE",
         references: {
-          model: "Products",
+          model: "Users",
           key: "id",
         },
         type: Sequelize.INTEGER,
       },
-      stars: {
+      followingStatus: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      headline: {
-        allowNull: false,
-        type: Sequelize.STRING(256),
-      },
-      previewImage: {
-        allowNull: false,
-        type: Sequelize.STRING(256),
-      },
-      body: {
-        allowNull: false,
-        type: Sequelize.STRING(256),
+        defaultValue: true,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
@@ -55,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Reviews");
+    await queryInterface.dropTable("Followerships");
   },
 };

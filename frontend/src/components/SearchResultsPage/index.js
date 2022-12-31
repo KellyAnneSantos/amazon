@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { fetchSearchProducts } from "../../store/productReducer";
 import { fetchSearchResults } from "../../store/searchReducer";
 import SearchResultsProducts from "../SearchResultsProducts";
@@ -8,17 +8,18 @@ import SearchResultsProducts from "../SearchResultsProducts";
 const SearchResultsPage = ({ location }) => {
   const dispatch = useDispatch();
 
-  const quantity = Object.values(useSelector((state) => state.products));
-  const products = Object.values(useSelector((state) => state.results));
+  const products = Object.values(useSelector((state) => state.products));
+  // const products = Object.values(useSelector((state) => state.results));
 
-  let string = location.search;
-  let substring = string.substring(string.indexOf("=") + 1, string.length);
-
-  const [prime, setPrime] = useState(false);
+  // const [prime, setPrime] = useState(false);
+  let [string, setString] = useState("");
   const [department, setDepartment] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
+  string = location.search;
+  let substring = string.substring(string.indexOf("=") + 1, string.length);
+  // setName(substring);
   //     .replace(/=/g, `:"`)
   //     .replace(/&/g, `",`)
   //     .replace("?", "{") + "}";
@@ -32,11 +33,11 @@ const SearchResultsPage = ({ location }) => {
 
   let max;
 
-  if (quantity?.length > 500000) {
-    max = "over 500000";
-  } else {
-    max = quantity?.length;
-  }
+  // if (quantity?.length > 500000) {
+  //   max = "over 500000";
+  // } else {
+  //   max = quantity?.length;
+  // }
 
   let set = new Set();
   let arr = [];
@@ -58,19 +59,21 @@ const SearchResultsPage = ({ location }) => {
   //   dispatch(fetchSearchResults(query));
   // };
 
-  const handlePrime = (e) => {
-    e.preventDefault();
+  // const handlePrime = (e) => {
+  //   e.preventDefault();
 
-    query = { ...query, prime };
-    dispatch(fetchSearchProducts(query));
-    dispatch(fetchSearchResults(query));
-  };
+  //   query = { ...query, prime };
+  //   dispatch(fetchSearchProducts(query));
+  //   dispatch(fetchSearchResults(query));
+  // };
   const handleDepartment = (e) => {
     e.preventDefault();
 
     query = { ...query, department };
     dispatch(fetchSearchProducts(query));
     dispatch(fetchSearchResults(query));
+    setMinPrice("");
+    setMaxPrice("");
   };
 
   const handlePrice = (e) => {
@@ -79,17 +82,18 @@ const SearchResultsPage = ({ location }) => {
     query = { ...query, minPrice, maxPrice };
     dispatch(fetchSearchProducts(query));
     dispatch(fetchSearchResults(query));
+    setDepartment("");
   };
 
   useEffect(() => {
+    setString(location.search);
     dispatch(fetchSearchProducts(query));
-    dispatch(fetchSearchResults(query));
-  }, []);
+  }, [location.search]);
 
   return (
     <>
       <p>
-        1 - {max} of {max} results for "{substring}"
+        1 - {products.length} of {products.length} results for "{substring}"
       </p>
       {/* <form onClick={handleChange}>
         <label>
@@ -101,7 +105,7 @@ const SearchResultsPage = ({ location }) => {
           />
         </label>
       </form> */}
-      <form onSubmit={handlePrime}>
+      {/* <form onSubmit={handlePrime}>
         <select
           name="type"
           onChange={(e) => setPrime(e.target.value)}
@@ -114,7 +118,7 @@ const SearchResultsPage = ({ location }) => {
           <option value={false}>All</option>
         </select>
         <button type="Submit">Filter by Delivery</button>
-      </form>
+      </form> */}
       <form onSubmit={handleDepartment}>
         <select
           name="type"
@@ -125,7 +129,11 @@ const SearchResultsPage = ({ location }) => {
             Select a department
           </option>
           {arr?.map((ele) => {
-            return <option value={ele}>{ele}</option>;
+            return (
+              <option key={ele} value={ele}>
+                {ele}
+              </option>
+            );
           })}
         </select>
         <button type="Submit">Filter by Department</button>

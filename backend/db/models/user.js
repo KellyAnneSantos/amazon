@@ -9,23 +9,31 @@ module.exports = (sequelize, DataTypes) => {
         id,
         firstName,
         lastName,
+        fakeName,
         merchant,
         merchantName,
+        influencer,
         email,
         phone,
         prime,
         previewImage,
+        backgroundImage,
+        about,
       } = this;
       return {
         id,
         firstName,
         lastName,
+        fakeName,
         merchant,
         merchantName,
+        influencer,
         email,
         phone,
         prime,
         previewImage,
+        backgroundImage,
+        about,
       };
     }
     validatePassword(password) {
@@ -43,6 +51,36 @@ module.exports = (sequelize, DataTypes) => {
       });
       User.hasMany(models.Description, {
         foreignKey: "merchantId",
+      });
+      User.hasMany(models.Question, {
+        foreignKey: "userId",
+      });
+      User.hasMany(models.Answer, {
+        foreignKey: "userId",
+      });
+      User.hasMany(models.Helpful, {
+        foreignKey: "userId",
+      });
+      User.hasMany(models.Upvote, {
+        foreignKey: "userId",
+      });
+      User.hasMany(models.Downvote, {
+        foreignKey: "userId",
+      });
+      User.hasMany(models.Wishlist, {
+        foreignKey: "userId",
+      });
+      User.hasMany(models.Followership, {
+        foreignKey: "userId",
+      });
+      User.hasMany(models.ideaList, {
+        foreignKey: "userId",
+      });
+      User.hasMany(models.Post, {
+        foreignKey: "influencerId",
+      });
+      User.hasMany(models.Like, {
+        foreignKey: "userId",
       });
     }
     static getCurrentUserById(id) {
@@ -65,24 +103,32 @@ module.exports = (sequelize, DataTypes) => {
     static async signup({
       firstName,
       lastName,
+      fakeName,
       merchant,
       merchantName,
+      influencer,
       email,
       phone,
       prime,
       previewImage,
+      backgroundImage,
+      about,
       password,
     }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         firstName,
         lastName,
+        fakeName,
         merchant,
         merchantName,
+        influencer,
         email,
         phone,
         prime,
         previewImage,
+        backgroundImage,
+        about,
         hashedPassword,
       });
       return await User.scope("currentUser").findByPk(user.id);
@@ -95,14 +141,21 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
-          len: [2, 25],
+          len: [2, 30],
         },
       },
       lastName: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
-          len: [2, 25],
+          len: [2, 30],
+        },
+      },
+      fakeName: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          len: [2, 30],
         },
       },
       merchant: {
@@ -116,6 +169,11 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: [2, 256],
         },
+      },
+      influencer: {
+        allowNull: false,
+        defaultValue: false,
+        type: DataTypes.BOOLEAN,
       },
       // username: {
       //   type: DataTypes.STRING,
@@ -151,9 +209,24 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
       },
       previewImage: {
+        allowNull: false,
         type: DataTypes.STRING,
         validate: {
           len: [5, 256],
+        },
+      },
+      backgroundImage: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          len: [5, 256],
+        },
+      },
+      about: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          len: [1, 256],
         },
       },
       hashedPassword: {

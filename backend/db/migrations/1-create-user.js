@@ -16,6 +16,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(30),
       },
+      fakeName: {
+        allowNull: false,
+        type: Sequelize.STRING(30),
+      },
       merchant: {
         allowNull: false,
         defaultValue: false,
@@ -24,6 +28,11 @@ module.exports = {
       merchantName: {
         type: Sequelize.STRING(256),
         unique: true,
+      },
+      influencer: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN,
       },
       // username: {
       //   type: Sequelize.STRING(30),
@@ -46,6 +55,15 @@ module.exports = {
         type: Sequelize.BOOLEAN,
       },
       previewImage: {
+        allowNull: false,
+        type: Sequelize.STRING(256),
+      },
+      backgroundImage: {
+        allowNull: false,
+        type: Sequelize.STRING(256),
+      },
+      about: {
+        allowNull: false,
         type: Sequelize.STRING(256),
       },
       hashedPassword: {
