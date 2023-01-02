@@ -73,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Followership, {
         foreignKey: "userId",
       });
-      User.hasMany(models.ideaList, {
+      User.hasMany(models.IdeaList, {
         foreignKey: "userId",
       });
       User.hasMany(models.Post, {

@@ -22,7 +22,7 @@ const validateSignup = [
     .withMessage("Please provide a valid email."),
   check("phone")
     .exists({ checkFalsy: true })
-    .isLength({ min: 10 })
+    .isLength({ min: 7 })
     .withMessage("Please provide a phone number with at least 10 digits."),
   check("phone")
     .not()
