@@ -23,6 +23,15 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
         hooks: true,
       });
+      Review.hasMany(models.Helpful, {
+        foreignKey: "helpableId",
+        constraints: false,
+        scope: {
+          helpableType: "review",
+        },
+        onDelete: "CASCADE",
+        hooks: true,
+      });
     }
   }
   Review.init(

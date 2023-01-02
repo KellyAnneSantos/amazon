@@ -2,44 +2,40 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("WishlistProducts", {
+    await queryInterface.createTable("Orders", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      productId: {
+      userId: {
         allowNull: false,
-        // onDelete: "CASCADE",
         references: {
-          model: "Products",
+          model: "Users",
           key: "id",
         },
         type: Sequelize.INTEGER,
       },
-      wishlistId: {
-        allowNull: false,
-        onDelete: "CASCADE",
-        references: {
-          model: "Wishlists",
-          key: "id",
-        },
+      billingAddress: {
+        // allowNull: false,
+        type: Sequelize.STRING(50),
+      },
+      shippingAddress: {
+        // allowNull: false,
+        type: Sequelize.STRING(50),
+      },
+      cardType: {
+        // allowNull: false,
+        type: Sequelize.ENUM("AMEX", "DC", "MC", "VISA"),
+      },
+      lastFour: {
+        // allowNull: false,
         type: Sequelize.INTEGER,
       },
-      comment: {
+      status: {
         allowNull: false,
-        type: Sequelize.STRING(256),
-      },
-      priority: {
-        allowNull: false,
-        type: Sequelize.ENUM("lowest", "low", "medium", "high", "highest"),
-      },
-      needs: {
-        type: Sequelize.INTEGER,
-      },
-      has: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.ENUM("cart", "ordered"),
       },
       createdAt: {
         allowNull: false,
@@ -54,6 +50,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("WishlistProducts");
+    await queryInterface.dropTable("Orders");
   },
 };

@@ -8,7 +8,27 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Question.belongsTo(models.User, {
+        foreignKey: "userId",
+      });
+      Question.belongsTo(models.Product, {
+        foreignKey: "productId",
+      });
+      Question.hasMany(models.Upvote, {
+        foreignKey: "questionId",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
+      Question.hasMany(models.Downvote, {
+        foreignKey: "questionId",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
+      Question.hasMany(models.Answer, {
+        foreignKey: "questionId",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
     }
   }
   Question.init(

@@ -8,7 +8,25 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      IdeaList.belongsToMany(models.Product, {
+        through: models.IdeaListProduct,
+        foreignKey: "ideaListId",
+        otherKey: "productId",
+      });
+      IdeaList.belongsTo(models.User, {
+        foreignKey: "userId",
+        // onDelete: "CASCADE",
+        // hooks: true,
+      });
+      IdeaList.hasMany(models.Like, {
+        foreignKey: "likeableId",
+        constraints: false,
+        scope: {
+          likeableType: "ideaList",
+        },
+        onDelete: "CASCADE",
+        hooks: true,
+      });
     }
   }
   IdeaList.init(

@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      WishlistProduct.belongsTo(models.Product, { foreignKey: "productId" });
+      WishlistProduct.belongsTo(models.Wishlist, { foreignKey: "wishlistId" });
     }
   }
   WishlistProduct.init(
@@ -29,8 +30,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       priority: DataTypes.STRING,
-      needs: DataTypes.INTEGER,
-      has: DataTypes.INTEGER,
     },
     {
       sequelize,

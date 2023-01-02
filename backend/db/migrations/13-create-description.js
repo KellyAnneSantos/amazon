@@ -2,14 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Helpfuls", {
+    await queryInterface.createTable("Descriptions", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      merchantId: {
         allowNull: false,
         references: {
           model: "Users",
@@ -17,32 +17,32 @@ module.exports = {
         },
         type: Sequelize.INTEGER,
       },
-      helpableId: {
+      productId: {
         allowNull: false,
+        // onDelete: "CASCADE",
+        references: {
+          model: "Products",
+          key: "id",
+        },
         type: Sequelize.INTEGER,
       },
-      helpfulType: {
+      bulletPoint: {
         allowNull: false,
-        type: Sequelize.ENUM("review", "answer"),
-      },
-      helpfulStatus: {
-        allowNull: false,
-        defaultValue: false,
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING(256),
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+        type: Sequelize.DATE,
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Helpfuls");
+    await queryInterface.dropTable("Descriptions");
   },
 };

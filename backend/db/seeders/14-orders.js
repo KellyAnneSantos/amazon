@@ -17,7 +17,7 @@ const orders = [
   },
   {
     userId: 1,
-    status: "checkout",
+    status: "cart",
   },
   {
     userId: 2,
@@ -30,10 +30,6 @@ const orders = [
   {
     userId: 3,
     status: "cart",
-  },
-  {
-    userId: 4,
-    status: "checkout",
   },
 ];
 

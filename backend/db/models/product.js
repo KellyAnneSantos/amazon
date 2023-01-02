@@ -56,9 +56,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "productId",
         otherKey: "ideaListId",
       });
-      Product.hasMany(models.IdeaListProduct, {
-        foreignKey: "productId",
-      });
       Product.belongsToMany(models.Post, {
         through: models.PostProduct,
         foreignKey: "productId",
