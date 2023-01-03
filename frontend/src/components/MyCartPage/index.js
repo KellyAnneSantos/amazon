@@ -1,21 +1,53 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../store/orderReducer";
-import MyCart from "../MyCart";
+import CartItem from "../CartItem";
+import ProductOrderItem from "../ProductOrderItem";
 
 const MyCartPage = () => {
   const dispatch = useDispatch();
 
-  const orders = Object.values(useSelector((state) => state.orders));
+  const order = Object.values(useSelector((state) => state?.orders))[0];
+  const productOrders = order?.ProductOrders;
+
+  const [sum, setSum] = useState(0.0);
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCart());
   }, []);
 
+  useEffect(() => {
+    let newSum = 0.0;
+    let newQuantity = 0;
+    if (productOrders) {
+      for (const productOrder of productOrders) {
+        newSum += productOrder.quantity * productOrder.Product.price;
+        newQuantity += productOrder.quantity;
+      }
+      setSum(newSum);
+      setQuantity(newQuantity);
+    }
+  }, [productOrders]);
+
   return (
     <>
-      <p>{orders[0]?.updatedAt}</p>
-      {/* <MyCart orders={orders} /> */}
+      <h1>Shopping Cart</h1>
+      <h2>Price</h2>
+      <div>
+        {productOrders?.map((productOrder) => {
+          return (
+            <CartItem key={productOrder?.id} productOrder={productOrder} />
+          );
+        })}
+      </div>
+      <p>
+        Subtotal ({quantity} items): {sum}
+      </p>
+      <p>
+        Subtotal ({quantity} items): {sum}
+      </p>
+      <button>Proceed to checkout</button>
     </>
   );
 };

@@ -105,10 +105,10 @@ router.get("/current/cart", async (req, res) => {
 
   // const orderAggregates = await mapOrders(orders);
 
-  return res.json(
+  return res.json({
     // Orders: orderAggregates,
-    Orders
-  );
+    Orders,
+  });
 });
 
 router.get("/current/orders", async (req, res) => {
@@ -139,6 +139,44 @@ router.get("/current/orders", async (req, res) => {
     // Orders: orderAggregates,
     Orders,
   });
+});
+
+router.post("/current/productorders", async (req, res) => {
+  const { user } = req;
+  let { productId, quantity } = req.body;
+  productId = parseInt(productId);
+
+  const order = await Order.findOne({
+    where: {
+      userId: user.id,
+      status: "cart",
+    },
+  });
+
+  if (order) {
+    const newProductOrder = await ProductOrder.create({
+      productId,
+      orderId: order.id,
+      quantity,
+    });
+
+    res.status(201);
+    return res.json(newProductOrder);
+  } else {
+    const newOrder = await Order.create({
+      userId: user.id,
+      status: "cart",
+    });
+
+    const newProductOrder = await ProductOrder.create({
+      productId,
+      orderId: newOrder.id,
+      quantity,
+    });
+
+    res.status(201);
+    return res.json(newProductOrder);
+  }
 });
 
 router.get("/current/reviews", async (req, res) => {

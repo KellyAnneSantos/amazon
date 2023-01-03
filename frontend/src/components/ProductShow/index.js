@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchProduct } from "../../store/productReducer";
 import { fetchReviews } from "../../store/reviewReducer";
 import { fetchProductImages } from "../../store/imageReducer";
 import ReviewItem from "../ReviewItem";
 import ReviewImages from "../ReviewImages";
+import { fetchAddProductOrder } from "../../store/productOrderReducer";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,17 @@ const ProductShow = () => {
   let reviews = useSelector((state) => state?.reviews) || "";
   let images = useSelector((state) => state?.images) || "";
   const descriptions = product?.Descriptions;
+
+  const [quantity, setQuantity] = useState(1);
+  let arr = Array.from(Array(31).keys());
+  arr.shift();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let productOrder = { productId, quantity };
+
+    dispatch(fetchAddProductOrder(productOrder));
+  };
 
   useEffect(() => {
     dispatch(fetchProduct(productId));
@@ -44,6 +56,27 @@ const ProductShow = () => {
           <li key={description.id}>{description.bulletPoint}</li>
         ))}
       </ul>
+      <div>
+        <div>{product?.price}</div>
+        {product?.prime && <div>prime</div>}
+        {product?.freeReturn && <div>FREE Returns</div>}
+        <form onSubmit={handleSubmit}>
+          <select
+            name="type"
+            onChange={(e) => setQuantity(e.target.value)}
+            value={quantity}
+          >
+            {arr?.map((ele) => {
+              return (
+                <option key={ele} value={ele}>
+                  {ele}
+                </option>
+              );
+            })}
+          </select>
+          <button type="Submit">Add to Cart</button>
+        </form>
+      </div>
       <h2>Customer reviews</h2>
       <h3>{product?.avgStarRating} out of 5</h3>
       <h4>{product?.numReviews} global ratings</h4>

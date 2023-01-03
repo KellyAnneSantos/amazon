@@ -3,10 +3,10 @@ import { csrfFetch } from "./csrf";
 const LOAD_ORDERS = "orders/loadMine";
 const LOAD_CART = "cart/load";
 
-const loadOrders = (orders) => {
+const loadOrders = (payload) => {
   return {
     type: LOAD_ORDERS,
-    payload: orders,
+    payload,
   };
 };
 
@@ -19,9 +19,11 @@ const loadCart = (payload) => {
 
 export const fetchOrders = () => async (dispatch) => {
   const res = await csrfFetch("/api/users/current/orders");
-  const orders = await res.json();
 
-  dispatch(loadOrders(orders));
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadOrders(data));
+  }
 };
 
 export const fetchCart = () => async (dispatch) => {
@@ -35,21 +37,17 @@ export const fetchCart = () => async (dispatch) => {
 
 let newState = {};
 
-const orderReducer = (state = {}, action) => {
-  // let newState;
+const orderReducer = (state = newState, action) => {
   switch (action.type) {
     case LOAD_ORDERS:
       newState = {};
-      const orders = action.payload.Orders;
-      orders.forEach((order) => {
+      action.payload.Orders.forEach((order) => {
         newState[order.id] = order;
       });
       return newState;
     case LOAD_CART:
       newState = {};
-      action.payload.Orders.forEach((order) => {
-        newState[order.id] = order;
-      });
+      newState[action.payload.Orders.id] = action.payload.Orders;
       return newState;
     default:
       return state;
