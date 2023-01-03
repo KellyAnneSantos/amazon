@@ -1,10 +1,18 @@
 import { csrfFetch } from "./csrf";
 
 const ADD_PRODUCTORDER = "productorder/add";
+const DELETE_PRODUCTORDER = "productorder/delete";
 
 const addProductOrder = (payload) => {
   return {
     type: ADD_PRODUCTORDER,
+    payload,
+  };
+};
+
+const deleteProductOrder = (payload) => {
+  return {
+    type: DELETE_PRODUCTORDER,
     payload,
   };
 };
@@ -25,6 +33,16 @@ export const fetchAddProductOrder = (productOrder) => async (dispatch) => {
   }
 };
 
+export const fetchDeleteProductOrder = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/productorders/${id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteProductOrder(id));
+  }
+};
+
 let newState = {};
 
 const productOrderReducer = (state = newState, action) => {
@@ -34,6 +52,10 @@ const productOrderReducer = (state = newState, action) => {
         ...state,
         [action.payload.id]: action.payload,
       };
+    case DELETE_PRODUCTORDER:
+      newState = { ...state };
+      delete newState[action.payload];
+      return newState;
     default:
       return state;
   }

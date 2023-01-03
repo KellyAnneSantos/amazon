@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { fetchDeleteProductOrder } from "../../store/productOrderReducer";
 import { fetchProduct } from "../../store/productReducer";
 
 const CartItem = ({ productOrder }) => {
@@ -10,9 +11,15 @@ const CartItem = ({ productOrder }) => {
     (state) => state.products[productOrder.productId]
   );
 
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    await dispatch(fetchDeleteProductOrder(productOrder.id));
+  };
+
   useEffect(() => {
     dispatch(fetchProduct(productOrder.productId));
-  }, []);
+  }, [dispatch, productOrder.productId]);
 
   return (
     <>
@@ -26,7 +33,7 @@ const CartItem = ({ productOrder }) => {
       {product?.prime && <div>prime</div>}
       {product?.freeReturn && <div>FREE Returns</div>}
       <span>{productOrder.quantity}</span>
-      <button>Delete</button>
+      <button onClick={handleClick}>Delete</button>
     </>
   );
 };
