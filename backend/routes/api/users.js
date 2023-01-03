@@ -93,6 +93,7 @@ router.get("/current/cart", async (req, res) => {
     include: [
       {
         model: ProductOrder,
+        attributes: ["id", "productId", "orderId", "quantity"],
         // through: { attributes: ["quantity"] },
         include: [
           {

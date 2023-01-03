@@ -4,12 +4,33 @@ const router = express.Router();
 
 const { Order, ProductOrder } = require("../../db/models");
 
+router.get("/:productOrderId", async (req, res) => {
+  let { productOrderId } = req.params;
+  productOrderId = parseInt(productOrderId);
+
+  // const productOrder = await ProductOrder.findByPk(productOrderId);
+  // returns where productorder.productid = productorderid
+
+  const productOrder = await ProductOrder.findOne({
+    where: {
+      id: productOrderId,
+    },
+  });
+
+  return res.json(productOrder);
+});
+
 router.delete("/:productOrderId", async (req, res) => {
   let { productOrderId } = req.params;
   const { user } = req;
   productOrderId = parseInt(productOrderId);
 
-  const productOrder = await ProductOrder.findByPk(productOrderId);
+  // const productOrder = await ProductOrder.findByPk(productOrderId);
+  const productOrder = await ProductOrder.findOne({
+    where: {
+      id: productOrderId,
+    },
+  });
 
   if (!productOrder) {
     res.status(404);
