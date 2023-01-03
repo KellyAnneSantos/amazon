@@ -26,7 +26,6 @@ module.exports = {
         type: Sequelize.BOOLEAN,
       },
       merchantName: {
-        allowNull: false,
         type: Sequelize.STRING(256),
         unique: true,
       },

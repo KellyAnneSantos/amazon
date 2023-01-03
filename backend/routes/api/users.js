@@ -81,6 +81,36 @@ const mapOrders = async (orders) => {
   return orders;
 };
 
+router.get("/current/cart", async (req, res) => {
+  const { user } = req;
+
+  // let orders = await Order.findAll({
+  let Orders = await Order.findOne({
+    where: {
+      userId: user.id,
+      status: "cart",
+    },
+    include: [
+      {
+        model: ProductOrder,
+        // through: { attributes: ["quantity"] },
+        include: [
+          {
+            model: Product,
+          },
+        ],
+      },
+    ],
+  });
+
+  // const orderAggregates = await mapOrders(orders);
+
+  return res.json(
+    // Orders: orderAggregates,
+    Orders
+  );
+});
+
 router.get("/current/orders", async (req, res) => {
   const { user } = req;
 

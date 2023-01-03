@@ -164,7 +164,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
       },
       merchantName: {
-        allowNull: false,
         type: DataTypes.STRING,
         unique: true,
         validate: {

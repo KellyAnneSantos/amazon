@@ -18,6 +18,7 @@ import VitalInfoTab from "./components/VitalInfoTab";
 import DescriptionTab from "./components/DescriptionTab";
 import MyOrdersPage from "./components/MyOrdersPage";
 import SearchResultsPage from "./components/SearchResultsPage";
+import MyCartPage from "./components/MyCartPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route path="/profile/:userId">
             <ProfilePage />
+          </Route>
+          <Route path="/my/cart">
+            <MyCartPage />
           </Route>
           <Route path="/my/orders">
             <MyOrdersPage />
