@@ -28,7 +28,7 @@ module.exports = {
       },
       downvoteStatus: {
         allowNull: false,
-        defaultValue: false,
+        defaultValue: true,
         type: Sequelize.BOOLEAN,
       },
       createdAt: {

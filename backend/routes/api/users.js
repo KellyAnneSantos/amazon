@@ -19,11 +19,15 @@ const validateSignup = [
   check("email")
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage("Please provide a valid email."),
+    .withMessage(
+      "Wrong or Invalid email address. Please correct and try again."
+    ),
   check("phone")
     .exists({ checkFalsy: true })
     .isLength({ min: 7 })
-    .withMessage("Please provide a phone number with at least 10 digits."),
+    .withMessage(
+      "Wrong or Invalid mobile phone number. Please correct and try again."
+    ),
   check("phone")
     .not()
     .isEmail()
@@ -31,7 +35,7 @@ const validateSignup = [
   check("password")
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
-    .withMessage("Password must be 6 characters or more."),
+    .withMessage("Minimum 6 characters required"),
   handleValidationErrors,
 ];
 
@@ -284,8 +288,14 @@ router.get("/:userId", async (req, res) => {
 });
 
 router.post("/", validateSignup, async (req, res) => {
-  const { email, password, phone } = req.body;
-  const user = await User.signup({ email, phone, password });
+  const { firstName, lastName, phone, email, password } = req.body;
+  const user = await User.signup({
+    firstName,
+    lastName,
+    phone,
+    email,
+    password,
+  });
 
   await setTokenCookie(res, user);
 

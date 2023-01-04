@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       downvoteStatus: {
         allowNull: false,
-        defaultValue: false,
+        defaultValue: true,
         type: DataTypes.BOOLEAN,
       },
     },

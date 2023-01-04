@@ -18,6 +18,7 @@ module.exports = {
       },
       fakeName: {
         allowNull: false,
+        defaultValue: "Anonymous",
         type: Sequelize.STRING(30),
       },
       merchant: {
@@ -46,7 +47,7 @@ module.exports = {
       },
       phone: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(10),
         unique: true,
       },
       prime: {
@@ -55,15 +56,12 @@ module.exports = {
         type: Sequelize.BOOLEAN,
       },
       previewImage: {
-        allowNull: false,
         type: Sequelize.STRING(256),
       },
       backgroundImage: {
-        allowNull: false,
         type: Sequelize.STRING(256),
       },
       about: {
-        allowNull: false,
         type: Sequelize.STRING(256),
       },
       hashedPassword: {

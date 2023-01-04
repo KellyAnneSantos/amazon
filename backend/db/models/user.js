@@ -153,6 +153,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       fakeName: {
         allowNull: false,
+        defaultValue: "Anonymous",
         type: DataTypes.STRING,
         validate: {
           len: [2, 30],
@@ -197,10 +198,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       phone: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         unique: true,
         validate: {
-          len: [7, 7],
+          len: [7, 17],
         },
       },
       prime: {
@@ -209,21 +210,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
       },
       previewImage: {
-        allowNull: false,
         type: DataTypes.STRING,
         validate: {
           len: [5, 256],
         },
       },
       backgroundImage: {
-        allowNull: false,
         type: DataTypes.STRING,
         validate: {
           len: [5, 256],
         },
       },
       about: {
-        allowNull: false,
         type: DataTypes.STRING,
         validate: {
           len: [1, 256],

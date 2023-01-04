@@ -28,7 +28,7 @@ module.exports = {
       },
       upvoteStatus: {
         allowNull: false,
-        defaultValue: false,
+        defaultValue: true,
         type: Sequelize.BOOLEAN,
       },
       createdAt: {
