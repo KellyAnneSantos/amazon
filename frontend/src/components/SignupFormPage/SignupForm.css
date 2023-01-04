@@ -1,0 +1,21 @@
+#privacy-notice {
+  font-size: 12px;
+}
+
+.create-footer-questions {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.create-footer-answers {
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#register-footer {
+  border-top: 1px solid;
+  border-image: linear-gradient(315deg, gray, #f8f8f8) 1;
+  background: radial-gradient(ellipse at top, #f8f8f8, transparent),
+    radial-gradient(ellipse at bottom, white, transparent);
+  height: 3%;
+}

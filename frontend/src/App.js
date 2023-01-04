@@ -29,6 +29,14 @@ function App() {
 
   return (
     <>
+      <Switch>
+        <Route path="/signin">
+          <LoginFormPage />
+        </Route>
+        <Route path="/register">
+          <SignupFormPage />
+        </Route>
+      </Switch>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -68,14 +76,8 @@ function App() {
           <Route path="/inventory">
             <MyInventoryPage />
           </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
           <Route path="/search">
             <SearchResultsPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
           </Route>
           <Route path="/">
             <LandingPage />

@@ -1,0 +1,13 @@
+#nav-bar-links {
+  list-style: none;
+}
+
+#nav-bar {
+  background-color: black;
+  margin-top: 0px;
+}
+
+#nav-bar-logo {
+  height: 40px;
+  margin: 10px 4px 10px 3px;
+}

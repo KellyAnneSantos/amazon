@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../store/orderReducer";
 import CartItem from "../CartItem";
-import ProductOrderItem from "../ProductOrderItem";
 
 const MyCartPage = () => {
   const dispatch = useDispatch();

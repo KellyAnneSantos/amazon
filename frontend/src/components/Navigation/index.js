@@ -19,17 +19,20 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/signin">Sign In</NavLink>
+        <NavLink to="/register">Sign Up</NavLink>
       </>
     );
   }
 
   return (
-    <ul>
-      <li>
+    <ul id="nav-bar">
+      <li id="nav-bar-links">
         <NavLink exact to="/">
-          Home
+          <img
+            src="../../images/NicePng_amazon-logo-png_167642.png"
+            id="nav-bar-logo"
+          />
         </NavLink>
         <SearchBar />
         {isLoaded && sessionLinks}

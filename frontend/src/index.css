@@ -7,3 +7,8 @@
 body {
   font-family: "PT Sans";
 }
+
+textarea:focus,
+input:focus {
+  outline: none;
+}

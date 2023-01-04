@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import SigninErrors from "../SigninErrors";
 import "./SignupForm.css";
 
 function SignupFormPage() {
@@ -10,13 +11,11 @@ function SignupFormPage() {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [merchant, setMerchant] = useState(false);
-  const [merchantName, setMerchantName] = useState("");
   const [email, setEmail] = useState("");
+  const [demoCredential, setDemoCredential] = useState("user1@user.io");
   const [phone, setPhone] = useState("");
-  const [prime, setPrime] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
   const [password, setPassword] = useState("");
+  const [demoPassword, setDemoPassword] = useState("password2");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -30,12 +29,8 @@ function SignupFormPage() {
         sessionActions.signup({
           firstName,
           lastName,
-          merchant,
-          merchantName,
           email,
           phone,
-          prime,
-          previewImage,
           password,
         })
       ).catch(async (res) => {
@@ -43,106 +38,119 @@ function SignupFormPage() {
         if (data && data.errors) setErrors(data.errors);
       });
     }
-    return setErrors([
-      "Confirm Password field must be the same as the Password field",
-    ]);
+    return setErrors(["Passwords must match"]);
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(
+      sessionActions.login({
+        credential: demoCredential,
+        password: demoPassword,
+      })
+    );
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        First Name
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
+    <>
+      <NavLink to="/">
+        <img
+          src="../../images/Amazon_logo_PNG3.png"
+          className="signin-signup-logo"
         />
-      </label>
-      <label>
-        Last Name
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Merchant
-        <input
-          type="checkbox"
-          checked={merchant}
-          onClick={() => setMerchant(!merchant)}
-        />
-      </label>
-      <label>
-        Merchant Name
-        <input
-          type="text"
-          value={merchantName}
-          onChange={(e) => setMerchantName(e.target.value)}
-        />
-      </label>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Phone
-        <input
-          type="text"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Prime
-        <input
-          type="checkbox"
-          checked={prime}
-          onClick={() => setPrime(!prime)}
-        />
-      </label>
-      <label>
-        Profile Picture
-        <input
-          type="text"
-          value={previewImage}
-          onChange={(e) => setPreviewImage(e.target.value)}
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Sign Up</button>
-    </form>
+      </NavLink>
+      <div id="create-account-div">
+        {errors.length !== 0 && <SigninErrors errors={errors} />}
+        <form onSubmit={handleSubmit} id="signin-form">
+          <h1 id="signin-title">Create account</h1>
+          <label className="signin-signup-labels">
+            Your first name
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+              className="signin-signup-inputs"
+            />
+          </label>
+          <label className="signin-signup-labels">
+            Your last name
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+              className="signin-signup-inputs"
+            />
+          </label>
+          <label className="signin-signup-labels">
+            Mobile number
+            <input
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              className="signin-signup-inputs"
+            />
+          </label>
+          <label className="signin-signup-labels">
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="signin-signup-inputs"
+            />
+          </label>
+          <label className="signin-signup-labels">
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="signin-signup-inputs"
+            />
+          </label>
+          <label className="signin-signup-labels">
+            Re-enter password
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              className="signin-signup-inputs"
+            />
+          </label>
+          <button type="submit" className="signin-signup-buttons">
+            Continue
+          </button>
+          <p id="privacy-notice">
+            By creating an account, you agree to Amazon's Conditions of Use and
+            Privacy Notice
+          </p>
+          <div id="register-footer">
+            <span className="create-footer-questions">
+              Already have an account?{" "}
+            </span>
+            <NavLink to="/signin">
+              <span className="create-footer-answers">Sign in </span>
+            </NavLink>
+            <span className="create-footer-questions">
+              Sign in as demo user?{" "}
+            </span>
+            <NavLink to="/">
+              <span onClick={handleClick} className="create-footer-answers">
+                Demo
+              </span>
+            </NavLink>
+          </div>
+        </form>
+      </div>
+      <div className="signin-signup-footer"></div>
+    </>
   );
 }
 
