@@ -1,0 +1,89 @@
+.product-cards {
+  width: 350px;
+  height: 420px;
+  background-color: white;
+  padding: 0px 0px;
+  margin: 0px 0px;
+}
+
+.landing-images {
+  margin-left: 20px;
+  width: 310px;
+  height: 303px;
+  /* inline-size: 100%; */
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+#landing-page {
+  background-color: lightgray;
+  position: relative;
+}
+
+#landing-inner-div {
+  /* position: absolute;
+  top: 50%;
+  left: 50%; */
+  margin: auto;
+  width: 77%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 20px;
+}
+
+.landing-card-titles {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.landing-card-captions {
+  font-size: 13px;
+  margin-left: 20px;
+  color: #3b7a57;
+  cursor: pointer;
+}
+
+.landing-card-captions:hover {
+  color: #ff9900;
+}
+
+#ad-banner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 77%;
+  margin-bottom: 20px;
+}
+
+/* .horizontal-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  overflow-x: auto;
+} */
+
+#carousel {
+  position: relative;
+  /* text-align: center; */
+  color: black;
+}
+
+#left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  /* font-size: 40px; */
+}
+
+#right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translate(-50%, -50%);
+  /* font-size: 20px; */
+  /* line-height: 22pt; */
+}

@@ -23,9 +23,10 @@ const SearchBar = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          id="search-input"
         />
         <button type="submit" id="magnifying-btn">
-          <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+          <i className="fa-solid fa-magnifying-glass fa-lg"></i>
         </button>
       </form>
     </>

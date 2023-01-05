@@ -112,35 +112,56 @@ export const fetchEditProduct = (product) => async (dispatch) => {
 
 export const fetchSearchProducts = (query) => async (dispatch) => {
   const { name, prime, department, minPrice, maxPrice } = query;
-
-  let nameVar = `name=${name}`;
-
-  let primeVar;
-  if (prime) {
-    primeVar = `&prime=${prime}`;
-  } else {
-    primeVar = "";
-  }
-
+  let nameVar = "";
+  let primeVar = "";
   let depVar;
-  if (department) {
-    depVar = `&department=${department}`;
-  } else {
-    depVar = "";
-  }
-
   let minVar;
-  if (minPrice) {
-    minVar = `&minPrice=${minPrice}`;
-  } else {
-    minVar = "";
-  }
-
   let maxVar;
-  if (maxPrice) {
-    maxVar = `&maxPrice=${maxPrice}`;
+
+  if (name) {
+    nameVar = `name=${name}`;
+
+    if (prime) {
+      primeVar = `&prime=${prime}`;
+    } else {
+      primeVar = "";
+    }
+
+    if (department) {
+      depVar = `&department=${department}`;
+    } else {
+      depVar = "";
+    }
+
+    if (minPrice) {
+      minVar = `&minPrice=${minPrice}`;
+    } else {
+      minVar = "";
+    }
+
+    if (maxPrice) {
+      maxVar = `&maxPrice=${maxPrice}`;
+    } else {
+      maxVar = "";
+    }
   } else {
-    maxVar = "";
+    if (department) {
+      depVar = `department=${department}`;
+    } else {
+      depVar = "";
+    }
+
+    if (minPrice) {
+      minVar = `&minPrice=${minPrice}`;
+    } else {
+      minVar = "";
+    }
+
+    if (maxPrice) {
+      maxVar = `&maxPrice=${maxPrice}`;
+    } else {
+      maxVar = "";
+    }
   }
 
   const res = await csrfFetch(
@@ -148,8 +169,9 @@ export const fetchSearchProducts = (query) => async (dispatch) => {
   );
 
   if (res.ok) {
-    const products = await res.json();
-    dispatch(searchProducts(products));
+    const data = await res.json();
+    dispatch(searchProducts(data));
+    return data;
   }
 };
 

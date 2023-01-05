@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
@@ -23,20 +23,21 @@ import MyCartPage from "./components/MyCartPage";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
-      <Switch>
+      {/* <Switch>
         <Route path="/signin">
           <LoginFormPage />
         </Route>
         <Route path="/register">
           <SignupFormPage />
         </Route>
-      </Switch>
+      </Switch> */}
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>

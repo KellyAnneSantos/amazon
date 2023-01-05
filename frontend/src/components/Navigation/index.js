@@ -1,33 +1,32 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import SearchBar from "../SearchBar";
+import NavigationDropdown from "../NavigationDropdown";
+import DepartmentItem from "../DepartmentItem";
 
-function Navigation({ isLoaded }) {
+function Navigation() {
   const sessionUser = useSelector((state) => state.session.user);
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <>
-        <ProfileButton user={sessionUser} />
-        <NavLink to="/my/cart">Shopping Cart</NavLink>
-      </>
-    );
-  } else {
-    sessionLinks = (
-      <>
-        <NavLink to="/signin">Sign In</NavLink>
-        <NavLink to="/register">Sign Up</NavLink>
-      </>
-    );
-  }
+  const departments = [
+    "Baby",
+    "Beauty",
+    "Books",
+    "Cellular",
+    "Clothing",
+    "Devices",
+    "Garden",
+    "Grocery",
+    "Health",
+    "Home",
+    "Sports",
+    "Toys",
+  ];
 
   return (
-    <ul id="nav-bar">
-      <li id="nav-bar-links">
+    <>
+      <nav id="nav-bar">
         <NavLink exact to="/">
           <img
             src="../../images/NicePng_amazon-logo-png_167642.png"
@@ -35,9 +34,22 @@ function Navigation({ isLoaded }) {
           />
         </NavLink>
         <SearchBar />
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+        <NavigationDropdown />
+        <NavLink to="/my/orders" className="remove-text-dec">
+          <p id="nav-bar-orders">Orders</p>
+        </NavLink>
+        <NavLink to="/my/cart" className="remove-text-dec">
+          <p id="nav-bar-cart">
+            <i className="fa-solid fa-cart-shopping fa-2xl"></i> Cart
+          </p>
+        </NavLink>
+      </nav>
+      <nav id="second-nav-bar">
+        {departments.map((department) => (
+          <DepartmentItem key={department} department={department} />
+        ))}
+      </nav>
+    </>
   );
 }
 

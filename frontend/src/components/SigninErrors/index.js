@@ -3,7 +3,7 @@ const SigninErrors = ({ errors }) => {
     <>
       <ul className="signin-signup-errors">
         <i
-          class="fa-solid fa-triangle-exclamation fa-2xl"
+          className="fa-solid fa-triangle-exclamation fa-2xl"
           id="signin-error-icon"
         />
         <h4 className="signin-signup-errors-title">There was a problem</h4>

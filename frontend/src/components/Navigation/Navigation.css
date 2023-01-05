@@ -1,13 +1,43 @@
-#nav-bar-links {
-  list-style: none;
-}
-
 #nav-bar {
   background-color: black;
   margin-top: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 #nav-bar-logo {
-  height: 40px;
-  margin: 10px 4px 10px 3px;
+  width: 99px;
+}
+
+#nav-bar-orders {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#nav-bar-cart {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#second-nav-bar {
+  height: 28px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #232f3e;
+  align-items: center;
+}
+
+.dept-nav-links {
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.remove-text-dec {
+  text-decoration: none !important;
 }

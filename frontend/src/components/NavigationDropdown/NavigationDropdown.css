@@ -1,0 +1,53 @@
+#dropdown-container {
+  display: inline-block;
+  position: relative;
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  list-style: none;
+  min-width: 400px;
+  border-radius: 3px;
+  right: 0;
+}
+
+#dropdown-container:hover .profile-dropdown {
+  display: block;
+}
+
+#greeting {
+  font-size: 12px;
+}
+
+.account-drop {
+  margin: 15px 0px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  width: 139px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#account-btn-row-2 {
+  font-size: 14px;
+}
+
+.remove-text-dec {
+  text-decoration: none !important;
+}
+
+.account-drop-options {
+  color: black;
+  font-size: 14px;
+  padding: 12px 15px;
+  cursor: pointer;
+}
+
+.account-drop-options:hover {
+  text-decoration: underline;
+  color: #ff9900;
+}

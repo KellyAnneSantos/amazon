@@ -19,6 +19,10 @@ const SearchResultsPage = ({ location }) => {
 
   string = location.search;
   let substring = string.substring(string.indexOf("=") + 1, string.length);
+  let depSubstring = string.substring(
+    string.indexOf("=") - 10,
+    string.indexOf("=")
+  );
   // setName(substring);
   //     .replace(/=/g, `:"`)
   //     .replace(/&/g, `",`)
@@ -28,8 +32,13 @@ const SearchResultsPage = ({ location }) => {
   // console.log(string);
   // let arr = string.replace("?", "").split("&");
   // console.log(arr);
+  let query;
 
-  let query = { name: substring };
+  if (depSubstring === "department") {
+    query = { department: substring };
+  } else {
+    query = { name: substring };
+  }
 
   let max;
 
@@ -119,25 +128,27 @@ const SearchResultsPage = ({ location }) => {
         </select>
         <button type="Submit">Filter by Delivery</button>
       </form> */}
-      <form onSubmit={handleDepartment}>
-        <select
-          name="type"
-          onChange={(e) => setDepartment(e.target.value)}
-          value={department}
-        >
-          <option value="" disabled>
-            Select a department
-          </option>
-          {arr?.map((ele) => {
-            return (
-              <option key={ele} value={ele}>
-                {ele}
-              </option>
-            );
-          })}
-        </select>
-        <button type="Submit">Filter by Department</button>
-      </form>
+      {depSubstring !== "department" && (
+        <form onSubmit={handleDepartment}>
+          <select
+            name="type"
+            onChange={(e) => setDepartment(e.target.value)}
+            value={department}
+          >
+            <option value="" disabled>
+              Select a department
+            </option>
+            {arr?.map((ele) => {
+              return (
+                <option key={ele} value={ele}>
+                  {ele}
+                </option>
+              );
+            })}
+          </select>
+          <button type="Submit">Filter by Department</button>
+        </form>
+      )}
       <form onSubmit={handlePrice}>
         <input
           type="number"
