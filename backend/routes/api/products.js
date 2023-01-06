@@ -3,9 +3,11 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  Answer,
   Description,
   Image,
   Product,
+  Question,
   Review,
   sequelize,
   User,
@@ -247,6 +249,12 @@ router.get("/:productId", async (req, res) => {
       {
         model: Review,
       },
+      {
+        model: Question,
+        include: {
+          model: Answer,
+        },
+      },
     ],
   });
   const productPlus = await aggregateReviews(product);
@@ -379,6 +387,12 @@ router.get("/", async (req, res) => {
       },
       {
         model: Review,
+      },
+      {
+        model: Question,
+        include: {
+          model: Answer,
+        },
       },
     ],
   });

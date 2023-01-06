@@ -1,0 +1,36 @@
+.user-review-preview-img {
+  width: 34px;
+  height: 34px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.product-review-preview-img {
+  height: 88px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.review-mini-img-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.product-fake-name {
+  text-decoration: none;
+  color: black;
+}
+
+.product-review-btn {
+  background-color: white;
+  width: 77px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  margin-right: 5px;
+}
+
+.product-review-btn:hover {
+  background-color: #f8f8f8;
+}
