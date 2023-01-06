@@ -18,6 +18,7 @@ const ProductShow = () => {
   let reviews = useSelector((state) => state?.reviews) || "";
   let images = useSelector((state) => state?.images) || "";
   const descriptions = product?.Descriptions;
+  const questions = product?.Questions;
 
   const [quantity, setQuantity] = useState(1);
   let [source, setSource] = useState(product?.previewImage);
@@ -150,6 +151,20 @@ const ProductShow = () => {
             </form>
           </div>
         </div>
+        <hr />
+        <div>
+          <h2>Looking for specific info?</h2>
+          <h2>Customer questions & answers</h2>
+          {questions?.map((question) => {
+            return (
+              <>
+                <p>Question: {question.body}</p>
+                <p>Answer: {question.Answers[0].body}</p>
+              </>
+            );
+          })}
+        </div>
+        <hr />
         <div id="product-reviews-container">
           <div id="review-summary-container">
             <h2>Customer reviews</h2>
