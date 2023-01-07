@@ -5,7 +5,6 @@ import { fetchProduct } from "../../store/productReducer";
 import { fetchReviews } from "../../store/reviewReducer";
 import { fetchProductImages } from "../../store/imageReducer";
 import ReviewItem from "../ReviewItem";
-import ReviewImages from "../ReviewImages";
 import { fetchAddProductOrder } from "../../store/productOrderReducer";
 import "./ProductShow.css";
 
@@ -151,7 +150,7 @@ const ProductShow = () => {
             </form>
           </div>
         </div>
-        <hr />
+        <hr className="product-dividers" />
         <div>
           <h2>Looking for specific info?</h2>
           <h2>Customer questions & answers</h2>
@@ -164,7 +163,7 @@ const ProductShow = () => {
             );
           })}
         </div>
-        <hr />
+        <hr className="product-dividers" />
         <div id="product-reviews-container">
           <div id="review-summary-container">
             <h2>Customer reviews</h2>

@@ -15,7 +15,7 @@ const ReviewItem = ({ review }) => {
   if (review.stars > 0) {
     checkedStarArr = Array.from(Array(Math.floor(review.stars)).keys());
   }
-  console.log(checkedStarArr);
+
   let starArr = [];
   if (checkedStarArr.length) {
     starArr = Array.from(Array(5 - checkedStarArr.length).keys());

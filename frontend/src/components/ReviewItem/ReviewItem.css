@@ -2,14 +2,14 @@
   width: 34px;
   height: 34px;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 50%;
 }
 
 .product-review-preview-img {
   height: 88px;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .review-mini-img-container {

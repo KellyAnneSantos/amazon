@@ -34,14 +34,14 @@ function LandingPage() {
     <div id="landing-page">
       <div id="carousel">
         <span id="left-arrow" onClick={() => handleClick(img, txt, dep)}>
-          <i class="fa-solid fa-chevron-left fa-2xl"></i>
+          <i className="fa-solid fa-chevron-left fa-2xl"></i>
         </span>
         <NavLink to={`/search?department=${depArr[dep >> 0]}`}>
           <div id="banner-txt">{textArr[txt >> 0]}</div>
         </NavLink>
         <img src={imgArr[img >>> 0]} id="ad-banner"></img>
         <span id="right-arrow" onClick={() => handleClick(img, txt)}>
-          <i class="fa-solid fa-chevron-right fa-2xl"></i>
+          <i className="fa-solid fa-chevron-right fa-2xl"></i>
         </span>
       </div>
       <div id="landing-inner-div">

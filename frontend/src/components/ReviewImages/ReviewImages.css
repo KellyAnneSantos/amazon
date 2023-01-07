@@ -2,5 +2,5 @@
   inline-size: 100%;
   margin: 5px;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
 } */

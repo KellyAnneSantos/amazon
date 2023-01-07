@@ -4,7 +4,7 @@
   margin-left: 5px;
   margin-right: 34px;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 #product-categories {
@@ -20,7 +20,7 @@
   border: 1px solid black;
   cursor: pointer;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 #mini-img-container {
@@ -161,5 +161,11 @@
 .reviews-w-images {
   inline-size: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
+}
+
+.product-dividers {
+  border: 0px;
+  height: 1px;
+  background-color: lightgray;
 }
