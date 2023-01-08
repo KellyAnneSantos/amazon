@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_ORDERS = "orders/loadMine";
 // const LOAD_CART = "cart/load";
+const EDIT_ORDER = "order/edit";
 
 const loadOrders = (payload) => {
   return {
@@ -16,6 +17,13 @@ const loadOrders = (payload) => {
 //     payload,
 //   };
 // };
+
+const editOrder = (id) => {
+  return {
+    type: EDIT_ORDER,
+    payload: id,
+  };
+};
 
 export const fetchOrders = () => async (dispatch) => {
   const res = await csrfFetch("/api/users/current/orders");
@@ -35,6 +43,15 @@ export const fetchOrders = () => async (dispatch) => {
 //   }
 // };
 
+export const fetchPay = () => async (dispatch) => {
+  const res = await csrfFetch(`/api/users/current/cart`, {
+    method: "PUT",
+  });
+  const data = await res.json();
+  dispatch(editOrder(data));
+  return data;
+};
+
 let newState = {};
 
 const orderReducer = (state = newState, action) => {
@@ -49,6 +66,10 @@ const orderReducer = (state = newState, action) => {
     //   newState = {};
     //   newState[action.payload.Orders.id] = action.payload.Orders;
     //   return newState;
+    case EDIT_ORDER:
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
+      return newState;
     default:
       return state;
   }

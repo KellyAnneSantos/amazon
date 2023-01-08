@@ -95,6 +95,14 @@ router.get("/current/cart/productorders", async (req, res) => {
     },
   });
 
+  if (!order) {
+    res.status(404);
+    return res.json({
+      message: "Cart is empty",
+      statusCode: 404,
+    });
+  }
+
   let ProductOrders = await ProductOrder.findAll({
     where: {
       orderId: order.id,
@@ -150,6 +158,65 @@ router.get("/current/cart", async (req, res) => {
   });
 });
 
+router.put("/current/cart", async (req, res) => {
+  const { user } = req;
+
+  let order = await Order.findOne({
+    where: {
+      userId: user.id,
+      status: "cart",
+    },
+    // include: [
+    //   {
+    //     model: ProductOrder,
+    //     include: [
+    //       {
+    //         model: Product,
+    //       },
+    //     ],
+    //   },
+    // ],
+  });
+
+  if (!order) {
+    res.status(404);
+    return res.json({
+      message: "Cart is empty",
+      statusCode: 404,
+    });
+  }
+
+  if (user.id !== order.userId) {
+    res.status(403);
+    return res.json({
+      message: "Current user must be the shopper to pay",
+      statusCode: 403,
+    });
+  }
+
+  order.update({
+    status: "ordered",
+  });
+
+  const updatedOrder = await Order.findOne({
+    where: {
+      id: order.id,
+    },
+    include: [
+      {
+        model: ProductOrder,
+        include: [
+          {
+            model: Product,
+          },
+        ],
+      },
+    ],
+  });
+
+  return res.json(order);
+});
+
 router.get("/current/orders", async (req, res) => {
   const { user } = req;
 
@@ -184,6 +251,7 @@ router.post("/current/productorders", async (req, res) => {
   const { user } = req;
   let { productId, quantity } = req.body;
   productId = parseInt(productId);
+  quantity = parseInt(quantity);
   let createdProductOrder;
 
   const order = await Order.findOne({
@@ -193,89 +261,123 @@ router.post("/current/productorders", async (req, res) => {
     },
   });
 
-  const productOrder = await ProductOrder.findOne({
-    where: {
-      productId,
-      orderId: order.id,
-    },
-  });
-
-  if (order && productOrder) {
-    let newQuantity = productOrder.quantity + quantity;
-
-    productOrder.update({
-      quantity: newQuantity,
-    });
-
-    const updatedProductOrder = await ProductOrder.findOne({
-      where: {
-        productId,
-        orderId: order.id,
-      },
-      attributes: [
-        "id",
-        "productId",
-        "orderId",
-        "quantity",
-        "createdAt",
-        "updatedAt",
-      ],
-    });
-
-    return res.json(updatedProductOrder);
-  } else if (order && !productOrder) {
-    const newProductOrder = await ProductOrder.create({
-      productId,
-      orderId: order.id,
-      quantity,
-    });
-
-    createdProductOrder = await ProductOrder.findOne({
-      where: {
-        productId,
-        orderId: order.id,
-      },
-      attributes: [
-        "id",
-        "productId",
-        "orderId",
-        "quantity",
-        "createdAt",
-        "updatedAt",
-      ],
-    });
-
-    res.status(201);
-    return res.json(createdProductOrder);
-  } else {
+  if (!order) {
     const newOrder = await Order.create({
       userId: user.id,
       status: "cart",
     });
 
-    const newProductOrder = await ProductOrder.create({
-      productId,
-      orderId: newOrder.id,
-      quantity,
+    const productOrder = await ProductOrder.findOne({
+      where: {
+        productId,
+        orderId: newOrder.id,
+      },
     });
 
-    createdProductOrder = await ProductOrder.findOne({
+    if (!productOrder) {
+      const newProductOrder = await ProductOrder.create({
+        productId,
+        orderId: newOrder.id,
+        quantity,
+      });
+
+      createdProductOrder = await ProductOrder.findOne({
+        where: {
+          productId,
+          orderId: order.id,
+        },
+        attributes: [
+          "id",
+          "productId",
+          "orderId",
+          "quantity",
+          "createdAt",
+          "updatedAt",
+        ],
+      });
+
+      res.status(201);
+      return res.json(createdProductOrder);
+    } else {
+      let newQuantity = parseInt(productOrder.quantity) + quantity;
+
+      productOrder.update({
+        quantity: newQuantity,
+      });
+
+      const updatedProductOrder = await ProductOrder.findOne({
+        where: {
+          productId,
+          orderId: order.id,
+        },
+        attributes: [
+          "id",
+          "productId",
+          "orderId",
+          "quantity",
+          "createdAt",
+          "updatedAt",
+        ],
+      });
+
+      return res.json(updatedProductOrder);
+    }
+  } else {
+    const productOrder = await ProductOrder.findOne({
       where: {
         productId,
         orderId: order.id,
       },
-      attributes: [
-        "id",
-        "productId",
-        "orderId",
-        "quantity",
-        "createdAt",
-        "updatedAt",
-      ],
     });
 
-    res.status(201);
-    return res.json(createdProductOrder);
+    if (!productOrder) {
+      const newProductOrder = await ProductOrder.create({
+        productId,
+        orderId: order.id,
+        quantity,
+      });
+
+      createdProductOrder = await ProductOrder.findOne({
+        where: {
+          productId,
+          orderId: order.id,
+        },
+        attributes: [
+          "id",
+          "productId",
+          "orderId",
+          "quantity",
+          "createdAt",
+          "updatedAt",
+        ],
+      });
+
+      res.status(201);
+      return res.json(createdProductOrder);
+    } else {
+      let newQuantity = parseInt(productOrder.quantity) + quantity;
+
+      productOrder.update({
+        quantity: newQuantity,
+      });
+
+      const updatedProductOrder = await ProductOrder.findOne({
+        where: {
+          productId,
+          orderId: order.id,
+        },
+        attributes: [
+          "id",
+          "productId",
+          "orderId",
+          "quantity",
+          "createdAt",
+          "updatedAt",
+        ],
+      });
+
+      return res.json(updatedProductOrder);
+    }
   }
 });
 

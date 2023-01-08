@@ -1,0 +1,45 @@
+.order-top-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid gainsboro;
+  justify-content: space-between;
+  padding: 14px 18px;
+  color: #565959;
+}
+
+.individual-orders-container {
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  margin-top: 14px;
+}
+
+.order-top-left-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.order-ship-name {
+  color: #007185;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.order-bottom-border {
+  border-bottom: 1px solid gainsboro;
+  margin-bottom: 32px;
+}
+
+.order-headers {
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+
+.order-footers {
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.order-top-table {
+  margin-left: 26px;
+}

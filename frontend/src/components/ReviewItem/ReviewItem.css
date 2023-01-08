@@ -2,7 +2,7 @@
   width: 34px;
   height: 34px;
   aspect-ratio: 16 / 9;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
 }
 

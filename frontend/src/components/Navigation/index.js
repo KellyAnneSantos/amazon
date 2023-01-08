@@ -59,7 +59,6 @@ export default Navigation;
 //fix spacing and fontsize and dropdown background color on product page
 //join prime and become merchant on dropdown menu
 //check that overflow on product page working
-////edit quantity for products on cart page
 //inner div sizing on landing page
 //change status to ordered
 //modal on product page

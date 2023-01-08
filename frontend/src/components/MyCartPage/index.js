@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
+import { fetchPay } from "../../store/orderReducer";
 import { fetchLoadCart } from "../../store/productOrderReducer";
 import CartItem from "../CartItem";
 import "./MyCartPage.css";
 
 const MyCartPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  // const order = Object.values(useSelector((state) => state?.orders))[0];
   const productOrders = Object.values(
     useSelector((state) => state?.productOrders)
   );
 
   const [sum, setSum] = useState(0.0);
   const [quantity, setQuantity] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLoadCart());
@@ -31,6 +34,15 @@ const MyCartPage = () => {
       setQuantity(newQuantity);
     }
   }, [productOrders]);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    await dispatch(fetchPay()).then(() => setIsLoaded(true));
+    history.push("/my/orders");
+  };
+
+  if (isLoaded) return <Redirect to="/my/orders" />;
 
   return (
     <div id="cart-page">
@@ -66,7 +78,9 @@ const MyCartPage = () => {
             </span>
             <span id="cart-checkout-subtotal-price">${sum}</span>
           </div>
-          <button id="cart-checkout-btn">Proceed to checkout</button>
+          <button id="cart-checkout-btn" onClick={handleClick}>
+            Proceed to checkout
+          </button>
         </div>
       </div>
     </div>

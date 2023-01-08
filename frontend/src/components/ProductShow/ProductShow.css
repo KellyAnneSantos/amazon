@@ -64,6 +64,7 @@
   border: 1px lightgray solid;
   border-radius: 10px;
   padding: 14px 18px;
+  height: max-content;
 }
 
 #product-info {
@@ -84,6 +85,7 @@
 #cart-free-returns {
   font-size: 14px;
   margin-bottom: 12px;
+  color: #007185;
 }
 
 #add-cart-btn {
@@ -94,6 +96,7 @@
   width: 204px;
   height: 29px;
   cursor: pointer;
+  margin-bottom: 12px;
 }
 
 #qty-form {
@@ -112,14 +115,20 @@
 
 #product-p-name {
   font-size: 25px;
+  margin-bottom: 0px;
 }
 
 #product-p-merchant {
+  margin-top: 0px;
   font-size: 14px;
+  color: #007185;
+  margin-bottom: 0px;
 }
 
 #product-info-num-reviews {
   font-size: 14px;
+  color: #007185;
+  margin-left: 20px;
 }
 
 #product-info-price {
@@ -128,11 +137,15 @@
 
 #product-info-free {
   font-size: 14px;
+  color: #007185;
 }
 
 #product-about {
   font-size: 16px;
   font-weight: 900;
+  margin-top: 0px;
+  padding-bottom: 4px;
+  margin-bottom: 0px;
 }
 
 .product-info-descr {
@@ -168,4 +181,36 @@
   border: 0px;
   height: 1px;
   background-color: lightgray;
+  margin-top: 0px;
+  margin-bottom: 14px;
+}
+
+#product-select-border {
+  border-color: #ff9900;
+  box-shadow: 0 0 5px #ff9900;
+}
+
+#product-prime-logo {
+  width: 58px;
+  margin-bottom: 0px;
+}
+
+#product-p-starratings {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+#product-descr-ul {
+  padding-left: 14px;
+  margin-top: 4px;
+}
+
+#buy-cart-btn {
+  background-color: #ff9900;
+  border: none;
+  border-radius: 25px;
+  padding: 1px 6px;
+  width: 204px;
+  height: 29px;
+  cursor: pointer;
 }

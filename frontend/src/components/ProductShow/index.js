@@ -36,11 +36,11 @@ const ProductShow = () => {
     starArr = Array.from(Array(5 - checkedStarArr.length).keys());
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let productOrder = { productId, quantity };
 
-    dispatch(fetchAddProductOrder(productOrder));
+    await dispatch(fetchAddProductOrder(productOrder));
   };
 
   useEffect(() => {
@@ -64,6 +64,7 @@ const ProductShow = () => {
               src={product?.previewImage}
               alt="Product"
               className="mini-product-img"
+              id={source === product?.previewImage && "product-select-border"}
               onClick={(e) => setSource(product?.previewImage)}
             />
             <div>
@@ -74,6 +75,7 @@ const ProductShow = () => {
                     key={image?.id}
                     alt="Product"
                     className="mini-product-img"
+                    id={source === image?.mediaUrl && "product-select-border"}
                     onClick={(e) => setSource(image?.mediaUrl)}
                   />
                 );
@@ -84,31 +86,35 @@ const ProductShow = () => {
           <div id="product-info">
             <h1 id="product-p-name">{product?.name}</h1>
             <h2 id="product-p-merchant">{product?.User.merchantName}</h2>
-            {checkedStarArr.length
-              ? checkedStarArr.map((star) => {
-                  return <i class="fa fa-star checked"></i>;
-                })
-              : ""}
-            {starArr.length
-              ? starArr.map((star) => {
-                  return <i class="fa-regular fa-star"></i>;
-                })
-              : ""}
-            <span id="product-info-num-reviews">
-              {product?.numReviews} ratings
-            </span>
+            <div id="product-p-starratings">
+              {checkedStarArr.length
+                ? checkedStarArr.map((star) => {
+                    return <i class="fa fa-star checked"></i>;
+                  })
+                : ""}
+              {starArr.length
+                ? starArr.map((star) => {
+                    return <i class="fa-regular fa-star"></i>;
+                  })
+                : ""}
+              <span id="product-info-num-reviews">
+                {product?.numReviews} ratings
+              </span>
+            </div>
+            <hr className="product-dividers" />
             <div id="product-info-price">${product?.price}</div>
             {product?.prime && (
               <img
-                id="cart-form-prime-logo"
+                id="product-prime-logo"
                 src="../../images/kisspng-amazon-com-amazon-prime-amazon-video-retail-prime-amazon-prime-5b376c3c2a9899.6153089515303588441745.png"
               />
             )}
             {product?.freeReturn && (
               <div id="product-info-free">FREE Returns</div>
             )}
+            <hr className="product-dividers" />
             <h3 id="product-about">About this item</h3>
-            <ul>
+            <ul id="product-descr-ul">
               <li className="product-info-descr">{product?.description}</li>
               {descriptions?.map((description) => (
                 <li className="product-info-descr" key={description.id}>
@@ -148,6 +154,7 @@ const ProductShow = () => {
                 Add to Cart
               </button>
             </form>
+            <button id="buy-cart-btn">Buy Now</button>
           </div>
         </div>
         <hr className="product-dividers" />

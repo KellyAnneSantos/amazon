@@ -49,7 +49,7 @@ body {
   width: 300px;
   margin-left: 20px;
   padding: 20px;
-  height: 145px;
+  height: max-content;
 }
 
 #cart-checkout-btn {
@@ -60,6 +60,7 @@ body {
   width: 285px;
   justify-content: center;
   margin-top: 20px;
+  cursor: pointer;
 }
 
 .cart-hr {

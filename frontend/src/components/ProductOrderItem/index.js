@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { fetchAddProductOrder } from "../../store/productOrderReducer";
 import { fetchProduct } from "../../store/productReducer";
+import "./ProductOrderItem.css";
 
 const ProductOrderItem = ({ productOrder }) => {
   const dispatch = useDispatch();
@@ -13,20 +15,43 @@ const ProductOrderItem = ({ productOrder }) => {
     dispatch(fetchProduct(productOrder.productId));
   }, []);
 
+  const handleClick = async (e) => {
+    e.preventDefault();
+    let newProductOrder = { productId: productOrder?.productId, quantity: 1 };
+
+    await dispatch(fetchAddProductOrder(newProductOrder));
+  };
+
   return (
-    <>
-      <NavLink to={`/products/${productOrder.productId}`}>
-        <img src={product?.previewImage} alt="Product" />
-      </NavLink>
-      <span>{productOrder.quantity}</span>
-      <NavLink to={`/products/${productOrder.productid}`}>
-        <p>{product?.name}</p>
-      </NavLink>
-      <button>Buy it again</button>
+    <div className="po-bottom">
+      <div className="po-left">
+        <div>
+          <NavLink to={`/products/${productOrder.productId}`}>
+            <img
+              src={product?.previewImage}
+              alt="Product"
+              className="po-image"
+            />
+          </NavLink>
+          {productOrder?.quantity > 1 && <span>{productOrder.quantity}</span>}
+        </div>
+        <div>
+          <NavLink
+            to={`/products/${productOrder.productid}`}
+            className="po-name"
+          >
+            <p className="po-name">{product?.name}</p>
+          </NavLink>
+          <button className="order-buy-btn" onClick={handleClick}>
+            <i class="fa-solid fa-bag-shopping fa-sm"></i>
+            <span>Buy it again</span>
+          </button>
+        </div>
+      </div>
       <NavLink to={`/products/${productOrder.productId}/reviews/new`}>
-        <button>Write a product review</button>
+        <button className="order-review-btn">Write a product review</button>
       </NavLink>
-    </>
+    </div>
   );
 };
 

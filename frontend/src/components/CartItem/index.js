@@ -26,12 +26,11 @@ const CartItem = ({ productOrder }) => {
     await dispatch(fetchDeleteProductOrder(productOrder?.id));
   };
 
-  console.log(productOrder.id);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     productOrder = { ...productOrder, quantity };
 
-    dispatch(fetchEditProductOrder(productOrder, productOrder?.id));
+    await dispatch(fetchEditProductOrder(productOrder, productOrder?.id));
   };
 
   useEffect(() => {
@@ -59,7 +58,7 @@ const CartItem = ({ productOrder }) => {
           )}
           {product?.freeReturn && <p className="cart-free">FREE Returns</p>}
           <div className="cart-action">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="cart-edit-form">
               <span id="qty-label">Qty: </span>
               <select
                 name="type"
@@ -75,13 +74,16 @@ const CartItem = ({ productOrder }) => {
                   );
                 })}
               </select>
-              <button type="Submit">Update</button>
+              <button type="Submit" className="cart-update-btn">
+                Update
+              </button>
             </form>
-            <div className="cart-vl">
-              <span onClick={handleClick} className="cart-delete-link">
-                Delete
-              </span>
-            </div>
+            <span className="cart-vl">|</span>
+            {/* <div className="cart-vl"> */}
+            <span onClick={handleClick} className="cart-delete-link">
+              Delete
+            </span>
+            {/* </div> */}
           </div>
         </div>
       </div>

@@ -15,14 +15,14 @@ const NavigationDropdown = () => {
   return (
     <div id="dropdown-container">
       <button className="account-drop">
-        <span id="greeting">Hello, {user?.firstName} </span>
-        <span id="account-btn-row-2">
+        <p id="greeting">Hello, {user?.firstName} </p>
+        <p id="account-btn-row-2">
           Accounts & Lists{" "}
           <i
             className="fa-solid fa-caret-down"
             style={{ color: "lightgray" }}
           ></i>
-        </span>
+        </p>
       </button>
       <div className="profile-dropdown">
         {/* <li>Your Lists</li>

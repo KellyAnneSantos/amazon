@@ -1,0 +1,62 @@
+.po-image {
+  width: 90px;
+  height: 90px;
+  height: 88px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.po-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+
+.po-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.po-name {
+  color: #007185;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 0px;
+  padding-top: 0px;
+  margin-bottom: 0px;
+}
+
+.order-buy-btn {
+  background-color: #ffd057;
+  border-radius: 5px;
+  border: none;
+  height: 29px;
+  width: 120px;
+  justify-content: center;
+  margin-top: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.order-review-btn {
+  background-color: white;
+  width: 218px;
+  height: 29px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.po-name:hover {
+  text-decoration: underline;
+}
+.order-review-btn:hover {
+  background-color: #f8f8f8;
+}
