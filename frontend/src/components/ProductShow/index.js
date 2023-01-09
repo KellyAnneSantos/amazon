@@ -21,6 +21,7 @@ const ProductShow = () => {
 
   const [quantity, setQuantity] = useState(1);
   let [source, setSource] = useState(product?.previewImage);
+  const [modal, setModal] = useState(false);
 
   let arr = Array.from(Array(31).keys());
   arr.shift();
@@ -89,12 +90,22 @@ const ProductShow = () => {
             <div id="product-p-starratings">
               {checkedStarArr.length
                 ? checkedStarArr.map((star) => {
-                    return <i class="fa fa-star checked"></i>;
+                    return (
+                      <i
+                        class="fa fa-star checked"
+                        id="product-orange-star"
+                      ></i>
+                    );
                   })
                 : ""}
               {starArr.length
                 ? starArr.map((star) => {
-                    return <i class="fa-regular fa-star"></i>;
+                    return (
+                      <i
+                        class="fa-regular fa-star"
+                        id="product-orange-star"
+                      ></i>
+                    );
                   })
                 : ""}
               <span id="product-info-num-reviews">
@@ -154,7 +165,51 @@ const ProductShow = () => {
                 Add to Cart
               </button>
             </form>
-            <button id="buy-cart-btn">Buy Now</button>
+            {/* <button id="buy-cart-btn" onClick={() => setModal(true)}>
+              Buy Now
+            </button>
+            {modal && (
+              <Modal>
+                <form>
+                  <h1>Buy now: {product?.name}</h1>
+                  <div>
+                    <img src={product?.previewImage} />
+                    <span>Sold by </span>
+                    <span>{product?.User?.merchantName}</span>
+                  </div>
+                  <hr />
+                  <div>
+                    <p>Ship to</p>
+                    <p>
+                      {user?.firstName} {user?.lastName}
+                    </p>
+                  </div>
+                  <hr />
+                  <div>
+                    <p>Pay with</p>
+                  </div>
+                  <hr />
+                  <div>
+                    <p>Total</p>
+                    <div>
+                      <p>(includes tax)</p>
+                    </div>
+                  </div>
+                  <p>
+                    By placing your order, you agree to Amazon's privacy notice
+                    and conditions of use.
+                  </p>
+                  <div>
+                    <button type="Submit">Place your order</button>
+                  </div>
+                </form>
+              </Modal>
+            )} */}
+            <span>Secure transaction</span>
+            <div>
+              <span>Sold by </span>
+              <span>{product?.User?.merchantName}</span>
+            </div>
           </div>
         </div>
         <hr className="product-dividers" />
@@ -176,12 +231,16 @@ const ProductShow = () => {
             <h2>Customer reviews</h2>
             {checkedStarArr.length
               ? checkedStarArr.map((star) => {
-                  return <i class="fa fa-star checked"></i>;
+                  return (
+                    <i class="fa fa-star checked" id="product-orange-star"></i>
+                  );
                 })
               : ""}
             {starArr.length
               ? starArr.map((star) => {
-                  return <i class="fa-regular fa-star"></i>;
+                  return (
+                    <i class="fa-regular fa-star" id="product-orange-star"></i>
+                  );
                 })
               : ""}
             <h4>{product?.numReviews} global ratings</h4>

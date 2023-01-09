@@ -8,6 +8,8 @@ import ReviewProductItem from "../ReviewProductItem";
 
 const EditReviewForm = () => {
   const { reviewId } = useParams();
+
+  const user = useSelector((state) => state.session.user);
   let review = useSelector((state) => state.reviews[reviewId]);
 
   const dispatch = useDispatch();
@@ -40,6 +42,7 @@ const EditReviewForm = () => {
 
   return (
     <>
+      <div id="review-fake-name">{user?.fakeName}</div>
       <ReviewProductItem productId={review?.productId} />
       <form onSubmit={handleSubmit}>
         <label>

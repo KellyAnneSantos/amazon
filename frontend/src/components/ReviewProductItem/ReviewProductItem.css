@@ -1,0 +1,19 @@
+#review-product-img {
+  width: 62px;
+  height: 62px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+#review-product-name {
+  font-size: 14px;
+  margin-left: 10px;
+  padding-top: 16px;
+  top: 0;
+}
+
+.review-product-item-container {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+}

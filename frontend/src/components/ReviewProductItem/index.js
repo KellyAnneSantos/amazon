@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../../store/productReducer";
+import "./ReviewProductItem.css";
 
 const ReviewProductItem = ({ productId }) => {
   const dispatch = useDispatch();
@@ -11,10 +12,10 @@ const ReviewProductItem = ({ productId }) => {
   }, [dispatch, productId]);
 
   return (
-    <>
-      <img src={product?.previewImage} alt="Product" />
-      <h1>{product?.name}</h1>
-    </>
+    <div className="review-product-item-container">
+      <img src={product?.previewImage} alt="Product" id="review-product-img" />
+      <span id="review-product-name">{product?.name}</span>
+    </div>
   );
 };
 
