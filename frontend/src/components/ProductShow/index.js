@@ -57,7 +57,7 @@ const ProductShow = () => {
     <>
       <div id="product-page">
         <span id="product-categories">
-          {product?.department} > {product?.name}
+          {product?.department} {">"} {product?.name}
         </span>
         <div id="product-imgs-container">
           <div id="mini-img-container">

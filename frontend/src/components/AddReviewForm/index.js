@@ -10,14 +10,29 @@ const AddReviewForm = () => {
   const { productId } = useParams();
   const history = useHistory();
 
-  const user = useSelector((state) => state.session.user);
+  let user = useSelector((state) => state.session.user);
 
-  const [stars, setStars] = useState("");
+  const [stars, setStars] = useState(0);
   const [headline, setHeadline] = useState("");
   const [previewImage, setPreviewImage] = useState("");
   const [body, setBody] = useState("");
   const [fake, setFake] = useState(true);
   const [errors, setErrors] = useState([]);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    user = { ...user, fakeName };
+
+    setErrors([]);
+
+    const response = await dispatch(fetchEditFakeName(user, fakeName)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,53 +60,67 @@ const AddReviewForm = () => {
         <div className="review-fake-name-form">
           <img src={user?.previewImage} className="review-user-img" />
           <span className="review-fake-name">{user?.fakeName}</span>
-          <button className="review-fake-edit">Edit</button>
+          <button className="review-fake-edit" onClick={() => setFake(!fake)}>
+            Edit
+          </button>
         </div>
       )}
       {!fake && (
         <div className="review-fake-name-form">
           <img src={user?.previewImage} className="review-user-img" />
           <span className="review-fake-name">{user?.fakeName}</span>
-          <button>Save</button>
-          <button>Cancel</button>
+          {/* need an input, form, backend route, store to update fakeName. useState fakeName on input onchange- set to target value */}
+          <button onClick={handleClick}>Save</button>
+          <button onClick={() => setFake(!fake)}>Cancel</button>
         </div>
       )}
       <div id="review-form">
         <h1 className="review-form-title">Create Review</h1>
         <ReviewProductItem productId={productId} />
         <hr className="review-lightgray-hr" />
+
         <form onSubmit={handleSubmit}>
           <p className="review-section-title">Overall rating</p>
           <div className="review-stars">
             <i
-              class="fa-regular fa-star fa-2xl"
-              id={stars >= 1 && "review-yellow-star"}
-              value={1}
-              onClick={(e) => setStars(e.target.value)}
+              class={
+                stars >= 1
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(1)}
             ></i>
             <i
-              class="fa-regular fa-star fa-2xl"
-              id={stars >= 2 && "review-yellow-star"}
-              value={2}
-              onClick={(e) => setStars(e.target.value)}
+              class={
+                stars >= 2
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(2)}
             ></i>
             <i
-              class="fa-regular fa-star fa-2xl"
-              id={stars >= 3 && "review-yellow-star"}
-              value={3}
-              onClick={(e) => setStars(e.target.value)}
+              class={
+                stars >= 3
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(3)}
             ></i>
             <i
-              class="fa-regular fa-star fa-2xl"
-              id={stars >= 4 && "review-yellow-star"}
-              value={4}
-              onClick={(e) => setStars(e.target.value)}
+              class={
+                stars >= 4
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(4)}
             ></i>
             <i
-              class="fa-regular fa-star fa-2xl"
-              id={stars === 5 && "review-yellow-star"}
-              value={5}
-              onClick={(e) => setStars(e.target.value)}
+              class={
+                stars >= 5
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(5)}
             ></i>
           </div>
           {/* <input
