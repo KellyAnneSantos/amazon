@@ -19,20 +19,20 @@ const AddReviewForm = () => {
   const [fake, setFake] = useState(true);
   const [errors, setErrors] = useState([]);
 
-  const handleClick = async (e) => {
-    e.preventDefault();
+  // const handleClick = async (e) => {
+  //   e.preventDefault();
 
-    user = { ...user, fakeName };
+  //   user = { ...user, fakeName };
 
-    setErrors([]);
+  //   setErrors([]);
 
-    const response = await dispatch(fetchEditFakeName(user, fakeName)).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
-  };
+  //   const response = await dispatch(fetchEditFakeName(user, fakeName)).catch(
+  //     async (res) => {
+  //       const data = await res.json();
+  //       if (data && data.errors) setErrors(data.errors);
+  //     }
+  //   );
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +70,7 @@ const AddReviewForm = () => {
           <img src={user?.previewImage} className="review-user-img" />
           <span className="review-fake-name">{user?.fakeName}</span>
           {/* need an input, form, backend route, store to update fakeName. useState fakeName on input onchange- set to target value */}
-          <button onClick={handleClick}>Save</button>
+          {/* <button onClick={handleClick}>Save</button> */}
           <button onClick={() => setFake(!fake)}>Cancel</button>
         </div>
       )}
