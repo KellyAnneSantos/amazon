@@ -54,16 +54,3 @@ function Navigation() {
 }
 
 export default Navigation;
-
-//onclick for product detail page: check if source matches something else
-//fix spacing and fontsize and dropdown background color on product page
-//join prime and become merchant on dropdown menu
-//check that overflow on product page working
-//inner div sizing on landing page
-//change status to ordered
-//modal on product page
-//instant checkout on product page
-//create and delete questions and answers on product page
-//votes and helpfuls on product page
-//wishlists on product page
-//delete this to do list

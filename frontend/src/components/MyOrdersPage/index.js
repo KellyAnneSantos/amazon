@@ -20,7 +20,7 @@ const MyOrdersPage = () => {
       <>
         <div id="your-orders-page">
           <span id="orders-account-category">Your Account </span>
-          <span id="orders-carat">> </span>
+          <span id="orders-carat">{"> "}</span>
           <span id="orders-category">Your Orders</span>
           <h1 id="orders-title">Your Orders</h1>
           <h2 id="orders-tab">Orders</h2>

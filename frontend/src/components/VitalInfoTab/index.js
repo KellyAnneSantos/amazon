@@ -45,13 +45,17 @@ const VitalInfoTab = () => {
 
   return (
     <>
-      <h1>Vital Info</h1>
-      <NavLink to={`/products/${product?.id}/images`}>
-        <h1>Images</h1>
-      </NavLink>
-      <NavLink to={`/products/${product?.id}/descriptions`}>
-        <h1>Description</h1>
-      </NavLink>
+      <div id="edit-product-tabs">
+        <h1>Vital Info</h1>
+        <NavLink to={`/products/${product?.id}/images`}>
+          <h1>Images</h1>
+        </NavLink>
+        <NavLink to={`/products/${product?.id}/descriptions`}>
+          <h1>Description</h1>
+        </NavLink>
+      </div>
+      <hr id="orders-short-hr" />
+      <hr id="orders-long-hr" />
       <form onSubmit={handleSubmit}>
         <label>
           Name

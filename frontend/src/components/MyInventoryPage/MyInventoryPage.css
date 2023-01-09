@@ -1,0 +1,81 @@
+#inventory-title {
+  font-size: 28px;
+}
+
+#inventory-add-btn {
+  background-color: white;
+  width: 218px;
+  height: 29px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#inventory-headers-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+  padding-bottom: 32px;
+  padding-top: 20px;
+}
+
+#inventory-header-image {
+  color: #007185;
+  text-align: left;
+}
+
+#inventory-table-top {
+  width: 98%;
+  margin: auto;
+  border: 1px solid gainsboro;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid gainsboro;
+  background-color: #f0f0f0;
+}
+
+#inventory-p-header {
+  margin: 26px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#inventory-header-image {
+  color: #007185;
+  text-align: left;
+  width: 24%;
+}
+
+#inventory-header-name {
+  color: #007185;
+  text-align: left;
+  width: 24%;
+}
+
+#inventory-header-date {
+  color: #007185;
+  text-align: left;
+  width: 24%;
+}
+
+#inventory-header-price {
+  color: #007185;
+  text-align: left;
+  width: 29%;
+}
+
+#inventory-table-bottom {
+  width: 98%;
+  margin: auto;
+  border: 1px solid gainsboro;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top: none;
+  border-collapse: collapse;
+}
