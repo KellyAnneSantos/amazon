@@ -1,0 +1,153 @@
+.edit-product-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 0px;
+  background-color: white;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.edit-product-tabs {
+  text-decoration: none;
+  color: black;
+  margin-left: 13px;
+  margin-right: 13px;
+  font-size: 14px;
+}
+
+.edit-product-form {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  margin: auto;
+  border-left: 1px solid gainsboro;
+  margin-top: 0px;
+  border-right: 1px solid gainsboro;
+  height: 100%;
+  background-color: white;
+  padding-top: 0px;
+}
+
+.edit-long-hr {
+  border: 0px;
+  height: 3px;
+  background-color: lightgray;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.edit-short-hr {
+  border: 0px;
+  height: 5px;
+  background-color: #007185;
+  margin-bottom: 0px;
+  width: 80px;
+  margin-left: 743px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.inventory-submit-btn {
+  float: right;
+  background-color: #ffd057;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px 0 11px;
+  width: 64px;
+  height: 29px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 594px;
+}
+
+.edit-product-input {
+  width: 287px;
+  height: 29px;
+  padding-left: 5px;
+}
+
+.edit-product-rows {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 195px;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#vital-info-p {
+  height: 100%;
+  background-color: #f0f0f0;
+}
+
+#edit-product-hr-section {
+  background-color: white;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.edit-product-labels {
+  margin-right: 20px;
+  font-weight: 900;
+}
+
+#edit-product-price-row {
+  padding-left: 292px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#edit-price-label {
+  margin-right: 30px;
+  font-weight: 900;
+}
+
+.edit-product-free-row {
+  padding-left: 242px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#edit-product-prime-row {
+  padding-left: 150.65px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.edit-free-label {
+  margin-right: 25px;
+  font-weight: 900;
+}
+
+.edit-product-input:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 5px #ff9900;
+}
+
+.edit-prime-label {
+  margin-right: 25px;
+  font-weight: 900;
+}
+
+.edit-product-rows:hover {
+  background-color: lightgray;
+}
+
+#edit-product-price-row:hover {
+  background-color: lightgray;
+}
+
+.edit-product-free-row:hover {
+  background-color: lightgray;
+}
+
+#edit-product-prime-row:hover {
+  background-color: lightgray;
+}
+
+.edit-green-asterisk {
+  color: #007185;
+  margin-right: 5px;
+  font-size: 20px;
+}

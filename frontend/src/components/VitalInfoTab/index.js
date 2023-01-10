@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { fetchEditProduct } from "../../store/productReducer";
+import "./VitalInfoTab.css";
 
 const VitalInfoTab = () => {
   const { productId } = useParams();
@@ -44,75 +45,99 @@ const VitalInfoTab = () => {
   };
 
   return (
-    <>
-      <div id="edit-product-tabs">
-        <h1>Vital Info</h1>
-        <NavLink to={`/products/${product?.id}/images`}>
-          <h1>Images</h1>
+    <div id="vital-info-p">
+      <div className="edit-product-top">
+        <h1 className="edit-product-tabs">Vital Info</h1>
+        <NavLink
+          to={`/products/${product?.id}/images`}
+          className="edit-product-tabs"
+        >
+          <h1 className="edit-product-tabs">Images</h1>
         </NavLink>
-        <NavLink to={`/products/${product?.id}/descriptions`}>
-          <h1>Description</h1>
+        <NavLink
+          to={`/products/${product?.id}/descriptions`}
+          className="edit-product-tabs"
+        >
+          <h1 className="edit-product-tabs">Description</h1>
         </NavLink>
       </div>
-      <hr id="orders-short-hr" />
-      <hr id="orders-long-hr" />
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name
+      <div id="edit-product-hr-section">
+        <hr className="edit-short-hr" />
+        <hr className="edit-long-hr" />
+      </div>
+      <form onSubmit={handleSubmit} className="edit-product-form">
+        <div className="edit-product-rows">
+          <span className="edit-green-asterisk">*</span>
+          <span className="edit-product-labels">Name</span>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            className="edit-product-input"
           />
-        </label>
-        <label>
-          Department
+        </div>
+        <div className="edit-product-rows">
+          <span className="edit-green-asterisk">*</span>
+          <span className="edit-product-labels">Department</span>
           <input
             type="text"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
             required
+            className="edit-product-input"
           />
-        </label>
-        <p>{product?.price}</p>
-        <label>
-          Description
+        </div>
+        <div id="edit-product-price-row">
+          <span className="edit-green-asterisk">*</span>
+          <span id="edit-price-label">Price</span>
+          <span>${product?.price}</span>
+        </div>
+        <div className="edit-product-rows">
+          <span className="edit-green-asterisk">*</span>
+          <span className="edit-product-labels">Description</span>
           <input
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            className="edit-product-input"
           />
-        </label>
-        <label>
-          Free Return?
+        </div>
+        <div className="edit-product-free-row">
+          <span className="edit-green-asterisk">*</span>
+          <span className="edit-free-label">Free Return?</span>
           <input
             type="checkbox"
             checked={freeReturn}
             onChange={(e) => setFreeReturn(!freeReturn)}
           />
-        </label>
-        <label>
-          Prime Shipping Available?
+        </div>
+        <div id="edit-product-prime-row">
+          <span className="edit-green-asterisk">*</span>
+          <span className="edit-prime-label">Prime Shipping Available?</span>
           <input
             type="checkbox"
             checked={prime}
             onChange={(e) => setPrime(!prime)}
           />
-        </label>
-        <label>
-          Preview Image
+        </div>
+        <div className="edit-product-rows">
+          <span className="edit-green-asterisk">*</span>
+          <span className="edit-product-labels">Preview Image</span>
           <input
             type="text"
             value={previewImage}
             onChange={(e) => setPreviewImage(e.target.value)}
             required
+            className="edit-product-input"
           />
-        </label>
-        <button type="submit">Submit</button>
+        </div>
+        <button type="submit" className="inventory-submit-btn">
+          Submit
+        </button>
       </form>
-    </>
+    </div>
   );
 };
 
