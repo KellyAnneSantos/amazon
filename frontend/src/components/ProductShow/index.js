@@ -86,7 +86,7 @@ const ProductShow = () => {
           <img src={source} alt="Product" id="main-product-img" />
           <div id="product-info">
             <h1 id="product-p-name">{product?.name}</h1>
-            <h2 id="product-p-merchant">{product?.User.merchantName}</h2>
+            {/* <h2 id="product-p-merchant">{product?.User.merchantName}</h2> */}
             <div id="product-p-starratings">
               {checkedStarArr.length
                 ? checkedStarArr.map((star) => {
@@ -206,12 +206,12 @@ const ProductShow = () => {
               </Modal>
             )} */}
             {/* <span>Secure transaction</span> */}
-            <div id="product-form-soldby-container">
+            {/* <div id="product-form-soldby-container">
               <span id="product-form-sold">Sold by </span>
               <span id="product-form-merchant">
                 {product?.User?.merchantName}
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* <hr className="product-dividers" />

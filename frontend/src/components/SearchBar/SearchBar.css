@@ -1,7 +1,7 @@
 #magnifying-btn {
   background-color: #ffd057;
   border: none;
-  height: 40px;
+  height: 41px;
   width: 45px;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
@@ -12,5 +12,9 @@
   width: 1170px;
   margin: 10px 0px 10px 3px;
   border-radius: 5px 0 0 5px;
-  border: none;
+  border-bottom: 1px solid white;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  /* border: none; */
 }

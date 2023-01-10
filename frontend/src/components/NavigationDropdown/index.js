@@ -32,23 +32,23 @@ const NavigationDropdown = () => {
           </NavLink>
         </li> */}
         {/* <li>Your Account</li> */}
-        {user?.merchant && (
-          <NavLink to="/products/new" className="remove-text-dec">
-            <li className="account-drop-options"> Add a Product</li>
-          </NavLink>
-        )}
-        {user?.merchant && (
-          <NavLink to="/inventory" className="remove-text-dec">
-            <li className="account-drop-options">Manage Inventory</li>
-          </NavLink>
-        )}
+        {/* {user?.merchant && ( */}
+        <NavLink to="/products/new" className="remove-text-dec">
+          <li className="account-drop-options"> Add a Product</li>
+        </NavLink>
+        {/* )} */}
+        {/* {user?.merchant && ( */}
+        <NavLink to="/inventory" className="remove-text-dec">
+          <li className="account-drop-options">Manage Inventory</li>
+        </NavLink>
+        {/* )} */}
         <NavLink to="/my/orders" className="remove-text-dec">
           <li className="account-drop-options">Orders</li>
         </NavLink>
-        {!user?.prime && <li className="account-drop-options">Join Prime</li>}
-        {!user?.merchant && (
+        {/* {!user?.prime && <li className="account-drop-options">Join Prime</li>} */}
+        {/* {!user?.merchant && (
           <li className="account-drop-options">Start a Selling Account</li>
-        )}
+        )} */}
         <li className="account-drop-options" onClick={logout}>
           Sign Out
         </li>
