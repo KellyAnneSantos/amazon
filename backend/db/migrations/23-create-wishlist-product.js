@@ -29,7 +29,7 @@ module.exports = {
       },
       comment: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       priority: {
         allowNull: false,

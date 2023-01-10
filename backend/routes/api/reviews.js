@@ -3,6 +3,41 @@ const express = require("express");
 const router = express.Router();
 
 const { Image, Review } = require("../../db/models");
+const { requireAuth } = require("../../utils/auth");
+const { check } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
+
+const validateImage = [
+  check("imageableType")
+    .isIn(["product", "review"])
+    .withMessage("Type must be product or review"),
+  check("mediaUrl")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1, max: 255 })
+    .withMessage("Media URL is required and must be 255 characters or less"),
+  handleValidationErrors,
+];
+
+const validateReview = [
+  check("stars")
+    .isInt({ min: 1, max: 5 })
+    .withMessage("Stars must be an integer from 1 to 5"),
+  check("headline")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1, max: 255 })
+    .withMessage("Headline is required and must be 255 characters or less"),
+  check("previewImage")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 5, max: 255 })
+    .withMessage(
+      "Preview image is required and must be between 5 and 255 characters"
+    ),
+  check("body")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1, max: 255 })
+    .withMessage("Review body is required and must be 255 characters or less"),
+  handleValidationErrors,
+];
 
 router.get("/:reviewId/images", async (req, res) => {
   let { reviewId } = req.params;
@@ -30,34 +65,48 @@ router.get("/:reviewId/images", async (req, res) => {
   });
 });
 
-router.post("/:reviewId/images", async (req, res) => {
-  const { mediaUrl } = req.body;
+router.post(
+  "/:reviewId/images",
+  requireAuth,
+  validateImage,
+  async (req, res) => {
+    const { mediaUrl } = req.body;
+    let { reviewId } = req.params;
+    reviewId = parseInt(reviewId);
+    const { user } = req;
+
+    const review = await Review.findByPk(reviewId);
+
+    if (!review) {
+      res.status(404);
+      return res.json({
+        message: "Review couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    if (user.id === review.userId) {
+      const image = await Image.create({
+        imageableId: reviewId,
+        imageableType: "review",
+        // mediaType: "image",
+        mediaUrl,
+      });
+
+      return res.json(image);
+    } else {
+      res.status(403);
+      return res.json({
+        message: "Forbidden",
+        statusCode: 403,
+      });
+    }
+  }
+);
+
+router.put("/:reviewId", requireAuth, validateReview, async (req, res) => {
   let { reviewId } = req.params;
   reviewId = parseInt(reviewId);
-  const { user } = req;
-
-  const review = await Review.findByPk(reviewId);
-
-  if (!review) {
-    res.status(404);
-    return res.json({
-      message: "Review couldn't be found",
-      statusCode: 404,
-    });
-  }
-
-  const image = await Image.create({
-    imageableId: reviewId,
-    imageableType: "review",
-    mediaType: "image",
-    mediaUrl,
-  });
-
-  return res.json(image);
-});
-
-router.put("/:reviewId", async (req, res) => {
-  const { reviewId } = req.params;
   const { stars, headline, previewImage, body } = req.body;
   const { user } = req;
 
@@ -89,8 +138,9 @@ router.put("/:reviewId", async (req, res) => {
   }
 });
 
-router.delete("/:reviewId", async (req, res) => {
-  const { reviewId } = req.params;
+router.delete("/:reviewId", requireAuth, async (req, res) => {
+  let { reviewId } = req.params;
+  reviewId = parseInt(reviewId);
   const { user } = req;
 
   const review = await Review.findByPk(reviewId);

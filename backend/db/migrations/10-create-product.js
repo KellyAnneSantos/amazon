@@ -19,7 +19,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       department: {
         allowNull: false,
@@ -94,7 +94,7 @@ module.exports = {
       // },
       description: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       freeReturn: {
         allowNull: false,
@@ -129,14 +129,14 @@ module.exports = {
       //   type: Sequelize.BOOLEAN,
       // },
       // artist: {
-      //   type: Sequelize.STRING(256),
+      //   type: Sequelize.STRING(255),
       // },
       // url: {
-      //   type: Sequelize.STRING(256),
+      //   type: Sequelize.STRING(255),
       // },
       previewImage: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       createdAt: {
         allowNull: false,

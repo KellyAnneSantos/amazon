@@ -19,11 +19,11 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       description: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       createdAt: {
         allowNull: false,

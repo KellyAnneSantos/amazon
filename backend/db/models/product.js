@@ -73,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
-          len: [2, 256],
+          len: [2, 255],
         },
       },
       department: {
@@ -112,7 +112,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
-          len: [1, 256],
+          len: [1, 255],
         },
       },
       freeReturn: {
@@ -145,7 +145,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
-          len: [5, 256],
+          len: [5, 255],
         },
       },
     },

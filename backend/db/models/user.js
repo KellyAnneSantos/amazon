@@ -168,7 +168,7 @@ module.exports = (sequelize, DataTypes) => {
       //   type: DataTypes.STRING,
       //   unique: true,
       //   validate: {
-      //     len: [2, 256],
+      //     len: [2, 255],
       //   },
       // },
       // influencer: {
@@ -193,7 +193,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         unique: true,
         validate: {
-          len: [10, 256],
+          len: [10, 255],
         },
       },
       phone: {
@@ -212,19 +212,19 @@ module.exports = (sequelize, DataTypes) => {
       previewImage: {
         type: DataTypes.STRING,
         validate: {
-          len: [5, 256],
+          len: [5, 255],
         },
       },
       // backgroundImage: {
       //   type: DataTypes.STRING,
       //   validate: {
-      //     len: [5, 256],
+      //     len: [5, 255],
       //   },
       // },
       // about: {
       //   type: DataTypes.STRING,
       //   validate: {
-      //     len: [1, 256],
+      //     len: [1, 255],
       //   },
       // },
       hashedPassword: {

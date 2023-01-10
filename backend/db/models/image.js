@@ -34,15 +34,15 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      mediaType: {
-        allowNull: false,
-        type: DataTypes.STRING,
-      },
+      // mediaType: {
+      //   allowNull: false,
+      //   type: DataTypes.STRING,
+      // },
       mediaUrl: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
-          len: [5, 256],
+          len: [5, 255],
         },
       },
     },

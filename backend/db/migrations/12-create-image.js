@@ -16,13 +16,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.ENUM("product", "review"),
       },
-      mediaType: {
-        allowNull: false,
-        type: Sequelize.ENUM("image", "video"),
-      },
+      // mediaType: {
+      //   allowNull: false,
+      //   type: Sequelize.ENUM("image", "video"),
+      // },
       mediaUrl: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       createdAt: {
         allowNull: false,

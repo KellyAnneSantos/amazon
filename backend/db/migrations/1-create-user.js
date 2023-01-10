@@ -27,7 +27,7 @@ module.exports = {
       //   type: Sequelize.BOOLEAN,
       // },
       // merchantName: {
-      //   type: Sequelize.STRING(256),
+      //   type: Sequelize.STRING(255),
       //   unique: true,
       // },
       // influencer: {
@@ -42,7 +42,7 @@ module.exports = {
       // },
       email: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
         unique: true,
       },
       phone: {
@@ -59,13 +59,13 @@ module.exports = {
         allowNull: false,
         defaultValue:
           "https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg",
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       // backgroundImage: {
-      //   type: Sequelize.STRING(256),
+      //   type: Sequelize.STRING(255),
       // },
       // about: {
-      //   type: Sequelize.STRING(256),
+      //   type: Sequelize.STRING(255),
       // },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,

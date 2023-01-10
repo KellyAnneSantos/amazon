@@ -3,8 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const { Image, Product, Review } = require("../../db/models");
+const { requireAuth } = require("../../utils/auth");
 
-router.delete("/:imageId", async (req, res) => {
+router.delete("/:imageId", requireAuth, async (req, res) => {
   const { user } = req;
   const { imageId } = req.params;
 

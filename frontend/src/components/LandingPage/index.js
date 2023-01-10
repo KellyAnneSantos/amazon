@@ -40,7 +40,7 @@ function LandingPage() {
           <div id="banner-txt">{textArr[txt >> 0]}</div>
         </NavLink>
         <img src={imgArr[img >>> 0]} id="ad-banner"></img>
-        <span id="right-arrow" onClick={() => handleClick(img, txt)}>
+        <span id="right-arrow" onClick={() => handleClick(img, txt, dep)}>
           <i className="fa-solid fa-chevron-right fa-2xl"></i>
         </span>
       </div>

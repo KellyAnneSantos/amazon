@@ -19,11 +19,11 @@ module.exports = {
       },
       caption: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       previewImage: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       createdAt: {
         allowNull: false,

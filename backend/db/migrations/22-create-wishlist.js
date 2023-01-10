@@ -19,7 +19,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
       },
       privacy: {
         allowNull: false,

@@ -14,6 +14,189 @@ const {
 } = require("../../db/models");
 const { Op } = require("sequelize");
 const { environment } = require("../../config");
+const { requireAuth } = require("../../utils/auth");
+const { check } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
+
+const validateDescription = [
+  check("bulletPoint")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1, max: 255 })
+    .withMessage(
+      "Description body is required and must be 255 characters or less"
+    ),
+  handleValidationErrors,
+];
+
+const validateImage = [
+  check("imageableType")
+    .isIn(["product", "review"])
+    .withMessage("Type must be product or review"),
+  check("mediaUrl")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1, max: 255 })
+    .withMessage("Media URL is required and must be 255 characters or less"),
+  handleValidationErrors,
+];
+
+const validateReview = [
+  check("stars")
+    .isInt({ min: 1, max: 5 })
+    .withMessage("Stars must be an integer from 1 to 5"),
+  check("headline")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1, max: 255 })
+    .withMessage("Headline is required and must be 255 characters or less"),
+  check("previewImage")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 5, max: 255 })
+    .withMessage(
+      "Preview image is required and must be between 5 and 255 characters"
+    ),
+  check("body")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1, max: 255 })
+    .withMessage("Review body is required and must be 255 characters or less"),
+  handleValidationErrors,
+];
+
+const validateProduct = [
+  check("name")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 2, max: 255 })
+    .withMessage(
+      "Product name is required and must be between 2 and 255 characters"
+    ),
+  check("department")
+    .exists({ checkFalsy: true })
+    .isIn([
+      "Alexa",
+      "Appliances",
+      "Arts",
+      "Audible",
+      "Auto",
+      "Baby",
+      "Beauty",
+      "Books",
+      "CDs",
+      "Cellular",
+      "Clothing",
+      "Collectibles",
+      "Computers",
+      "Credit",
+      "Devices",
+      "Electronics",
+      "Education",
+      "Games",
+      "Garden",
+      "Grocery",
+      "Handmade",
+      "Health",
+      "Home",
+      "Industrial",
+      "Kindle",
+      "Luxury",
+      "Magazines",
+      "Music",
+      "Office",
+      "Pets",
+      "Pharmacy",
+      "Prime",
+      "Services",
+      "Software",
+      "Sports",
+      "Tools",
+      "Toys",
+      "Travel",
+      "Video",
+      "Warehouse",
+    ])
+    .withMessage("Department must be an existing department"),
+  check("price")
+    .exists({ checkFalsy: true })
+    .isFloat({ min: 0.01 })
+    .withMessage("Price is invalid"),
+  check("description")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1, max: 255 })
+    .withMessage("Description is required and must be 255 characters or less"),
+  check("previewImage")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 5, max: 255 })
+    .withMessage(
+      "Preview image is required and must be between 5 and 255 characters"
+    ),
+  handleValidationErrors,
+];
+
+const validateQuery = [
+  check("page")
+    .optional({ nullable: true })
+    .isInt({ min: 0 })
+    .withMessage("Page must be greater than or equal to 0"),
+  check("size")
+    .optional({ nullable: true })
+    .isInt({ min: 0 })
+    .withMessage("Size must be greater than or equal to 0"),
+  check("name")
+    .optional({ nullable: true })
+    .isString()
+    .withMessage("Name must be a string"),
+  check("department")
+    .optional({ nullable: true })
+    .isIn([
+      "Alexa",
+      "Appliances",
+      "Arts",
+      "Audible",
+      "Auto",
+      "Baby",
+      "Beauty",
+      "Books",
+      "CDs",
+      "Cellular",
+      "Clothing",
+      "Collectibles",
+      "Computers",
+      "Credit",
+      "Devices",
+      "Electronics",
+      "Education",
+      "Games",
+      "Garden",
+      "Grocery",
+      "Handmade",
+      "Health",
+      "Home",
+      "Industrial",
+      "Kindle",
+      "Luxury",
+      "Magazines",
+      "Music",
+      "Office",
+      "Pets",
+      "Pharmacy",
+      "Prime",
+      "Services",
+      "Software",
+      "Sports",
+      "Tools",
+      "Toys",
+      "Travel",
+      "Video",
+      "Warehouse",
+    ])
+    .withMessage("Department must be an existing department"),
+  check("minPrice")
+    .optional({ nullable: true })
+    .isFloat({ min: 0.0 })
+    .withMessage("Minimum price must be greater than or equal to 0"),
+  check("maxPrice")
+    .optional({ nullable: true })
+    .isFloat({ min: 0.0 })
+    .withMessage("Minimum price must be greater than or equal to 0"),
+  handleValidationErrors,
+];
 
 const aggregateReviews = async (product) => {
   const reviews = await Review.findAll({
@@ -82,30 +265,43 @@ router.get("/:productId/descriptions", async (req, res) => {
   });
 });
 
-router.post("/:productId/descriptions", async (req, res) => {
-  const { bulletPoint } = req.body;
-  let { productId } = req.params;
-  productId = parseInt(productId);
-  const { user } = req;
+router.post(
+  "/:productId/descriptions",
+  requireAuth,
+  validateDescription,
+  async (req, res) => {
+    const { bulletPoint } = req.body;
+    let { productId } = req.params;
+    productId = parseInt(productId);
+    const { user } = req;
 
-  const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId);
 
-  if (!product) {
-    res.status(404);
-    return res.json({
-      message: "Product couldn't be found",
-      statusCode: 404,
-    });
+    if (!product) {
+      res.status(404);
+      return res.json({
+        message: "Product couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    if (user.id === product.merchantId) {
+      const description = await Description.create({
+        merchantId: user.id,
+        productId,
+        bulletPoint,
+      });
+
+      return res.json(description);
+    } else {
+      res.status(403);
+      return res.json({
+        message: "Forbidden",
+        statusCode: 403,
+      });
+    }
   }
-
-  const description = await Description.create({
-    merchantId: user.id,
-    productId,
-    bulletPoint,
-  });
-
-  return res.json(description);
-});
+);
 
 router.get("/:productId/images", async (req, res) => {
   let { productId } = req.params;
@@ -133,31 +329,44 @@ router.get("/:productId/images", async (req, res) => {
   });
 });
 
-router.post("/:productId/images", async (req, res) => {
-  const { mediaUrl } = req.body;
-  let { productId } = req.params;
-  productId = parseInt(productId);
-  const { user } = req;
+router.post(
+  "/:productId/images",
+  requireAuth,
+  validateImage,
+  async (req, res) => {
+    const { mediaUrl } = req.body;
+    let { productId } = req.params;
+    productId = parseInt(productId);
+    const { user } = req;
 
-  const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId);
 
-  if (!product) {
-    res.status(404);
-    return res.json({
-      message: "Product couldn't be found",
-      statusCode: 404,
-    });
+    if (!product) {
+      res.status(404);
+      return res.json({
+        message: "Product couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    if (user.id === product.merchantId) {
+      const image = await Image.create({
+        imageableId: productId,
+        imageableType: "product",
+        // mediaType: "image",
+        mediaUrl,
+      });
+
+      return res.json(image);
+    } else {
+      res.status(403);
+      return res.json({
+        message: "Forbidden",
+        statusCode: 403,
+      });
+    }
   }
-
-  const image = await Image.create({
-    imageableId: productId,
-    imageableType: "product",
-    mediaType: "image",
-    mediaUrl,
-  });
-
-  return res.json(image);
-});
+);
 
 router.get("/:productId/reviews", async (req, res) => {
   let { productId } = req.params;
@@ -196,33 +405,54 @@ router.get("/:productId/reviews", async (req, res) => {
   });
 });
 
-router.post("/:productId/reviews", async (req, res) => {
-  const { stars, headline, previewImage, body } = req.body;
-  let { productId } = req.params;
-  productId = parseInt(productId);
-  const { user } = req;
+router.post(
+  "/:productId/reviews",
+  requireAuth,
+  validateReview,
+  async (req, res) => {
+    const { stars, headline, previewImage, body } = req.body;
+    let { productId } = req.params;
+    productId = parseInt(productId);
+    const { user } = req;
 
-  const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId);
 
-  if (!product) {
-    res.status(404);
-    return res.json({
-      message: "Product couldn't be found",
-      statusCode: 404,
+    if (!product) {
+      res.status(404);
+      return res.json({
+        message: "Product couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    let review = await Review.findOne({
+      where: {
+        productId,
+        userId: user.id,
+      },
     });
+
+    if (review) {
+      res.status(400);
+      return res.json({
+        message:
+          "User already wrote a review of this product. Please edit the existing review instead.",
+        statusCode: 400,
+      });
+    }
+
+    const newReview = await Review.create({
+      userId: user.id,
+      productId,
+      stars,
+      headline,
+      previewImage,
+      body,
+    });
+
+    return res.json(newReview);
   }
-
-  const review = await Review.create({
-    userId: user.id,
-    productId,
-    stars,
-    headline,
-    previewImage,
-    body,
-  });
-
-  return res.json(review);
-});
+);
 
 router.get("/:productId", async (req, res) => {
   let { productId } = req.params;
@@ -262,7 +492,7 @@ router.get("/:productId", async (req, res) => {
   return res.json(productPlus);
 });
 
-router.put("/:productId", async (req, res) => {
+router.put("/:productId", requireAuth, validateProduct, async (req, res) => {
   const { user } = req;
   let {
     name,
@@ -306,7 +536,7 @@ router.put("/:productId", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", validateQuery, async (req, res) => {
   let { name, prime, department, minPrice, maxPrice, page, size } = req.query;
 
   let where = {};
@@ -406,7 +636,7 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.post("/", async (req, res) => {
+router.post("/", requireAuth, validateProduct, async (req, res) => {
   const {
     name,
     department,

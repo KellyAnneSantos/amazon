@@ -30,13 +30,13 @@ module.exports = (sequelize, DataTypes) => {
       billingAddress: {
         type: DataTypes.STRING,
         validate: {
-          len: [4, 256],
+          len: [4, 255],
         },
       },
       shippingAddress: {
         type: DataTypes.STRING,
         validate: {
-          len: [4, 256],
+          len: [4, 255],
         },
       },
       cardType: {

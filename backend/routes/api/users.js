@@ -10,6 +10,7 @@ const {
   Review,
   User,
 } = require("../../db/models");
+const { requireAuth } = require("../../utils/auth");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -36,6 +37,14 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
     .withMessage("Minimum 6 characters required"),
+  handleValidationErrors,
+];
+
+const validateProductOrder = [
+  check("quantity")
+    .exists({ checkFalsy: true })
+    .isInt({ min: 1, max: 30 })
+    .withMessage("Quantity is invalid"),
   handleValidationErrors,
 ];
 
@@ -85,7 +94,7 @@ const mapOrders = async (orders) => {
   return orders;
 };
 
-router.get("/current/cart/productorders", async (req, res) => {
+router.get("/current/cart/productorders", requireAuth, async (req, res) => {
   const { user } = req;
 
   let order = await Order.findOne({
@@ -127,7 +136,7 @@ router.get("/current/cart/productorders", async (req, res) => {
   });
 });
 
-router.get("/current/cart", async (req, res) => {
+router.get("/current/cart", requireAuth, async (req, res) => {
   const { user } = req;
 
   // let orders = await Order.findAll({
@@ -158,7 +167,7 @@ router.get("/current/cart", async (req, res) => {
   });
 });
 
-router.put("/current/cart", async (req, res) => {
+router.put("/current/cart", requireAuth, async (req, res) => {
   const { user } = req;
 
   let order = await Order.findOne({
@@ -198,10 +207,7 @@ router.put("/current/cart", async (req, res) => {
     status: "ordered",
   });
 
-  const updatedOrder = await Order.findOne({
-    where: {
-      id: order.id,
-    },
+  const updatedOrder = await Order.findByPk(order.id, {
     include: [
       {
         model: ProductOrder,
@@ -214,10 +220,10 @@ router.put("/current/cart", async (req, res) => {
     ],
   });
 
-  return res.json(order);
+  return res.json(updatedOrder);
 });
 
-router.get("/current/orders", async (req, res) => {
+router.get("/current/orders", requireAuth, async (req, res) => {
   const { user } = req;
 
   // let orders = await Order.findAll({
@@ -247,141 +253,146 @@ router.get("/current/orders", async (req, res) => {
   });
 });
 
-router.post("/current/productorders", async (req, res) => {
-  const { user } = req;
-  let { productId, quantity } = req.body;
-  productId = parseInt(productId);
-  quantity = parseInt(quantity);
-  let createdProductOrder;
+router.post(
+  "/current/productorders",
+  requireAuth,
+  validateProductOrder,
+  async (req, res) => {
+    const { user } = req;
+    let { productId, quantity } = req.body;
+    productId = parseInt(productId);
+    quantity = parseInt(quantity);
+    let createdProductOrder;
 
-  const order = await Order.findOne({
-    where: {
-      userId: user.id,
-      status: "cart",
-    },
-  });
-
-  if (!order) {
-    const newOrder = await Order.create({
-      userId: user.id,
-      status: "cart",
-    });
-
-    const productOrder = await ProductOrder.findOne({
+    const order = await Order.findOne({
       where: {
-        productId,
-        orderId: newOrder.id,
+        userId: user.id,
+        status: "cart",
       },
     });
 
-    if (!productOrder) {
-      const newProductOrder = await ProductOrder.create({
-        productId,
-        orderId: newOrder.id,
-        quantity,
+    if (!order) {
+      const newOrder = await Order.create({
+        userId: user.id,
+        status: "cart",
       });
 
-      createdProductOrder = await ProductOrder.findOne({
+      const productOrder = await ProductOrder.findOne({
         where: {
           productId,
-          orderId: order.id,
+          orderId: newOrder.id,
         },
-        attributes: [
-          "id",
-          "productId",
-          "orderId",
-          "quantity",
-          "createdAt",
-          "updatedAt",
-        ],
       });
 
-      res.status(201);
-      return res.json(createdProductOrder);
+      if (!productOrder) {
+        const newProductOrder = await ProductOrder.create({
+          productId,
+          orderId: newOrder.id,
+          quantity,
+        });
+
+        createdProductOrder = await ProductOrder.findOne({
+          where: {
+            productId,
+            orderId: order.id,
+          },
+          attributes: [
+            "id",
+            "productId",
+            "orderId",
+            "quantity",
+            "createdAt",
+            "updatedAt",
+          ],
+        });
+
+        res.status(201);
+        return res.json(createdProductOrder);
+      } else {
+        let newQuantity = parseInt(productOrder.quantity) + quantity;
+
+        productOrder.update({
+          quantity: newQuantity,
+        });
+
+        const updatedProductOrder = await ProductOrder.findOne({
+          where: {
+            productId,
+            orderId: order.id,
+          },
+          attributes: [
+            "id",
+            "productId",
+            "orderId",
+            "quantity",
+            "createdAt",
+            "updatedAt",
+          ],
+        });
+
+        return res.json(updatedProductOrder);
+      }
     } else {
-      let newQuantity = parseInt(productOrder.quantity) + quantity;
-
-      productOrder.update({
-        quantity: newQuantity,
-      });
-
-      const updatedProductOrder = await ProductOrder.findOne({
+      const productOrder = await ProductOrder.findOne({
         where: {
           productId,
           orderId: order.id,
         },
-        attributes: [
-          "id",
-          "productId",
-          "orderId",
-          "quantity",
-          "createdAt",
-          "updatedAt",
-        ],
       });
 
-      return res.json(updatedProductOrder);
-    }
-  } else {
-    const productOrder = await ProductOrder.findOne({
-      where: {
-        productId,
-        orderId: order.id,
-      },
-    });
-
-    if (!productOrder) {
-      const newProductOrder = await ProductOrder.create({
-        productId,
-        orderId: order.id,
-        quantity,
-      });
-
-      createdProductOrder = await ProductOrder.findOne({
-        where: {
+      if (!productOrder) {
+        const newProductOrder = await ProductOrder.create({
           productId,
           orderId: order.id,
-        },
-        attributes: [
-          "id",
-          "productId",
-          "orderId",
-          "quantity",
-          "createdAt",
-          "updatedAt",
-        ],
-      });
+          quantity,
+        });
 
-      res.status(201);
-      return res.json(createdProductOrder);
-    } else {
-      let newQuantity = parseInt(productOrder.quantity) + quantity;
+        createdProductOrder = await ProductOrder.findOne({
+          where: {
+            productId,
+            orderId: order.id,
+          },
+          attributes: [
+            "id",
+            "productId",
+            "orderId",
+            "quantity",
+            "createdAt",
+            "updatedAt",
+          ],
+        });
 
-      productOrder.update({
-        quantity: newQuantity,
-      });
+        res.status(201);
+        return res.json(createdProductOrder);
+      } else {
+        let newQuantity = parseInt(productOrder.quantity) + quantity;
 
-      const updatedProductOrder = await ProductOrder.findOne({
-        where: {
-          productId,
-          orderId: order.id,
-        },
-        attributes: [
-          "id",
-          "productId",
-          "orderId",
-          "quantity",
-          "createdAt",
-          "updatedAt",
-        ],
-      });
+        productOrder.update({
+          quantity: newQuantity,
+        });
 
-      return res.json(updatedProductOrder);
+        const updatedProductOrder = await ProductOrder.findOne({
+          where: {
+            productId,
+            orderId: order.id,
+          },
+          attributes: [
+            "id",
+            "productId",
+            "orderId",
+            "quantity",
+            "createdAt",
+            "updatedAt",
+          ],
+        });
+
+        return res.json(updatedProductOrder);
+      }
     }
   }
-});
+);
 
-router.get("/current/reviews", async (req, res) => {
+router.get("/current/reviews", requireAuth, async (req, res) => {
   const { user } = req;
 
   const Reviews = await Review.findAll({
@@ -403,7 +414,7 @@ router.get("/current/reviews", async (req, res) => {
   });
 });
 
-router.get("/current/products", async (req, res) => {
+router.get("/current/products", requireAuth, async (req, res) => {
   const { user } = req;
 
   let products = await Product.findAll({
