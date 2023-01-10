@@ -56,7 +56,7 @@ const AddReviewForm = () => {
 
   return (
     <>
-      {fake && (
+      {/* {fake && (
         <div className="review-fake-name-form">
           <img src={user?.previewImage} className="review-user-img" />
           <span className="review-fake-name">{user?.fakeName}</span>
@@ -69,16 +69,13 @@ const AddReviewForm = () => {
         <div className="review-fake-name-form">
           <img src={user?.previewImage} className="review-user-img" />
           <span className="review-fake-name">{user?.fakeName}</span>
-          {/* need an input, form, backend route, store to update fakeName. useState fakeName on input onchange- set to target value */}
-          {/* <button onClick={handleClick}>Save</button> */}
           <button onClick={() => setFake(!fake)}>Cancel</button>
         </div>
-      )}
+      )} */}
       <div id="review-form">
         <h1 className="review-form-title">Create Review</h1>
         <ReviewProductItem productId={productId} />
         <hr className="review-lightgray-hr" />
-
         <form onSubmit={handleSubmit}>
           <p className="review-section-title">Overall rating</p>
           <div className="review-stars">

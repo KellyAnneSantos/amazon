@@ -1,0 +1,7 @@
+#review-preview-img {
+  width: 62px;
+  height: 62px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  margin-top: 16px;
+}

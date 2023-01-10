@@ -5,6 +5,7 @@ import { fetchReviewImages } from "../../store/imageReducer";
 import { fetchEditReview } from "../../store/reviewReducer";
 import AddReviewImage from "../AddReviewImage";
 import ReviewProductItem from "../ReviewProductItem";
+import "./EditReviewForm.css";
 
 const EditReviewForm = () => {
   const { reviewId } = useParams();
@@ -19,6 +20,7 @@ const EditReviewForm = () => {
   const [headline, setHeadline] = useState(review?.headline);
   const [previewImage, setPreviewImage] = useState(review?.previewImage);
   const [body, setBody] = useState(review?.body);
+  const [fake, setFake] = useState(true);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
@@ -42,48 +44,111 @@ const EditReviewForm = () => {
 
   return (
     <>
-      <div id="review-fake-name">{user?.fakeName}</div>
-      <ReviewProductItem productId={review?.productId} />
-      <form onSubmit={handleSubmit}>
-        <label>
-          Stars
-          <input
-            type="number"
-            value={stars}
-            onChange={(e) => setStars(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Headline
+      {/* {fake && (
+        <div className="review-fake-name-form">
+          <img src={user?.previewImage} className="review-user-img" />
+          <span className="review-fake-name">{user?.fakeName}</span>
+          <button className="review-fake-edit" onClick={() => setFake(!fake)}>
+            Edit
+          </button>
+        </div>
+      )}
+      {!fake && (
+        <div className="review-fake-name-form">
+          <img src={user?.previewImage} className="review-user-img" />
+          <span className="review-fake-name">{user?.fakeName}</span>
+          <button onClick={() => setFake(!fake)}>Cancel</button>
+        </div>
+      )} */}
+      <div id="review-form">
+        <h1 className="review-form-title">Create Review</h1>
+        <ReviewProductItem productId={review?.productId} />
+        <hr className="review-lightgray-hr" />
+        <form onSubmit={handleSubmit}>
+          <p className="review-section-title">Overall rating</p>
+          <div className="review-stars">
+            <i
+              class={
+                stars >= 1
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(1)}
+            ></i>
+            <i
+              class={
+                stars >= 2
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(2)}
+            ></i>
+            <i
+              class={
+                stars >= 3
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(3)}
+            ></i>
+            <i
+              class={
+                stars >= 4
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(4)}
+            ></i>
+            <i
+              class={
+                stars >= 5
+                  ? "fa fa-star checked fa-2xl"
+                  : "fa-regular fa-star fa-2xl"
+              }
+              onClick={() => setStars(5)}
+            ></i>
+          </div>
+          <hr className="review-lightgray-hr" />
+          <p className="review-section-title">Add a headline</p>
           <input
             type="text"
             value={headline}
             onChange={(e) => setHeadline(e.target.value)}
+            placeholder="What's most important to know?"
             required
+            className="review-headline"
           />
-        </label>
-        <label>
-          Preview Image
+          <hr className="review-lightgray-hr" />
+          <p className="review-section-title">Add a photo</p>
+          <p className="review-photo-p">
+            Shoppers find images and videos more helpful than text alone.
+          </p>
           <input
             type="text"
             value={previewImage}
             onChange={(e) => setPreviewImage(e.target.value)}
+            className="review-headline"
+            placeholder="Paste image address here."
+            required
           />
-        </label>
-        <img src={review?.previewImage} />
-        <label>
-          Body
-          <input
+          <img src={review?.previewImage} id="review-preview-img" />
+          <hr className="review-lightgray-hr" />
+          <p className="review-section-title">Add a written review</p>
+          <textarea
             type="text"
             value={body}
             onChange={(e) => setBody(e.target.value)}
+            placeholder="What did you like or dislike? What did you use this product for?"
             required
+            className="review-text-area"
           />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-      <AddReviewImage reviewId={reviewId} />
+          <hr className="review-lightgray-hr" />
+          <button type="submit" className="review-submit-btn">
+            Submit
+          </button>
+        </form>
+        {/* <AddReviewImage reviewId={reviewId} /> */}
+      </div>
     </>
   );
 };

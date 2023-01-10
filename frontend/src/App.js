@@ -22,6 +22,9 @@ import MyCartPage from "./components/MyCartPage";
 
 function App() {
   const dispatch = useDispatch();
+
+  const sessionUser = useSelector((state) => state.session.user);
+
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,61 +33,71 @@ function App() {
 
   return (
     <>
-      {/* <Switch>
-        <Route path="/signin">
-          <LoginFormPage />
-        </Route>
-        <Route path="/register">
-          <SignupFormPage />
-        </Route>
-      </Switch> */}
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
+      {!sessionUser && (
         <Switch>
-          <Route path="/products/new">
-            <CreateProductForm />
-          </Route>
-          <Route path="/products/:productId/reviews/new">
-            <AddReviewForm />
-          </Route>
-          <Route path="/products/:productId/descriptions">
-            <DescriptionTab />
-          </Route>
-          <Route path="/products/:productId/edit">
-            <VitalInfoTab />
-          </Route>
-          <Route path="/products/:productId/images">
-            <ImagesTab />
-          </Route>
-          <Route path="/products/:productId">
-            <ProductShow />
-          </Route>
-          <Route path="/reviews/:reviewId/edit">
-            <EditReviewForm />
-          </Route>
-          <Route path="/profile/:userId">
-            <ProfilePage />
-          </Route>
-          <Route path="/my/cart">
-            <MyCartPage />
-          </Route>
-          <Route path="/my/orders">
-            <MyOrdersPage />
-          </Route>
-          <Route path="/my/profile">
-            <AccountPage />
-          </Route>
-          <Route path="/inventory">
-            <MyInventoryPage />
-          </Route>
-          <Route path="/search">
-            <SearchResultsPage />
+          <Route path="/register">
+            <SignupFormPage />
           </Route>
           <Route path="/">
-            <LandingPage />
+            <LoginFormPage />
           </Route>
         </Switch>
       )}
+      {sessionUser && <Navigation isLoaded={isLoaded} />}
+      {sessionUser
+        ? isLoaded && (
+            <Switch>
+              <Route path="/products/new">
+                <CreateProductForm />
+              </Route>
+              <Route path="/products/:productId/reviews/new">
+                <AddReviewForm />
+              </Route>
+              <Route path="/products/:productId/descriptions">
+                <DescriptionTab />
+              </Route>
+              <Route path="/products/:productId/edit">
+                <VitalInfoTab />
+              </Route>
+              <Route path="/products/:productId/images">
+                <ImagesTab />
+              </Route>
+              <Route path="/products/:productId">
+                <ProductShow />
+              </Route>
+              <Route path="/reviews/:reviewId/edit">
+                <EditReviewForm />
+              </Route>
+              <Route path="/profile/:userId">
+                <ProfilePage />
+              </Route>
+              <Route path="/my/cart">
+                <MyCartPage />
+              </Route>
+              <Route path="/my/orders">
+                <MyOrdersPage />
+              </Route>
+              <Route path="/my/profile">
+                <AccountPage />
+              </Route>
+              <Route path="/inventory">
+                <MyInventoryPage />
+              </Route>
+              <Route path="/register">
+                <SignupFormPage />
+              </Route>
+              <Route path="/search">
+                <SearchResultsPage />
+              </Route>
+              <Route path="/signin">
+                <LoginFormPage />
+              </Route>
+              <Route path="/">
+                <LandingPage />
+              </Route>
+            </Switch>
+          )
+        : ""}
     </>
   );
 }

@@ -113,7 +113,7 @@ const ProductShow = () => {
               </span>
             </div>
             <hr className="product-dividers" />
-            <div id="product-info-price">${product?.price}</div>
+            <div id="product-info-price">${product?.price.toFixed(2)}</div>
             {product?.prime && (
               <img
                 id="product-prime-logo"
@@ -135,7 +135,7 @@ const ProductShow = () => {
             </ul>
           </div>
           <div id="cart-form">
-            <div id="cart-price">${product?.price}</div>
+            <div id="cart-price">${product?.price.toFixed(2)}</div>
             {product?.prime && (
               <img
                 id="cart-form-prime-logo"
@@ -206,13 +206,15 @@ const ProductShow = () => {
               </Modal>
             )} */}
             {/* <span>Secure transaction</span> */}
-            <div>
-              <span>Sold by </span>
-              <span>{product?.User?.merchantName}</span>
+            <div id="product-form-soldby-container">
+              <span id="product-form-sold">Sold by </span>
+              <span id="product-form-merchant">
+                {product?.User?.merchantName}
+              </span>
             </div>
           </div>
         </div>
-        <hr className="product-dividers" />
+        {/* <hr className="product-dividers" />
         <div>
           <h2>Looking for specific info?</h2>
           <h2>Customer questions & answers</h2>
@@ -224,7 +226,7 @@ const ProductShow = () => {
               </>
             );
           })}
-        </div>
+        </div> */}
         <hr className="product-dividers" />
         <div id="product-reviews-container">
           <div id="review-summary-container">
