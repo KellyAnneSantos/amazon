@@ -205,7 +205,7 @@ const ProductShow = () => {
                 </form>
               </Modal>
             )} */}
-            <span>Secure transaction</span>
+            {/* <span>Secure transaction</span> */}
             <div>
               <span>Sold by </span>
               <span>{product?.User?.merchantName}</span>

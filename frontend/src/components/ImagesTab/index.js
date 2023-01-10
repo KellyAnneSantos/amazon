@@ -39,14 +39,26 @@ const ImagesTab = () => {
   };
 
   return (
-    <>
-      <NavLink to={`/products/${product?.id}/edit`}>
-        <h1>Vital Info</h1>
-      </NavLink>
-      <h1>Images</h1>
-      <NavLink to={`/products/${product?.id}/descriptions`}>
-        <h1>Description</h1>
-      </NavLink>
+    <div id="vital-info-p">
+      <div className="edit-product-top">
+        <NavLink
+          to={`/products/${product?.id}/edit`}
+          className="edit-product-tabs"
+        >
+          <h1 className="edit-product-tabs">Vital Info</h1>
+        </NavLink>
+        <h1 className="edit-product-tabs">Images</h1>
+        <NavLink
+          to={`/products/${product?.id}/descriptions`}
+          className="edit-product-tabs"
+        >
+          <h1 className="edit-product-tabs">Description</h1>
+        </NavLink>
+      </div>
+      <div id="edit-product-hr-section">
+        <hr className="edit-short-hr" />
+        <hr className="edit-long-hr" />
+      </div>
       <img src={product?.previewImage} />
       <NavLink to={`/products/${product?.id}/edit`}>
         <button>Delete</button>
@@ -68,7 +80,7 @@ const ImagesTab = () => {
         </label>
         <button type="submit">Add Image</button>
       </form>
-    </>
+    </div>
   );
 };
 
