@@ -10,30 +10,30 @@ module.exports = (sequelize, DataTypes) => {
         firstName,
         lastName,
         fakeName,
-        merchant,
-        merchantName,
-        influencer,
+        // merchant,
+        // merchantName,
+        // influencer,
         email,
         phone,
-        prime,
+        // prime,
         previewImage,
-        backgroundImage,
-        about,
+        // backgroundImage,
+        // about,
       } = this;
       return {
         id,
         firstName,
         lastName,
         fakeName,
-        merchant,
-        merchantName,
-        influencer,
+        // merchant,
+        // merchantName,
+        // influencer,
         email,
         phone,
-        prime,
+        // prime,
         previewImage,
-        backgroundImage,
-        about,
+        // backgroundImage,
+        // about,
       };
     }
     validatePassword(password) {
@@ -104,15 +104,15 @@ module.exports = (sequelize, DataTypes) => {
       firstName,
       lastName,
       fakeName,
-      merchant,
-      merchantName,
-      influencer,
+      // merchant,
+      // merchantName,
+      // influencer,
       email,
       phone,
-      prime,
+      // prime,
       previewImage,
-      backgroundImage,
-      about,
+      // backgroundImage,
+      // about,
       password,
     }) {
       const hashedPassword = bcrypt.hashSync(password);
@@ -120,15 +120,15 @@ module.exports = (sequelize, DataTypes) => {
         firstName,
         lastName,
         fakeName,
-        merchant,
-        merchantName,
-        influencer,
+        // merchant,
+        // merchantName,
+        // influencer,
         email,
         phone,
-        prime,
+        // prime,
         previewImage,
-        backgroundImage,
-        about,
+        // backgroundImage,
+        // about,
         hashedPassword,
       });
       return await User.scope("currentUser").findByPk(user.id);
@@ -159,23 +159,23 @@ module.exports = (sequelize, DataTypes) => {
           len: [2, 30],
         },
       },
-      merchant: {
-        allowNull: false,
-        defaultValue: false,
-        type: DataTypes.BOOLEAN,
-      },
-      merchantName: {
-        type: DataTypes.STRING,
-        unique: true,
-        validate: {
-          len: [2, 256],
-        },
-      },
-      influencer: {
-        allowNull: false,
-        defaultValue: false,
-        type: DataTypes.BOOLEAN,
-      },
+      // merchant: {
+      //   allowNull: false,
+      //   defaultValue: true,
+      //   type: DataTypes.BOOLEAN,
+      // },
+      // merchantName: {
+      //   type: DataTypes.STRING,
+      //   unique: true,
+      //   validate: {
+      //     len: [2, 256],
+      //   },
+      // },
+      // influencer: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: DataTypes.BOOLEAN,
+      // },
       // username: {
       //   type: DataTypes.STRING,
       //   allowNull: false,
@@ -204,29 +204,29 @@ module.exports = (sequelize, DataTypes) => {
           len: [7, 17],
         },
       },
-      prime: {
-        allowNull: false,
-        defaultValue: false,
-        type: DataTypes.BOOLEAN,
-      },
+      // prime: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: DataTypes.BOOLEAN,
+      // },
       previewImage: {
         type: DataTypes.STRING,
         validate: {
           len: [5, 256],
         },
       },
-      backgroundImage: {
-        type: DataTypes.STRING,
-        validate: {
-          len: [5, 256],
-        },
-      },
-      about: {
-        type: DataTypes.STRING,
-        validate: {
-          len: [1, 256],
-        },
-      },
+      // backgroundImage: {
+      //   type: DataTypes.STRING,
+      //   validate: {
+      //     len: [5, 256],
+      //   },
+      // },
+      // about: {
+      //   type: DataTypes.STRING,
+      //   validate: {
+      //     len: [1, 256],
+      //   },
+      // },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
         allowNull: false,

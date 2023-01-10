@@ -21,20 +21,20 @@ module.exports = {
         defaultValue: "Anonymous",
         type: Sequelize.STRING(30),
       },
-      merchant: {
-        allowNull: false,
-        defaultValue: false,
-        type: Sequelize.BOOLEAN,
-      },
-      merchantName: {
-        type: Sequelize.STRING(256),
-        unique: true,
-      },
-      influencer: {
-        allowNull: false,
-        defaultValue: false,
-        type: Sequelize.BOOLEAN,
-      },
+      // merchant: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: Sequelize.BOOLEAN,
+      // },
+      // merchantName: {
+      //   type: Sequelize.STRING(256),
+      //   unique: true,
+      // },
+      // influencer: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: Sequelize.BOOLEAN,
+      // },
       // username: {
       //   type: Sequelize.STRING(30),
       //   allowNull: false,
@@ -50,20 +50,23 @@ module.exports = {
         type: Sequelize.STRING(10),
         unique: true,
       },
-      prime: {
-        allowNull: false,
-        defaultValue: false,
-        type: Sequelize.BOOLEAN,
-      },
+      // prime: {
+      //   allowNull: false,
+      //   defaultValue: false,
+      //   type: Sequelize.BOOLEAN,
+      // },
       previewImage: {
+        allowNull: false,
+        defaultValue:
+          "https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg",
         type: Sequelize.STRING(256),
       },
-      backgroundImage: {
-        type: Sequelize.STRING(256),
-      },
-      about: {
-        type: Sequelize.STRING(256),
-      },
+      // backgroundImage: {
+      //   type: Sequelize.STRING(256),
+      // },
+      // about: {
+      //   type: Sequelize.STRING(256),
+      // },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
         allowNull: false,
