@@ -83,14 +83,8 @@ function App() {
               <Route path="/inventory">
                 <MyInventoryPage />
               </Route>
-              <Route path="/register">
-                <SignupFormPage />
-              </Route>
               <Route path="/search">
                 <SearchResultsPage />
-              </Route>
-              <Route path="/signin">
-                <LoginFormPage />
               </Route>
               <Route path="/">
                 <LandingPage />

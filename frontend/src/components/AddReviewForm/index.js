@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
+import { fetchProduct } from "../../store/productReducer";
 import { fetchAddReview } from "../../store/reviewReducer";
 import ReviewProductItem from "../ReviewProductItem";
 import "./AddReviewForm.css";
@@ -11,6 +12,7 @@ const AddReviewForm = () => {
   const history = useHistory();
 
   let user = useSelector((state) => state.session.user);
+  // let product = useSelector((state) => state.products[productId]);
 
   const [stars, setStars] = useState(0);
   const [headline, setHeadline] = useState("");
@@ -53,6 +55,14 @@ const AddReviewForm = () => {
 
     if (response) history.push(`/products/${productId}`);
   };
+
+  // useEffect(() => {
+  //   dispatch(fetchProduct(productId));
+  // }, [dispatch]);
+
+  // if (!product.id) {
+  //   return <Redirect to="/" />;
+  // }
 
   return (
     <>

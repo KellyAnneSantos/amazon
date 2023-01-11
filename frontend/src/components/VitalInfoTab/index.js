@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { fetchEditProduct } from "../../store/productReducer";
 import "./VitalInfoTab.css";
 
@@ -43,6 +43,10 @@ const VitalInfoTab = () => {
 
     if (response) history.push(`/products/${product?.id}/images`);
   };
+
+  if (!product) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div id="vital-info-p">

@@ -51,7 +51,9 @@ const ProductShow = () => {
     dispatch(fetchProductImages(productId));
   }, [dispatch, productId, product?.previewImage]);
 
-  if (!user) return <Redirect to="/signin" />;
+  if (!product?.id) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>

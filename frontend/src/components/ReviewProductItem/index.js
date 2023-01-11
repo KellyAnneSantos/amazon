@@ -1,15 +1,27 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { fetchProduct } from "../../store/productReducer";
 import "./ReviewProductItem.css";
 
 const ReviewProductItem = ({ productId }) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state?.products[productId]);
+  const user = useSelector((state) => state.session.user);
+  const reviews = product?.Reviews;
+  const review = reviews.find((review) => review?.userId === user?.id);
 
   useEffect(() => {
     dispatch(fetchProduct(productId));
   }, [dispatch, productId]);
+
+  if (!product) {
+    return <Redirect to="/" />;
+  }
+
+  if (review) {
+    return <Redirect to={`/reviews/${review?.id}/edit`} />;
+  }
 
   return (
     <div className="review-product-item-container">

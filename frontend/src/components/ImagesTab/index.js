@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, Redirect, useParams } from "react-router-dom";
 import {
   fetchAddProductImage,
   fetchProductImages,
@@ -37,6 +37,10 @@ const ImagesTab = () => {
     });
     setMediaUrl("");
   };
+
+  if (!product?.id) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div id="vital-info-p">

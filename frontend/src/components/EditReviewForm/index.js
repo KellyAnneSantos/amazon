@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import { fetchReviewImages } from "../../store/imageReducer";
 import { fetchEditReview } from "../../store/reviewReducer";
 import AddReviewImage from "../AddReviewImage";
@@ -41,6 +41,10 @@ const EditReviewForm = () => {
 
     if (response) history.push(`/products/${review?.productId}`);
   };
+
+  if (!review?.id) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>

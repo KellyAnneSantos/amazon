@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import { fetchUserReviews } from "../../store/reviewReducer";
 import { fetchUser } from "../../store/userReducer";
 import ProfileReviewItems from "../ProfileReviewItems";
@@ -23,6 +23,10 @@ const ProfilePage = () => {
     dispatch(fetchUserReviews(userId));
     dispatch(fetchUser(userId));
   }, [dispatch, userId]);
+
+  if (!profileUser) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
