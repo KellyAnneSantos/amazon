@@ -72,7 +72,7 @@ const EditReviewForm = () => {
           <p className="review-section-title">Overall rating</p>
           <div className="review-stars">
             <i
-              class={
+              className={
                 stars >= 1
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -80,7 +80,7 @@ const EditReviewForm = () => {
               onClick={() => setStars(1)}
             ></i>
             <i
-              class={
+              className={
                 stars >= 2
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -88,7 +88,7 @@ const EditReviewForm = () => {
               onClick={() => setStars(2)}
             ></i>
             <i
-              class={
+              className={
                 stars >= 3
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -96,7 +96,7 @@ const EditReviewForm = () => {
               onClick={() => setStars(3)}
             ></i>
             <i
-              class={
+              className={
                 stars >= 4
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -104,7 +104,7 @@ const EditReviewForm = () => {
               onClick={() => setStars(4)}
             ></i>
             <i
-              class={
+              className={
                 stars >= 5
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"

@@ -443,7 +443,7 @@ const reviews = [
     stars: 5,
     headline: "My dog’s favorite toy in the whole world!",
     previewImage:
-      "https://reviewed-com-res.cloudinary.com/image/fetch/s--SNpXU9gt--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,q_auto,w_972/https://reviewed-production.s3.amazonaws.com/1656106498222/8E4C0EAF-8F8E-4F32-9D5C-1EE974653649_1_201_a.jpeg",
+      "https://media1.popsugar-assets.com/files/thumbor/QKmVAMjtU0vmXT-dLpq0PD-tgQA/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/11/05/745/n/47856405/3c10c19e26c82d8e_Sloth/i/MewaJump-Plush-Dog-Toy.jpg",
     body: "This is the only toy my dog will play with.",
   },
   {
@@ -452,7 +452,7 @@ const reviews = [
     stars: 5,
     headline: "Big difference",
     previewImage:
-      "https://reviewed-com-res.cloudinary.com/image/fetch/s--SNpXU9gt--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,q_auto,w_972/https://reviewed-production.s3.amazonaws.com/1656106498222/8E4C0EAF-8F8E-4F32-9D5C-1EE974653649_1_201_a.jpeg",
+      "https://www.fisherpointedental.com/wp-content/uploads/2019/06/Fisher-Pointe-Dental-_-June-Blog-Charcoal-Toothpaste-Featured-Image-958648636-LK-_-6-24-19.jpg",
     body: "Wish I'd taken a before pic, been using this for 3 days now and can see a noticeable difference, highly recommend",
   },
   {

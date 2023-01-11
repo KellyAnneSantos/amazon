@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { fetchProduct } from "../../store/productReducer";
-import { fetchAddReview } from "../../store/reviewReducer";
+import { fetchAddReview, fetchUserReviews } from "../../store/reviewReducer";
 import ReviewProductItem from "../ReviewProductItem";
 import "./AddReviewForm.css";
 
@@ -12,7 +12,6 @@ const AddReviewForm = () => {
   const history = useHistory();
 
   let user = useSelector((state) => state.session.user);
-  // let product = useSelector((state) => state.products[productId]);
 
   const [stars, setStars] = useState(0);
   const [headline, setHeadline] = useState("");
@@ -90,7 +89,7 @@ const AddReviewForm = () => {
           <p className="review-section-title">Overall rating</p>
           <div className="review-stars">
             <i
-              class={
+              className={
                 stars >= 1
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -98,7 +97,7 @@ const AddReviewForm = () => {
               onClick={() => setStars(1)}
             ></i>
             <i
-              class={
+              className={
                 stars >= 2
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -106,7 +105,7 @@ const AddReviewForm = () => {
               onClick={() => setStars(2)}
             ></i>
             <i
-              class={
+              className={
                 stars >= 3
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -114,7 +113,7 @@ const AddReviewForm = () => {
               onClick={() => setStars(3)}
             ></i>
             <i
-              class={
+              className={
                 stars >= 4
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -122,7 +121,7 @@ const AddReviewForm = () => {
               onClick={() => setStars(4)}
             ></i>
             <i
-              class={
+              className={
                 stars >= 5
                   ? "fa fa-star checked fa-2xl"
                   : "fa-regular fa-star fa-2xl"
@@ -174,6 +173,11 @@ const AddReviewForm = () => {
           </button>
         </form>
       </div>
+      <ul>
+        {errors.map((error, idx) => (
+          <li key={idx}>{error}</li>
+        ))}
+      </ul>
     </>
   );
 };

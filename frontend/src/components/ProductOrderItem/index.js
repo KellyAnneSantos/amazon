@@ -43,7 +43,7 @@ const ProductOrderItem = ({ productOrder }) => {
             <p className="po-name">{product?.name}</p>
           </NavLink>
           <button className="order-buy-btn" onClick={handleClick}>
-            <i class="fa-solid fa-bag-shopping fa-sm"></i>
+            <i className="fa-solid fa-bag-shopping fa-sm"></i>
             <span>Buy it again</span>
           </button>
         </div>

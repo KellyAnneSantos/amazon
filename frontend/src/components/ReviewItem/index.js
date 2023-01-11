@@ -43,14 +43,14 @@ const ReviewItem = ({ review }) => {
         {checkedStarArr.length
           ? checkedStarArr.map((star) => {
               return (
-                <i class="fa fa-star checked" id="product-orange-star"></i>
+                <i className="fa fa-star checked" id="product-orange-star"></i>
               );
             })
           : ""}
         {starArr.length
           ? starArr.map((star) => {
               return (
-                <i class="fa-regular fa-star" id="product-orange-star"></i>
+                <i className="fa-regular fa-star" id="product-orange-star"></i>
               );
             })
           : ""}

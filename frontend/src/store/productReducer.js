@@ -51,9 +51,16 @@ const searchProducts = (payload) => {
 
 export const fetchProduct = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/products/${id}`);
-  const product = await res.json();
-
-  dispatch(loadProduct(product));
+  //   const product = await res.json();
+  console.log(res, "response");
+  if (res.ok) {
+    console.log(res, "successful response");
+    const product = await res.json();
+    dispatch(loadProduct(product));
+    return product;
+  }
+  console.log(res, "failed response");
+  return res;
 };
 
 export const fetchProducts = () => async (dispatch) => {
