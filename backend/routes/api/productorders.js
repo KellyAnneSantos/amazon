@@ -9,7 +9,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const validateProductOrder = [
   check("quantity")
-    // .exists({ checkFalsy: true })
+    .exists({ checkFalsy: true })
     .isInt({ min: 1, max: 30 })
     .withMessage("Quantity is invalid"),
   handleValidationErrors,
@@ -47,7 +47,7 @@ router.get("/:productOrderId", async (req, res) => {
 router.put(
   "/:productOrderId",
   requireAuth,
-  // validateProductOrder,
+  validateProductOrder,
   async (req, res) => {
     let { productOrderId } = req.params;
     let { quantity } = req.body;
