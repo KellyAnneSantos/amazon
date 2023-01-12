@@ -132,10 +132,13 @@ const productOrderReducer = (state = newState, action) => {
       delete newState[action.payload];
       return newState;
     case EDIT_PRODUCTORDER:
-      return {
-        ...state,
-        [action.payload.id]: action.payload,
-      };
+      // return {
+      //   ...newState,
+      //   [action.payload.id]: action.payload,
+      // };
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
+      return newState;
     case LOAD_PRODUCTORDERS:
       newState = {};
       action.payload.ProductOrders.forEach((productorder) => {

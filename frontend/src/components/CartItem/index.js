@@ -34,7 +34,7 @@ const CartItem = ({ productOrder }) => {
   };
 
   useEffect(() => {
-    setQuantity(productOrder?.quantity);
+    // setQuantity(productOrder?.quantity);
     dispatch(fetchProduct(productOrder?.productId));
   }, [dispatch, productOrder?.productId, productOrder?.quantity]);
 
