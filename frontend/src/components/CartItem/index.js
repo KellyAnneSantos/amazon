@@ -26,8 +26,8 @@ const CartItem = ({ productOrder }) => {
     await dispatch(fetchDeleteProductOrder(productOrder?.id));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
     productOrder = { ...productOrder, quantity };
 
     await dispatch(fetchEditProductOrder(productOrder, productOrder?.id));
