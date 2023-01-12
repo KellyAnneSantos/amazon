@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { fetchPay } from "../../store/orderReducer";
 import { fetchLoadCart } from "../../store/productOrderReducer";
 import CartItem from "../CartItem";
@@ -14,17 +14,18 @@ const MyCartPage = () => {
     useSelector((state) => state?.productOrders)
   );
 
-  const [sum, setSum] = useState(0.0);
-  const [quantity, setQuantity] = useState(0);
+  let [sum, setSum] = useState(0.0);
+  let [quantity, setQuantity] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLoadCart()).then(() => setIsLoaded(true));
-  }, []);
+  }, [dispatch]);
+
+  let newSum = 0.0;
+  let newQuantity = 0;
 
   useEffect(() => {
-    let newSum = 0.0;
-    let newQuantity = 0;
     if (productOrders) {
       for (const productOrder of productOrders) {
         newSum += productOrder?.quantity * productOrder?.Product?.price;
@@ -33,7 +34,7 @@ const MyCartPage = () => {
       setSum(newSum);
       setQuantity(newQuantity);
     }
-  }, [productOrders]);
+  }, [productOrders, sum, quantity, newSum, newQuantity]);
 
   const handleClick = async (e) => {
     e.preventDefault();
