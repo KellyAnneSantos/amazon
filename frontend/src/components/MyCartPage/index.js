@@ -20,7 +20,7 @@ const MyCartPage = () => {
   let [arr, setArr] = useState(
     productOrders?.map((productOrder) => productOrder?.quantity).join("")
   );
-
+  let [newArr, setNewArr] = useState([]);
   // const getTotal = (productOrders) => {
   //   let newSum = 0.0;
   //   let newQuantity = 0;
@@ -61,20 +61,20 @@ const MyCartPage = () => {
     // ...productOrders?.map((productOrder) => productOrder?.quantity),
   ]);
 
-  // useEffect(() => {
-  //   let newSum = 0.0;
-  //   let newQuantity = 0;
-  //   if (productOrders) {
-  //     for (const productOrder of productOrders) {
-  //       newSum +=
-  //         parseInt(productOrder?.quantity) *
-  //         parseInt(productOrder?.Product?.price);
-  //       newQuantity += parseInt(productOrder?.quantity);
-  //     }
-  //     setSum(newSum);
-  //     setQuantity(newQuantity);
-  //   }
-  // }, [productOrders]);
+  useEffect(() => {
+    let newSum = 0.0;
+    let newQuantity = 0;
+    if (productOrders) {
+      for (const productOrder of productOrders) {
+        newSum +=
+          parseInt(productOrder?.quantity) *
+          parseInt(productOrder?.Product?.price);
+        newQuantity += parseInt(productOrder?.quantity);
+      }
+      setSum(newSum);
+      setQuantity(newQuantity);
+    }
+  }, [productOrders?.map((productOrder) => productOrder?.quantity).join("")]);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -93,18 +93,26 @@ const MyCartPage = () => {
               <h2 id="position-price">Price</h2>
               <hr className="cart-hr" />
               <div>
-                {productOrders?.map((productOrder) => {
-                  return (
-                    <>
-                      <CartItem
-                        key={productOrder?.id}
-                        productOrder={productOrder}
-                      />
-                      <hr className="cart-hr" />
-                    </>
-                  );
-                })}
+                {
+                  (newArr = productOrders?.map((productOrder) => {
+                    return (
+                      <>
+                        <CartItem
+                          key={productOrder?.id}
+                          productOrder={productOrder}
+                        />
+                        <p>{productOrder?.quantity}</p>
+                        <p>
+                          {productOrder?.quantity *
+                            productOrder?.Product?.price}
+                        </p>
+                        <hr className="cart-hr" />
+                      </>
+                    );
+                  }))
+                }
               </div>
+              <div>{console.log(newArr)}</div>
               <div id="cart-product-subtotal-section">
                 <span id="cart-product-subtotal">
                   Subtotal ({quantity} items):{" "}
