@@ -79,7 +79,7 @@ const CartItem = ({ productOrder }) => {
               <button
                 type="button"
                 className="cart-update-btn"
-                onClick={handleSubmit}
+                onMouseDown={handleSubmit}
               >
                 Update
               </button>
