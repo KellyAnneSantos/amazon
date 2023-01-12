@@ -104,7 +104,7 @@ const MyCartPage = () => {
               </div>
               <div id="cart-product-subtotal-section">
                 <span id="cart-product-subtotal">
-                  Subtotal ({arr} {quantity} items):{" "}
+                  Subtotal ({quantity} items):{" "}
                 </span>
                 <span id="cart-product-subtotal-price">${sum.toFixed(2)}</span>
               </div>
