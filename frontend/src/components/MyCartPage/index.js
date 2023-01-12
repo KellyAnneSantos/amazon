@@ -47,8 +47,10 @@ const MyCartPage = () => {
     let newQuantity = 0;
     if (productOrders) {
       for (const productOrder of productOrders) {
-        newSum += productOrder?.quantity * productOrder?.Product?.price;
-        newQuantity += productOrder?.quantity;
+        newSum +=
+          parseInt(productOrder?.quantity) *
+          parseInt(productOrder?.Product?.price);
+        newQuantity += parseInt(productOrder?.quantity);
       }
       setSum(newSum);
       setQuantity(newQuantity);
@@ -86,7 +88,7 @@ const MyCartPage = () => {
               </div>
               <div id="cart-product-subtotal-section">
                 <span id="cart-product-subtotal">
-                  Subtotal ({quantity} items):{" "}
+                  Subtotal ({arr} {quantity} items):{" "}
                 </span>
                 <span id="cart-product-subtotal-price">${sum.toFixed(2)}</span>
               </div>
