@@ -12,6 +12,7 @@ const AddReviewForm = () => {
   const history = useHistory();
 
   let user = useSelector((state) => state.session.user);
+  let amazonDog = useSelector((state) => state?.products[999999999]);
 
   const [stars, setStars] = useState(0);
   const [headline, setHeadline] = useState("");
@@ -55,13 +56,17 @@ const AddReviewForm = () => {
     if (response) history.push(`/products/${productId}`);
   };
 
-  // useEffect(() => {
-  //   dispatch(fetchProduct(productId));
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchProduct(productId));
+  }, [dispatch]);
 
   // if (!product.id) {
   //   return <Redirect to="/" />;
   // }
+
+  if (amazonDog?.department === "New" || isNaN(productId)) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
@@ -172,12 +177,12 @@ const AddReviewForm = () => {
             Submit
           </button>
         </form>
+        <ul className="error-ul">
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
       </div>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
     </>
   );
 };

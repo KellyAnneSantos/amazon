@@ -24,7 +24,7 @@ const ProfilePage = () => {
     dispatch(fetchUser(userId));
   }, [dispatch, userId]);
 
-  if (!profileUser) {
+  if (!profileUser?.id) {
     return <Redirect to="/" />;
   }
 

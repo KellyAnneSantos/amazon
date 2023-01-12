@@ -104,10 +104,10 @@ router.get("/current/cart/productorders", requireAuth, async (req, res) => {
   });
 
   if (!order) {
-    res.status(404);
+    // res.status(404);
     return res.json({
-      message: "Cart is empty",
-      statusCode: 404,
+      // message: "Cart is empty",
+      // statusCode: 404,
     });
   }
 
@@ -293,7 +293,7 @@ router.post(
         createdProductOrder = await ProductOrder.findOne({
           where: {
             productId,
-            orderId: order.id,
+            orderId: newOrder.id,
           },
           attributes: [
             "id",

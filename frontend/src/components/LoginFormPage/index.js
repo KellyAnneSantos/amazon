@@ -91,7 +91,7 @@ function LoginFormPage() {
           Sign in as demo user
         </button>
       </div>
-      <div className="signin-signup-footer"></div>
+      {/* <div className="signin-signup-footer"></div> */}
     </>
   );
 }

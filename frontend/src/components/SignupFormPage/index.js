@@ -149,7 +149,7 @@ function SignupFormPage() {
           </div>
         </form>
       </div>
-      <div className="signin-signup-footer"></div>
+      {/* <div className="signin-signup-footer"></div> */}
     </>
   );
 }

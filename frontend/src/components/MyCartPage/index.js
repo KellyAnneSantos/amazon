@@ -19,7 +19,7 @@ const MyCartPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchLoadCart());
+    dispatch(fetchLoadCart()).then(() => setIsLoaded(true));
   }, []);
 
   useEffect(() => {
@@ -38,52 +38,54 @@ const MyCartPage = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    await dispatch(fetchPay()).then(() => setIsLoaded(true));
+    await dispatch(fetchPay());
     history.push("/my/orders");
   };
 
-  if (isLoaded) return <Redirect to="/my/orders" />;
-
   return (
-    <div id="cart-page">
-      <div id="center-product-cart">
-        <div id="product-orders-container">
-          <h1 id="cart-title">Shopping Cart</h1>
-          <h2 id="position-price">Price</h2>
-          <hr className="cart-hr" />
-          <div>
-            {productOrders?.map((productOrder) => {
-              return (
-                <>
-                  <CartItem
-                    key={productOrder?.id}
-                    productOrder={productOrder}
-                  />
-                  <hr className="cart-hr" />
-                </>
-              );
-            })}
-          </div>
-          <div id="cart-product-subtotal-section">
-            <span id="cart-product-subtotal">
-              Subtotal ({quantity} items):{" "}
-            </span>
-            <span id="cart-product-subtotal-price">${sum}</span>
+    <>
+      {isLoaded && (
+        <div id="cart-page">
+          <div id="center-product-cart">
+            <div id="product-orders-container">
+              <h1 id="cart-title">Shopping Cart</h1>
+              <h2 id="position-price">Price</h2>
+              <hr className="cart-hr" />
+              <div>
+                {productOrders?.map((productOrder) => {
+                  return (
+                    <>
+                      <CartItem
+                        key={productOrder?.id}
+                        productOrder={productOrder}
+                      />
+                      <hr className="cart-hr" />
+                    </>
+                  );
+                })}
+              </div>
+              <div id="cart-product-subtotal-section">
+                <span id="cart-product-subtotal">
+                  Subtotal ({quantity} items):{" "}
+                </span>
+                <span id="cart-product-subtotal-price">${sum.toFixed(2)}</span>
+              </div>
+            </div>
+            <div id="cart-check-out-section">
+              <div>
+                <span id="cart-checkout-subtotal">
+                  Subtotal ({quantity} items):{" "}
+                </span>
+                <span id="cart-checkout-subtotal-price">${sum.toFixed(2)}</span>
+              </div>
+              <button id="cart-checkout-btn" onClick={handleClick}>
+                Place your order
+              </button>
+            </div>
           </div>
         </div>
-        <div id="cart-check-out-section">
-          <div>
-            <span id="cart-checkout-subtotal">
-              Subtotal ({quantity} items):{" "}
-            </span>
-            <span id="cart-checkout-subtotal-price">${sum}</span>
-          </div>
-          <button id="cart-checkout-btn" onClick={handleClick}>
-            Proceed to checkout
-          </button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

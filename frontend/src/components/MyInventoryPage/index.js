@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { fetchMyProducts } from "../../store/productReducer";
@@ -9,34 +9,42 @@ const MyInventoryPage = () => {
   const dispatch = useDispatch();
   const products = Object.values(useSelector((state) => state?.products));
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
-    dispatch(fetchMyProducts());
+    dispatch(fetchMyProducts()).then(setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
-      <div id="inventory-p-header">
-        <span id="inventory-title">Manage Inventory</span>
-        <NavLink to="/products/new">
-          <button id="inventory-add-btn">Add a product</button>
-        </NavLink>
-      </div>
-      <table id="inventory-table-top">
-        <tr id="inventory-headers-section">
-          <th id="inventory-header-image">Image</th>
-          <th id="inventory-header-name">Product Name</th>
-          <th id="inventory-header-date">Date Created</th>
-          <th id="inventory-header-price">Price</th>
-          <th id="inventory-header-none">{""}</th>
-        </tr>
-      </table>
-      <table id="inventory-table-bottom">
+      {isLoaded && (
         <>
-          {products?.map((product) => {
-            return <InventoryProducts key={product.id} product={product} />;
-          })}
+          <div id="inventory-p-header">
+            <span id="inventory-title">Manage Inventory</span>
+            <NavLink to="/products/new">
+              <button id="inventory-add-btn">Add a product</button>
+            </NavLink>
+          </div>
+          <table id="inventory-table-top">
+            <tbody>
+              <tr id="inventory-headers-section">
+                <th id="inventory-header-image">Image</th>
+                <th id="inventory-header-name">Product Name</th>
+                <th id="inventory-header-date">Date Created</th>
+                <th id="inventory-header-price">Price</th>
+                <th id="inventory-header-none">{""}</th>
+              </tr>
+            </tbody>
+          </table>
+          <table id="inventory-table-bottom">
+            <tbody>
+              {products?.map((product) => {
+                return <InventoryProducts key={product.id} product={product} />;
+              })}
+            </tbody>
+          </table>
         </>
-      </table>
+      )}
     </>
   );
 };

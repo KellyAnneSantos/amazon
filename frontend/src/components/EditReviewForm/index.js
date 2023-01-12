@@ -152,6 +152,11 @@ const EditReviewForm = () => {
           </button>
         </form>
         {/* <AddReviewImage reviewId={reviewId} /> */}
+        <ul className="error-ul">
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
       </div>
     </>
   );

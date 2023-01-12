@@ -1,0 +1,19 @@
+#footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  bottom: 0;
+  background-color: lightgray;
+}
+
+#git-hub {
+  width: 40px;
+}
+
+#Kelly-Anne-Santos {
+  font-size: 15px;
+  text-decoration: none;
+  color: black;
+  margin-right: 20px;
+}

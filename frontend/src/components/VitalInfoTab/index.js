@@ -20,6 +20,49 @@ const VitalInfoTab = () => {
   const [previewImage, setPreviewImage] = useState(product?.previewImage);
   const [errors, setErrors] = useState([]);
 
+  const departments = [
+    "Alexa",
+    "Appliances",
+    "Arts",
+    "Audible",
+    "Auto",
+    "Baby",
+    "Beauty",
+    "Books",
+    "CDs",
+    "Cellular",
+    "Clothing",
+    "Collectibles",
+    "Computers",
+    "Credit",
+    "Devices",
+    "Electronics",
+    "Education",
+    "Games",
+    "Garden",
+    "Grocery",
+    "Handmade",
+    "Health",
+    "Home",
+    "Industrial",
+    "Kindle",
+    "Luxury",
+    "Magazines",
+    "Music",
+    "Office",
+    "Pets",
+    "Pharmacy",
+    "Prime",
+    "Services",
+    "Software",
+    "Sports",
+    "Tools",
+    "Toys",
+    "Travel",
+    "Video",
+    "Warehouse",
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     product = {
@@ -41,7 +84,7 @@ const VitalInfoTab = () => {
       if (data && data.errors) setErrors(data.errors);
     });
 
-    if (response) history.push(`/products/${product?.id}/images`);
+    if (response) history.push(`/inventory`);
   };
 
   if (!product) {
@@ -84,13 +127,23 @@ const VitalInfoTab = () => {
         <div className="edit-product-rows">
           <span className="edit-green-asterisk">*</span>
           <span className="edit-product-labels">Department</span>
-          <input
-            type="text"
-            value={department}
+          <select
+            name="type"
             onChange={(e) => setDepartment(e.target.value)}
-            required
-            className="edit-product-input"
-          />
+            value={department}
+            className="edit-product-select"
+          >
+            <option value="" disabled>
+              Select a department
+            </option>
+            {departments.map((ele) => {
+              return (
+                <option key={ele} value={ele}>
+                  {ele}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <div id="edit-product-price-row">
           <span className="edit-green-asterisk">*</span>
@@ -140,6 +193,11 @@ const VitalInfoTab = () => {
         <button type="submit" className="inventory-submit-btn">
           Submit
         </button>
+        <ul className="error-ul">
+          {errors?.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
       </form>
     </div>
   );

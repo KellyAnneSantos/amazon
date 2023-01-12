@@ -4,6 +4,7 @@ import { fetchProducts } from "../../store/productReducer";
 import { NavLink } from "react-router-dom";
 import "./LandingPage.css";
 import CaptionItems from "../CaptionItems";
+import Footer from "../Footer";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function LandingPage() {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 }

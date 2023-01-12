@@ -149,9 +149,11 @@ const productOrderReducer = (state = newState, action) => {
       };
     case LOAD_CART:
       newState = {};
-      action.payload.ProductOrders.forEach((productOrder) => {
-        newState[productOrder.id] = productOrder;
-      });
+      if (Object.keys(action.payload).length !== 0) {
+        action.payload.ProductOrders.forEach((productOrder) => {
+          newState[productOrder.id] = productOrder;
+        });
+      }
       return newState;
     default:
       return state;

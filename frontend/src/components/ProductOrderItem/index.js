@@ -1,12 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { fetchAddProductOrder } from "../../store/productOrderReducer";
 import { fetchProduct } from "../../store/productReducer";
 import "./ProductOrderItem.css";
 
 const ProductOrderItem = ({ productOrder }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const product = useSelector(
     (state) => state.products[productOrder.productId]
   );
@@ -19,7 +23,10 @@ const ProductOrderItem = ({ productOrder }) => {
     e.preventDefault();
     let newProductOrder = { productId: productOrder?.productId, quantity: 1 };
 
-    await dispatch(fetchAddProductOrder(newProductOrder));
+    await dispatch(fetchAddProductOrder(newProductOrder)).then(
+      setIsLoaded(true)
+    );
+    history.push("/my/cart");
   };
 
   return (

@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 import "./InventoryProducts.css";
 
 const InventoryProducts = ({ product }) => {
+  let price = product?.price;
+  price = price.toFixed(2);
+
   return (
     <tr className="inventory-product-row">
       <td style={{ width: "24%" }}>
@@ -28,7 +31,7 @@ const InventoryProducts = ({ product }) => {
         <span>{product.createdAt.substring(0, 10)}</span>
       </td>
       <td style={{ width: "24%" }} className="inventory-product-price">
-        <span>${product.price.toFixed(2)}</span>
+        <span>${price}</span>
       </td>
       <td style={{ width: "24%" }}>
         <NavLink to={`/products/${product?.id}/edit`}>

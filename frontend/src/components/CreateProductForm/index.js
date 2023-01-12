@@ -18,6 +18,49 @@ const CreateProductForm = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [errors, setErrors] = useState([]);
 
+  const departments = [
+    "Alexa",
+    "Appliances",
+    "Arts",
+    "Audible",
+    "Auto",
+    "Baby",
+    "Beauty",
+    "Books",
+    "CDs",
+    "Cellular",
+    "Clothing",
+    "Collectibles",
+    "Computers",
+    "Credit",
+    "Devices",
+    "Electronics",
+    "Education",
+    "Games",
+    "Garden",
+    "Grocery",
+    "Handmade",
+    "Health",
+    "Home",
+    "Industrial",
+    "Kindle",
+    "Luxury",
+    "Magazines",
+    "Music",
+    "Office",
+    "Pets",
+    "Pharmacy",
+    "Prime",
+    "Services",
+    "Software",
+    "Sports",
+    "Tools",
+    "Toys",
+    "Travel",
+    "Video",
+    "Warehouse",
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let product = {
@@ -35,6 +78,7 @@ const CreateProductForm = () => {
       async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
+        console.log(data.errors);
       }
     );
 
@@ -65,13 +109,24 @@ const CreateProductForm = () => {
         <div className="edit-product-rows">
           <span className="edit-green-asterisk">*</span>
           <span className="edit-product-labels">Department</span>
-          <input
-            type="text"
-            value={department}
+          <select
+            name="type"
             onChange={(e) => setDepartment(e.target.value)}
+            value={department}
+            className="edit-product-select"
             required
-            className="edit-product-input"
-          />
+          >
+            <option value="" disabled>
+              Select a department
+            </option>
+            {departments.map((ele) => {
+              return (
+                <option key={ele} value={ele}>
+                  {ele}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <div className="edit-product-rows">
           <span className="edit-green-asterisk">*</span>
@@ -126,6 +181,11 @@ const CreateProductForm = () => {
         <button type="submit" className="inventory-submit-btn">
           Submit
         </button>
+        <ul className="error-ul">
+          {errors?.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
       </form>
     </div>
   );

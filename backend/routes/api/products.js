@@ -461,10 +461,25 @@ router.get("/:productId", async (req, res) => {
   let product = await Product.findByPk(productId);
 
   if (!product) {
-    res.status(404);
     return res.json({
-      message: "Product couldn't be found",
-      statusCode: 404,
+      id: 999999999,
+      merchantId: 1,
+      name: "Dog",
+      department: "New",
+      price: 5.0,
+      description: "Fake Product",
+      freeReturn: true,
+      prime: true,
+      previewImage:
+        "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_4x3.jpg",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      numReviews: 0,
+      avgStarRating: 0,
+      Descriptions: [],
+      User: {},
+      Reviews: [],
+      Questions: [],
     });
   }
 
@@ -637,7 +652,7 @@ router.get("/", validateQuery, async (req, res) => {
 });
 
 router.post("/", requireAuth, validateProduct, async (req, res) => {
-  const {
+  let {
     name,
     department,
     price,
@@ -647,6 +662,7 @@ router.post("/", requireAuth, validateProduct, async (req, res) => {
     previewImage,
   } = req.body;
   const { user } = req;
+  price = parseInt(price);
   const newProduct = await Product.create({
     merchantId: user.id,
     name,

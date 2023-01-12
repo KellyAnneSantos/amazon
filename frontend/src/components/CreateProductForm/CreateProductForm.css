@@ -13,3 +13,15 @@
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
+
+.edit-product-select {
+  width: 298px;
+  height: 35px;
+  outline: 0;
+}
+
+.edit-product-select:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 5px #ff9900;
+  outline: 0;
+}

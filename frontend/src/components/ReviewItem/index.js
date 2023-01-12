@@ -41,16 +41,24 @@ const ReviewItem = ({ review }) => {
       </NavLink>
       <div>
         {checkedStarArr.length
-          ? checkedStarArr.map((star) => {
+          ? checkedStarArr.map((star, idx) => {
               return (
-                <i className="fa fa-star checked" id="product-orange-star"></i>
+                <i
+                  className="fa fa-star checked"
+                  id="product-orange-star"
+                  key={idx}
+                ></i>
               );
             })
           : ""}
         {starArr.length
-          ? starArr.map((star) => {
+          ? starArr.map((star, idx) => {
               return (
-                <i className="fa-regular fa-star" id="product-orange-star"></i>
+                <i
+                  className="fa-regular fa-star"
+                  id="product-orange-star"
+                  key={idx}
+                ></i>
               );
             })
           : ""}
