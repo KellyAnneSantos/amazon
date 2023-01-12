@@ -47,7 +47,7 @@ router.get("/:productOrderId", async (req, res) => {
 router.put(
   "/:productOrderId",
   requireAuth,
-  validateProductOrder,
+  // validateProductOrder,
   async (req, res) => {
     let { productOrderId } = req.params;
     let { quantity } = req.body;
