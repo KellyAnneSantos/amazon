@@ -18,44 +18,47 @@ const MyCartPage = () => {
   const [quantity, setQuantity] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   let [arr, setArr] = useState(
-    productOrders
-      ?.map((productOrder) => {
-        return productOrder.quantity;
-      })
-      .join("")
+    productOrders?.map((productOrder) => productOrder?.quantity).join("")
   );
 
+  // const getTotal = (productOrders) => {
+  //   let newSum = 0.0;
+  //   let newQuantity = 0;
+  //   if (productOrders) {
+  //     for (const productOrder of productOrders) {
+  //       newSum +=
+  //         parseInt(productOrder?.quantity) *
+  //         parseInt(productOrder?.Product?.price);
+  //       newQuantity += parseInt(productOrder?.quantity);
+  //     }
+  //     setSum(newSum);
+  //     setQuantity(newQuantity);
+  //   }
+  // };
+
   useEffect(() => {
-    const getTotal = () => {
-      let newSum = 0.0;
-      let newQuantity = 0;
-      if (productOrders) {
-        for (const productOrder of productOrders) {
-          newSum +=
-            parseInt(productOrder?.quantity) *
-            parseInt(productOrder?.Product?.price);
-          newQuantity += parseInt(productOrder?.quantity);
-        }
-        setSum(newSum);
-        setQuantity(newQuantity);
+    let newSum = 0.0;
+    let newQuantity = 0;
+    if (productOrders) {
+      for (const productOrder of productOrders) {
+        newSum +=
+          parseInt(productOrder?.quantity) *
+          parseInt(productOrder?.Product?.price);
+        newQuantity += parseInt(productOrder?.quantity);
       }
-    };
-    getTotal();
+      setSum(newSum);
+      setQuantity(newQuantity);
+    }
     setArr(
-      productOrders
-        ?.map((productOrder) => {
-          return productOrder.quantity;
-        })
-        .join("")
+      productOrders?.map((productOrder) => productOrder?.quantity).join("")
     );
     dispatch(fetchLoadCart()).then(() => setIsLoaded(true));
   }, [
-    productOrders
-      ?.map((productOrder) => {
-        return productOrder.quantity;
-      })
-      .join(""),
+    productOrders?.map((productOrder) => productOrder?.quantity).join(""),
     // productOrders,
+    // getTotal,
+    // getTotal,
+    // ...productOrders?.map((productOrder) => productOrder?.quantity),
   ]);
 
   // useEffect(() => {
