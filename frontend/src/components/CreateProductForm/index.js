@@ -13,8 +13,8 @@ const CreateProductForm = () => {
   const [price, setPrice] = useState("");
   //used to be 0
   const [description, setDescription] = useState("");
-  const [freeReturn, setFreeReturn] = useState("");
-  const [prime, setPrime] = useState("");
+  const [freeReturn, setFreeReturn] = useState(false);
+  const [prime, setPrime] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [errors, setErrors] = useState([]);
 
