@@ -26,6 +26,21 @@ const MyCartPage = () => {
   );
 
   useEffect(() => {
+    const getTotal = () => {
+      let newSum = 0.0;
+      let newQuantity = 0;
+      if (productOrders) {
+        for (const productOrder of productOrders) {
+          newSum +=
+            parseInt(productOrder?.quantity) *
+            parseInt(productOrder?.Product?.price);
+          newQuantity += parseInt(productOrder?.quantity);
+        }
+        setSum(newSum);
+        setQuantity(newQuantity);
+      }
+    };
+    getTotal();
     setArr(
       productOrders
         ?.map((productOrder) => {
@@ -40,22 +55,23 @@ const MyCartPage = () => {
         return productOrder.quantity;
       })
       .join(""),
+    // productOrders,
   ]);
 
-  useEffect(() => {
-    let newSum = 0.0;
-    let newQuantity = 0;
-    if (productOrders) {
-      for (const productOrder of productOrders) {
-        newSum +=
-          parseInt(productOrder?.quantity) *
-          parseInt(productOrder?.Product?.price);
-        newQuantity += parseInt(productOrder?.quantity);
-      }
-      setSum(newSum);
-      setQuantity(newQuantity);
-    }
-  }, [productOrders]);
+  // useEffect(() => {
+  //   let newSum = 0.0;
+  //   let newQuantity = 0;
+  //   if (productOrders) {
+  //     for (const productOrder of productOrders) {
+  //       newSum +=
+  //         parseInt(productOrder?.quantity) *
+  //         parseInt(productOrder?.Product?.price);
+  //       newQuantity += parseInt(productOrder?.quantity);
+  //     }
+  //     setSum(newSum);
+  //     setQuantity(newQuantity);
+  //   }
+  // }, [productOrders]);
 
   const handleClick = async (e) => {
     e.preventDefault();
