@@ -17,10 +17,30 @@ const MyCartPage = () => {
   const [sum, setSum] = useState(0.0);
   const [quantity, setQuantity] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  let [arr, setArr] = useState(
+    productOrders
+      ?.map((productOrder) => {
+        return productOrder.quantity;
+      })
+      .join("")
+  );
 
   useEffect(() => {
+    setArr(
+      productOrders
+        ?.map((productOrder) => {
+          return productOrder.quantity;
+        })
+        .join("")
+    );
     dispatch(fetchLoadCart()).then(() => setIsLoaded(true));
-  }, []);
+  }, [
+    productOrders
+      ?.map((productOrder) => {
+        return productOrder.quantity;
+      })
+      .join(""),
+  ]);
 
   useEffect(() => {
     let newSum = 0.0;

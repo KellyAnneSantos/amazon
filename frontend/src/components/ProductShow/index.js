@@ -23,7 +23,6 @@ const ProductShow = () => {
 
   const [quantity, setQuantity] = useState(1);
   let [source, setSource] = useState(product?.previewImage);
-  // let [reviewCount, setReviewCount] = useState(product?.numReviews);
   const [modal, setModal] = useState(false);
 
   let arr = Array.from(Array(31).keys());
@@ -130,7 +129,7 @@ const ProductShow = () => {
           <img src={source} alt="Product" id="main-product-img" />
           <div id="product-info">
             <h1 id="product-p-name">{product?.name}</h1>
-            {/* <h2 id="product-p-merchant">{product?.User.merchantName}</h2> */}
+            <h2 id="product-p-merchant">{product?.avgStarRating}</h2>
             <div id="product-p-starratings">
               {checkedStarArr.length
                 ? checkedStarArr.map((star, idx) => {
