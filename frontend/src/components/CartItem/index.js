@@ -27,7 +27,7 @@ const CartItem = ({ productOrder }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.stopPropagation();
 
     productOrder = { ...productOrder, quantity };
 
