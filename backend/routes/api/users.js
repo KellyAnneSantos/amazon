@@ -41,7 +41,7 @@ const validateSignup = [
 
 const validateProductOrder = [
   check("quantity")
-    .exists({ checkFalsy: true })
+    // .exists({ checkFalsy: true })
     .isInt({ min: 1, max: 30 })
     .withMessage("Quantity is invalid"),
   handleValidationErrors,
