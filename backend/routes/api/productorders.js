@@ -106,7 +106,7 @@ router.put(
       quantity,
     });
 
-    const updatedProductOrder = await ProductOrder.findOne({
+    let updatedProductOrder = await ProductOrder.findOne({
       where: {
         id: productOrderId,
       },
@@ -124,7 +124,7 @@ router.put(
         },
       ],
     });
-
+    updatedProductOrder.dataValues.quantity = quantity;
     return res.json(updatedProductOrder);
   }
 );
