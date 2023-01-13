@@ -15,7 +15,7 @@ const MyCartPage = () => {
   );
 
   const [sum, setSum] = useState(0.0);
-  const [quantity, setQuantity] = useState(0);
+  const [number, setNumber] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   let [arr, setArr] = useState(
     productOrders?.map((productOrder) => productOrder?.quantity).join("")
@@ -48,7 +48,7 @@ const MyCartPage = () => {
           newQuantity += parseInt(productOrder?.quantity);
         }
         setSum(newSum);
-        setQuantity(newQuantity);
+        setNumber(newQuantity);
       }
     };
     getTotal();
@@ -118,7 +118,7 @@ const MyCartPage = () => {
               <div>{console.log(newArr)}</div>
               <div id="cart-product-subtotal-section">
                 <span id="cart-product-subtotal">
-                  Subtotal ({quantity} items):{" "}
+                  Subtotal ({number} items):{" "}
                 </span>
                 <span id="cart-product-subtotal-price">${sum.toFixed(2)}</span>
               </div>
@@ -126,7 +126,7 @@ const MyCartPage = () => {
             <div id="cart-check-out-section">
               <div>
                 <span id="cart-checkout-subtotal">
-                  Subtotal ({quantity} items):{" "}
+                  Subtotal ({number} items):{" "}
                 </span>
                 <span id="cart-checkout-subtotal-price">${sum.toFixed(2)}</span>
               </div>
