@@ -32,7 +32,7 @@ const CartItem = ({ productOrder }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(quantity);
     newProductOrder = { ...newProductOrder, quantity };
 
     await dispatch(fetchEditProductOrder(newProductOrder, newProductOrder?.id));
@@ -65,7 +65,7 @@ const CartItem = ({ productOrder }) => {
           )}
           {product?.freeReturn && <p className="cart-free">FREE Returns</p>}
           <div className="cart-action">
-            <form className="cart-edit-form">
+            <form className="cart-edit-form" onSubmit={handleSubmit}>
               <span id="qty-label">Qty: </span>
               <select
                 name="type"
@@ -73,19 +73,17 @@ const CartItem = ({ productOrder }) => {
                 value={quantity}
                 id="qty-form"
               >
-                {arr?.map((ele) => {
-                  return (
-                    <option key={ele} value={ele}>
-                      {ele}
-                    </option>
-                  );
-                })}
+                <>
+                  {arr?.map((ele) => {
+                    return (
+                      <option key={ele} value={ele}>
+                        {ele}
+                      </option>
+                    );
+                  })}
+                </>
               </select>
-              <button
-                type="button"
-                className="cart-update-btn"
-                onMouseDown={handleSubmit}
-              >
+              <button type="Submit" className="cart-update-btn">
                 Update
               </button>
             </form>
