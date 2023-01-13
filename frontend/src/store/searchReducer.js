@@ -16,7 +16,7 @@ export const fetchSearchResults = (query) => async (dispatch) => {
   let depVar;
   let minVar = "";
   let maxVar = "";
-  console.log(department);
+
   if (name) {
     nameVar = `name=${name}`;
 
@@ -54,7 +54,7 @@ export const fetchSearchResults = (query) => async (dispatch) => {
     //   depVar = "";
     // }
   }
-  console.log(`/api/products?${nameVar}${primeVar}${depVar}${minVar}${maxVar}`);
+
   const res = await csrfFetch(
     `/api/products?${nameVar}${primeVar}${depVar}${minVar}${maxVar}`
   );

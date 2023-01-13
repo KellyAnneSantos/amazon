@@ -32,19 +32,16 @@ const CartItem = ({ productOrder }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(quantity);
     let newerProductOrder = {
       ...newProductOrder,
       quantity: parseInt(quantity),
     };
-    console.log(newerProductOrder);
     await dispatch(
       fetchEditProductOrder(newerProductOrder, newProductOrder?.id)
     );
   };
 
   useEffect(() => {
-    // setQuantity(productOrder?.quantity);
     dispatch(fetchProductOrder(productOrder?.id));
     dispatch(fetchProduct(productOrder?.productId));
   }, [dispatch]);
@@ -93,11 +90,9 @@ const CartItem = ({ productOrder }) => {
               </button>
             </form>
             <span className="cart-vl">|</span>
-            {/* <div className="cart-vl"> */}
             <span onClick={handleClick} className="cart-delete-link">
               Delete
             </span>
-            {/* </div> */}
           </div>
         </div>
       </div>

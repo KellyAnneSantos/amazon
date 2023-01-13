@@ -129,7 +129,7 @@ const ProductShow = () => {
           <img src={source} alt="Product" id="main-product-img" />
           <div id="product-info">
             <h1 id="product-p-name">{product?.name}</h1>
-            <h2 id="product-p-merchant">{product?.avgStarRating}</h2>
+            {/* <h2 id="product-p-merchant">{product?.merchantName}</h2> */}
             <div id="product-p-starratings">
               {checkedStarArr.length
                 ? checkedStarArr.map((star, idx) => {

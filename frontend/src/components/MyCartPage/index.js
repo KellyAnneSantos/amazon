@@ -21,20 +21,6 @@ const MyCartPage = () => {
     productOrders?.map((productOrder) => productOrder?.quantity).join("")
   );
   let [newArr, setNewArr] = useState([]);
-  // const getTotal = (productOrders) => {
-  //   let newSum = 0.0;
-  //   let newQuantity = 0;
-  //   if (productOrders) {
-  //     for (const productOrder of productOrders) {
-  //       newSum +=
-  //         parseInt(productOrder?.quantity) *
-  //         parseInt(productOrder?.Product?.price);
-  //       newQuantity += parseInt(productOrder?.quantity);
-  //     }
-  //     setSum(newSum);
-  //     setQuantity(newQuantity);
-  //   }
-  // };
 
   useEffect(() => {
     const getTotal = async () => {
@@ -56,28 +42,7 @@ const MyCartPage = () => {
       productOrders?.map((productOrder) => productOrder?.quantity)?.join("")
     );
     dispatch(fetchLoadCart()).then(() => setIsLoaded(true));
-  }, [
-    productOrders?.map((productOrder) => productOrder?.quantity)?.join(""),
-    // productOrders,
-    // getTotal,
-    // getTotal,
-    // ...productOrders?.map((productOrder) => productOrder?.quantity),
-  ]);
-
-  // useEffect(() => {
-  //   let newSum = 0.0;
-  //   let newQuantity = 0;
-  //   if (productOrders) {
-  //     for (const productOrder of productOrders) {
-  //       newSum +=
-  //         parseInt(productOrder?.quantity) *
-  //         parseInt(productOrder?.Product?.price);
-  //       newQuantity += parseInt(productOrder?.quantity);
-  //     }
-  //     setSum(newSum);
-  //     setQuantity(newQuantity);
-  //   }
-  // }, [productOrders?.map((productOrder) => productOrder?.quantity).join("")]);
+  }, [productOrders?.map((productOrder) => productOrder?.quantity)?.join("")]);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -110,7 +75,6 @@ const MyCartPage = () => {
                   }))
                 }
               </div>
-              <div>{console.log(newArr)}</div>
               <div id="cart-product-subtotal-section">
                 <span id="cart-product-subtotal">
                   Subtotal ({number} items):{" "}
