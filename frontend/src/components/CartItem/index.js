@@ -33,9 +33,14 @@ const CartItem = ({ productOrder }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(quantity);
-    newProductOrder = { ...newProductOrder, quantity: parseInt(quantity) };
-    console.log(newProductOrder);
-    await dispatch(fetchEditProductOrder(newProductOrder, newProductOrder?.id));
+    let newerProductOrder = {
+      ...newProductOrder,
+      quantity: parseInt(quantity),
+    };
+    console.log(newerProductOrder);
+    await dispatch(
+      fetchEditProductOrder(newerProductOrder, newProductOrder?.id)
+    );
   };
 
   useEffect(() => {
