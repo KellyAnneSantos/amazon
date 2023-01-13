@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import {
   fetchEditProductOrder,
   fetchDeleteProductOrder,
+  fetchProductOrder,
 } from "../../store/productOrderReducer";
 import { fetchProduct } from "../../store/productReducer";
 import "./CartItem.css";
@@ -14,8 +15,11 @@ const CartItem = ({ productOrder }) => {
   const product = useSelector(
     (state) => state.products[productOrder?.productId]
   );
+  let newProductOrder = useSelector(
+    (state) => state.productOrders[productOrder?.id]
+  );
 
-  const [quantity, setQuantity] = useState(productOrder?.quantity);
+  const [quantity, setQuantity] = useState(newProductOrder?.quantity);
 
   let arr = Array.from(Array(31).keys());
   arr.shift();
@@ -23,21 +27,22 @@ const CartItem = ({ productOrder }) => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    await dispatch(fetchDeleteProductOrder(productOrder?.id));
+    await dispatch(fetchDeleteProductOrder(newProductOrder?.id));
   };
 
   const handleSubmit = async (e) => {
-    e.stopPropagation();
+    e.preventDefault();
 
-    productOrder = { ...productOrder, quantity };
+    newProductOrder = { ...newProductOrder, quantity };
 
-    await dispatch(fetchEditProductOrder(productOrder, productOrder?.id));
+    await dispatch(fetchEditProductOrder(newProductOrder, newProductOrder?.id));
   };
 
   useEffect(() => {
     // setQuantity(productOrder?.quantity);
+    dispatch(fetchProductOrder(productOrder?.id));
     dispatch(fetchProduct(productOrder?.productId));
-  }, [dispatch, productOrder?.productId, productOrder?.quantity]);
+  }, [dispatch]);
 
   return (
     <div className="cart-product-order">
