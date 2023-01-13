@@ -104,11 +104,6 @@ const MyCartPage = () => {
                           key={productOrder?.id}
                           productOrder={productOrder}
                         />
-                        <p>{productOrder?.quantity}</p>
-                        <p>
-                          {productOrder?.quantity *
-                            productOrder?.Product?.price}
-                        </p>
                         <hr className="cart-hr" />
                       </>
                     );
