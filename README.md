@@ -1,5 +1,3 @@
-# amazon
-
 # `Amazon Project`
 
 ## Technologies
