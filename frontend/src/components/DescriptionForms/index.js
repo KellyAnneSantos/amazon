@@ -36,15 +36,17 @@ const DescriptionForms = ({ description }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>
-          Bullet Point
+        <div className="edit-product-rows">
+          <span className="edit-green-asterisk">*</span>
+          <span className="edit-product-labels">Description</span>
           <input
             type="text"
             value={bulletPoint}
             onChange={(e) => setBulletPoint(e.target.value)}
             required
+            className="edit-product-input"
           />
-        </label>
+        </div>
         <button type="submit">Save</button>
       </form>
       <button onClick={deleteDescription}>Delete</button>

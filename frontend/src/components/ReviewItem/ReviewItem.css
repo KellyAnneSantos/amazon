@@ -20,6 +20,8 @@
 .product-fake-name {
   text-decoration: none;
   color: black;
+  font-size: 13px;
+  margin-left: 5px;
 }
 
 .product-review-btn {
@@ -34,4 +36,76 @@
 
 .product-review-btn:hover {
   background-color: #f8f8f8;
+}
+
+.product-review-star-headline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 18px;
+}
+
+.product-review-top-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 0px 4px;
+}
+
+.product-review-headline {
+  font-size: 14px;
+  font-weight: 900;
+  padding-left: 10px;
+}
+
+.product-review-date {
+  font-size: 14px;
+  color: dimgray;
+  margin: 0px 0px 4px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.product-review-body {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.product-review-container {
+  margin-bottom: 26px;
+}
+
+.reviews-w-images {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+#review-images-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 25%;
+  overflow-x: hidden;
+  margin-inline: auto;
+  margin-bottom: 8px;
+}
+
+#review-helpful-btn {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  width: 98px;
+  padding: 1px 6px;
+  font-size: 13px;
+  height: 29px;
+}
+
+#write-review-btn:hover {
+  background-color: #f8f8f8;
+}
+
+.product-review-helpfuls {
+  font-size: 14px;
+  color: dimgray;
 }

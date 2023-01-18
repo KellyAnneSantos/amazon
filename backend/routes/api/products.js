@@ -5,6 +5,7 @@ const router = express.Router();
 const {
   Answer,
   Description,
+  Helpful,
   Image,
   Product,
   Question,
@@ -303,6 +304,39 @@ router.post(
   }
 );
 
+// router.get("/:productId/helpfuls", async (req, res) => {
+//   let { productId } = req.params;
+//   productId = parseInt(productId);
+
+//   const product = await Product.findByPk(productId);
+
+//   if (!product) {
+//     res.status(404);
+//     return res.json({
+//       message: "Product couldn't be found",
+//       statusCode: 404,
+//     });
+//   }
+
+//   const Helpfuls = await Review.findAll({
+//     attributes: [],
+//     where: {
+//       productId: product.id,
+//     },
+//     include: [
+//       {
+//         model: Helpful,
+//       },
+//     ],
+//     // where: {
+//     //   helpableId: review.id,
+//     //   helpableType: "review",
+//     // },
+//   });
+
+//   return res.json(Helpfuls);
+// });
+
 router.get("/:productId/images", async (req, res) => {
   let { productId } = req.params;
   productId = parseInt(productId);
@@ -339,13 +373,23 @@ router.post(
     productId = parseInt(productId);
     const { user } = req;
 
-    const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId, {
+      include: [{ model: Image }],
+    });
 
     if (!product) {
       res.status(404);
       return res.json({
         message: "Product couldn't be found",
         statusCode: 404,
+      });
+    }
+
+    if (product.Images.length >= 9) {
+      res.status(400);
+      return res.json({
+        message: "Maximum 10 images are allowed",
+        statusCode: 400,
       });
     }
 
@@ -368,6 +412,37 @@ router.post(
   }
 );
 
+router.get("/:productId/questions", async (req, res) => {
+  let { productId } = req.params;
+  productId = parseInt(productId);
+
+  const product = await Product.findByPk(productId);
+
+  if (!product) {
+    res.status(404);
+    return res.json({
+      message: "Product couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const Questions = await Question.findAll({
+    where: {
+      productId: product.id,
+    },
+    include: [
+      {
+        model: Answer,
+        include: [{ model: User }],
+      },
+    ],
+  });
+
+  return res.json({
+    Questions,
+  });
+});
+
 router.get("/:productId/reviews", async (req, res) => {
   let { productId } = req.params;
   productId = parseInt(productId);
@@ -386,6 +461,9 @@ router.get("/:productId/reviews", async (req, res) => {
     include: [
       {
         model: Image,
+      },
+      {
+        model: Helpful,
       },
       {
         model: Product,

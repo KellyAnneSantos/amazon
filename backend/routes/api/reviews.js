@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const { Image, Review } = require("../../db/models");
+const { Helpful, Image, Review } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -38,6 +38,66 @@ const validateReview = [
     .withMessage("Review body is required and must be 255 characters or less"),
   handleValidationErrors,
 ];
+
+router.get("/:reviewId/helpfuls", async (req, res) => {
+  let { reviewId } = req.params;
+  reviewId = parseInt(reviewId);
+
+  const review = await Review.findByPk(reviewId);
+
+  if (!review) {
+    res.status(404);
+    return res.json({
+      message: "Review couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const Helpfuls = await Helpful.findAll({
+    where: {
+      helpableId: review.id,
+      helpableType: "review",
+    },
+  });
+
+  return res.json({
+    Helpfuls,
+  });
+});
+
+router.post("/:reviewId/helpfuls", requireAuth, async (req, res) => {
+  const { helpfulStatus } = req.body;
+  let { reviewId } = req.params;
+  reviewId = parseInt(reviewId);
+  const { user } = req;
+
+  const review = await Review.findByPk(reviewId);
+
+  if (!review) {
+    res.status(404);
+    return res.json({
+      message: "Review couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  if (user.id !== review.userId) {
+    const helpful = await Helpful.create({
+      userId: user.id,
+      helpableId: reviewId,
+      helpableType: "review",
+      helpfulStatus,
+    });
+
+    return res.json(helpful);
+  } else {
+    res.status(403);
+    return res.json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
+});
 
 router.get("/:reviewId/images", async (req, res) => {
   let { reviewId } = req.params;

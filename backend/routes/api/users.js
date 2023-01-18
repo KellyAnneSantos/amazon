@@ -305,6 +305,8 @@ router.post(
           ],
         });
 
+        createdProductOrder.dataValues.quantity = quantity;
+
         res.status(201);
         return res.json(createdProductOrder);
       } else {
@@ -328,6 +330,8 @@ router.post(
             "updatedAt",
           ],
         });
+
+        updatedProductOrder.dataValues.quantity = quantity;
 
         return res.json(updatedProductOrder);
       }
@@ -361,6 +365,8 @@ router.post(
           ],
         });
 
+        createdProductOrder.dataValues.quantity = quantity;
+
         res.status(201);
         return res.json(createdProductOrder);
       } else {
@@ -385,6 +391,8 @@ router.post(
           ],
         });
 
+        updatedProductOrder.dataValues.quantity = quantity;
+
         return res.json(updatedProductOrder);
       }
     }
@@ -399,6 +407,9 @@ router.get("/current/reviews", requireAuth, async (req, res) => {
       userId: user.id,
     },
     include: [
+      {
+        model: Helpful,
+      },
       {
         model: Image,
       },

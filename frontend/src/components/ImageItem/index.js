@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { fetchDeleteImage } from "../../store/imageReducer";
+import "./ImageItem.css";
 
 const ImageItem = ({ image }) => {
   const dispatch = useDispatch();
@@ -11,10 +12,12 @@ const ImageItem = ({ image }) => {
   };
 
   return (
-    <>
-      <img src={image?.mediaUrl} alt="Product" />
-      <button onClick={deleteImage}>Delete</button>
-    </>
+    <div className="product-cards">
+      <img src={image?.mediaUrl} alt="Product" className="image-pics" />
+      <span className="image-map-trash">
+        <i class="fa-solid fa-trash" onClick={deleteImage}></i>
+      </span>
+    </div>
   );
 };
 

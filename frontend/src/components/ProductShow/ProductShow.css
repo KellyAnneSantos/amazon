@@ -10,7 +10,8 @@
 #product-categories {
   color: gray;
   font-size: 13px;
-  margin: 20px 26px;
+  margin: 20px 0px 20px 26px;
+  cursor: pointer;
 }
 
 .mini-product-img {
@@ -104,7 +105,13 @@
 #qty-form {
   margin-bottom: 12px;
   font-size: 12px;
-  padding: 0px 20px 0px;
+  padding: 0px 20px 0px 7px;
+  background-color: #f0f0f0;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid gray;
+  width: 61px;
+  height: 20px;
 }
 
 #qty-label {
@@ -156,6 +163,7 @@
 
 #review-summary-container {
   width: 300px;
+  margin-right: 30px;
 }
 
 #write-review-btn {
@@ -164,7 +172,7 @@
   border: 1px solid lightgray;
   cursor: pointer;
   width: 289px;
-  padding: 0px 11px;
+  padding: 0px 10px 0px 11px;
   font-size: 13px;
   height: 29px;
 }
@@ -212,7 +220,7 @@
   border: none;
   border-radius: 25px;
   padding: 1px 6px;
-  width: 204px;
+  width: 100%;
   height: 29px;
   cursor: pointer;
 }
@@ -231,4 +239,110 @@
   flex-direction: row;
   justify-content: space-between;
   margin: 0px 20px 0px 0px;
+}
+
+.product-question-title {
+  font-size: 24px;
+  font-weight: 900;
+  margin-top: 6px 0px 0px;
+  padding: 0px 0px 4px;
+}
+
+.product-question-h2 {
+  margin: 0px 0px 12px;
+  padding: 0px 0px 4px;
+}
+
+#product-post-q-container {
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  margin-bottom: 26px;
+  display: flex;
+  flex-direction: row;
+  padding: 18px 22px;
+  width: 800px;
+}
+
+#product-post-q-btn {
+  margin-left: 16px;
+  padding: 0px 10px 0px 11px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  background-color: white;
+  cursor: pointer;
+}
+
+#product-no-answer {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+#product-post-q-btn:active {
+  border-color: skyblue;
+  box-shadow: 0 0 15px skyblue;
+}
+
+#product-review-title {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+#product-review-rating-count {
+  font-size: 14px;
+  color: gray;
+}
+
+#product-review-btn-title {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+#product-review-share {
+  font-size: 14px;
+}
+
+#product-reviews-w-imgs {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+#product-reviews-right-title {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 24px 0px 16px;
+}
+
+.fa-lock {
+  color: gray;
+}
+
+#product-secure {
+  color: #007185;
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+#product-secure-container {
+  margin-top: 12px;
+}
+
+#product-categories-carat {
+  color: gray;
+  font-size: 13px;
+  margin: 20px 0px 20px 0px;
+}
+
+#product-categories:hover {
+  text-decoration: underline;
+}
+
+#product-see {
+  font-size: 14px;
+  color: #007185;
+  cursor: pointer;
+  margin-bottom: 0px;
+}
+
+#product-see:hover {
+  color: #c45500;
 }

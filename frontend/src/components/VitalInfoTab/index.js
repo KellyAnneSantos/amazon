@@ -94,7 +94,7 @@ const VitalInfoTab = () => {
   return (
     <div id="vital-info-p">
       <div className="edit-product-top">
-        <h1 className="edit-product-tabs">Vital Info</h1>
+        <h1 className="edit-product-box">Vital Info</h1>
         <NavLink
           to={`/products/${product?.id}/images`}
           className="edit-product-tabs"
@@ -109,7 +109,7 @@ const VitalInfoTab = () => {
         </NavLink>
       </div>
       <div id="edit-product-hr-section">
-        <hr className="edit-short-hr" />
+        {/* <hr className="edit-short-hr" /> */}
         <hr className="edit-long-hr" />
       </div>
       <form onSubmit={handleSubmit} className="edit-product-form">
