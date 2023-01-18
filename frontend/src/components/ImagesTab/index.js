@@ -7,6 +7,7 @@ import {
 } from "../../store/imageReducer";
 import { fetchProduct } from "../../store/productReducer";
 import ImageItem from "../ImageItem";
+import "./ImagesTab.css";
 
 const ImagesTab = () => {
   const { productId } = useParams();
@@ -26,7 +27,7 @@ const ImagesTab = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let image = { mediaUrl };
+    let image = { mediaUrl, imageableType: "product" };
     setErrors([]);
 
     const response = await dispatch(
@@ -51,7 +52,7 @@ const ImagesTab = () => {
         >
           <h1 className="edit-product-tabs">Vital Info</h1>
         </NavLink>
-        <h1 className="edit-product-tabs">Images</h1>
+        <h1 className="edit-product-box">Images</h1>
         <NavLink
           to={`/products/${product?.id}/descriptions`}
           className="edit-product-tabs"
@@ -60,30 +61,63 @@ const ImagesTab = () => {
         </NavLink>
       </div>
       <div id="edit-product-hr-section">
-        <hr className="edit-short-hr" />
+        {/* <hr className="edit-short-hr" /> */}
         <hr className="edit-long-hr" />
       </div>
-      <img src={product?.previewImage} />
-      <NavLink to={`/products/${product?.id}/edit`}>
-        <button>Delete</button>
-      </NavLink>
-      <div>
-        {Object.values(images)?.map((image) => {
-          return <ImageItem key={image?.id} image={image} />;
-        })}
+      <div className="edit-product-form">
+        <div id="image-instructions-container">
+          {/* <i class="fa-solid fa-circle-plus"></i> */}
+          <p id="image-instructions">Upload additional images</p>
+        </div>
+        <p id="image-max">
+          Uploaded: {Object.values(images).length + 1} of 10 images. Maximum 10
+          images are allowed.
+        </p>
+        <form>
+          <div className="edit-product-rows">
+            <span className="edit-green-asterisk">*</span>
+            <span className="edit-product-labels">Image URL</span>
+            <input
+              type="text"
+              value={mediaUrl}
+              onChange={(e) => setMediaUrl(e.target.value)}
+              required
+              className="edit-product-input"
+            />
+          </div>
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="image-add-btn"
+          >
+            Add Image
+          </button>
+          <ul className="error-ul">
+            {errors?.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        </form>
+        <div id="image-inner-div">
+          <div className="product-cards">
+            <img
+              src={product?.previewImage}
+              alt="Product"
+              className="image-pics"
+            />
+            <NavLink to={`/products/${product?.id}/edit`}>
+              <span className="image-trash">
+                <i class="fa-solid fa-trash"></i>
+              </span>
+            </NavLink>
+          </div>
+          <>
+            {Object.values(images)?.map((image) => {
+              return <ImageItem key={image?.id} image={image} />;
+            })}
+          </>
+        </div>
       </div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Image URL
-          <input
-            type="text"
-            value={mediaUrl}
-            onChange={(e) => setMediaUrl(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Add Image</button>
-      </form>
     </div>
   );
 };

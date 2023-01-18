@@ -7,6 +7,7 @@ import {
 } from "../../store/descriptionReducer";
 import { fetchProduct } from "../../store/productReducer";
 import DescriptionForms from "../DescriptionForms";
+import "./DescriptionTab.css";
 
 const DescriptionTab = () => {
   const { productId } = useParams();
@@ -45,41 +46,71 @@ const DescriptionTab = () => {
   }
 
   return (
-    <>
-      <NavLink to={`/products/${product?.id}/edit`}>
-        <h1>Vital Info</h1>
-      </NavLink>
-      <NavLink to={`/products/${product?.id}/images`}>
-        <h1>Images</h1>
-      </NavLink>
-      <h1>Description</h1>
-      <p>{product?.description}</p>
-      <NavLink to={`/products/${product?.id}/edit`}>
-        <button>Edit</button>
-      </NavLink>
-      <NavLink to={`/products/${product?.id}/edit`}>
-        <button>Delete</button>
-      </NavLink>
-      <div>
-        {descriptions?.map((description) => {
-          return (
-            <DescriptionForms key={description?.id} description={description} />
-          );
-        })}
+    <div id="vital-info-p">
+      <div className="edit-product-top">
+        <NavLink
+          to={`/products/${product?.id}/edit`}
+          className="edit-product-tabs"
+        >
+          <h1 className="edit-product-tabs">Vital Info</h1>
+        </NavLink>
+        <NavLink
+          to={`/products/${product?.id}/images`}
+          className="edit-product-tabs"
+        >
+          <h1 className="edit-product-tabs">Images</h1>
+        </NavLink>
+        <h1 className="edit-product-box">Description</h1>
       </div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Description
-          <input
-            type="text"
-            value={bulletPoint}
-            onChange={(e) => setBulletPoint(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Add Description</button>
-      </form>
-    </>
+      <div id="edit-product-hr-section">
+        {/* <hr className="edit-short-hr" /> */}
+        <hr className="edit-long-hr" />
+      </div>
+      <div className="edit-product-form">
+        <div className="edit-product-rows">
+          <span className="edit-green-asterisk">*</span>
+          <span className="edit-product-labels">Description</span>
+          <p>{product?.description}</p>
+          <NavLink to={`/products/${product?.id}/edit`}>
+            <button>Edit</button>
+          </NavLink>
+          <NavLink to={`/products/${product?.id}/edit`}>
+            <button>Delete</button>
+          </NavLink>
+        </div>
+        <div>
+          {descriptions?.map((description) => {
+            return (
+              <DescriptionForms
+                key={description?.id}
+                description={description}
+              />
+            );
+          })}
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="edit-product-rows">
+            <span className="edit-green-asterisk">*</span>
+            <span className="edit-product-labels">Description</span>
+            <input
+              type="text"
+              value={bulletPoint}
+              onChange={(e) => setBulletPoint(e.target.value)}
+              required
+              className="edit-product-input"
+            />
+          </div>
+          <button type="submit" className="description-submit-btn">
+            Submit
+          </button>
+          <ul className="error-ul">
+            {errors?.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        </form>
+      </div>
+    </div>
   );
 };
 

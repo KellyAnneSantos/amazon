@@ -14,6 +14,7 @@
   margin-left: 13px;
   margin-right: 13px;
   font-size: 14px;
+  /* border-bottom: 2px solid #007185; */
 }
 
 .edit-product-form {
@@ -150,4 +151,22 @@
   color: #007185;
   margin-right: 5px;
   font-size: 20px;
+}
+
+.edit-product-box {
+  text-decoration: none;
+  color: black;
+  /* margin-left: 13px;
+  margin-right: 13px; */
+  font-size: 14px;
+  border-bottom: 5px solid #007185;
+  padding-bottom: 5px;
+  margin-bottom: 0px;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+
+a.edit-product-tabs {
+  margin-left: 0px;
+  margin-right: 0px;
 }

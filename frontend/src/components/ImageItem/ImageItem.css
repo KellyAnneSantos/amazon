@@ -1,0 +1,8 @@
+.image-map-trash {
+  position: absolute;
+  transform: translate(-100%, 645%);
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
+}

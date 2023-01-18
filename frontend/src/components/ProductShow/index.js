@@ -7,6 +7,8 @@ import { fetchProductImages } from "../../store/imageReducer";
 import ReviewItem from "../ReviewItem";
 import { fetchAddProductOrder } from "../../store/productOrderReducer";
 import "./ProductShow.css";
+import QuestionAnswerItem from "../QuestionAnswerItem";
+import { fetchQuestions } from "../../store/questionReducer";
 
 const ProductShow = () => {
   const history = useHistory();
@@ -18,78 +20,55 @@ const ProductShow = () => {
   let reviews = Object.values(useSelector((state) => state?.reviews));
   let images = useSelector((state) => state?.images) || "";
   const descriptions = product?.Descriptions;
-  const questions = product?.Questions;
+  const questions = Object.values(useSelector((state) => state.questions));
   let amazonDog = useSelector((state) => state?.products[999999999]);
 
   const [quantity, setQuantity] = useState(1);
   let [source, setSource] = useState(product?.previewImage);
   const [modal, setModal] = useState(false);
+  const [average, setAverage] = useState(product?.avgStarRating);
 
   let arr = Array.from(Array(31).keys());
   arr.shift();
-
   let checkedStarArr = [];
-  if (product?.avgStarRating > 0) {
-    checkedStarArr = Array.from(
-      Array(Math.floor(product?.avgStarRating)).keys()
-    );
+  if (average > 0) {
+    checkedStarArr = Array.from(Array(Math.floor(average)).keys());
   }
   let starArr = [];
   if (checkedStarArr.length) {
     starArr = Array.from(Array(5 - checkedStarArr.length).keys());
   }
 
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    history.push(`/search?department=${product?.department}`);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let productOrder = { productId, quantity };
+    let productOrder = { productId, quantity: parseInt(quantity) };
 
     await dispatch(fetchAddProductOrder(productOrder));
     history.push("/my/cart");
   };
 
-  // useEffect(() => {
-  //   const newData = async () => {
-  //     const newProduct = await dispatch(fetchProduct(productId));
-  //     setSource(newProduct?.previewImage);
-  //     // setReviewCount(newProduct?.numReviews);
-
-  //     // if (!newProduct?.id) {
-  //     //   setTimeout(() => {
-  //     //     history.push("/");
-  //     //   }, 0);
-  //     // }
-
-  //     dispatch(fetchReviews(productId));
-  //     dispatch(fetchProductImages(productId));
-  //   };
-  //   newData();
-  // }, [dispatch, productId, product?.previewImage]);
-
-  // useEffect(() => {
-  //   setSource(product?.previewImage);
-  //   let newData = true;
-  //   const getData = async () => {
-  //     newData = await dispatch(fetchProduct(productId));
-  //     console.log(newData);
-
-  //     await dispatch(fetchReviews(productId));
-  //     await dispatch(fetchProductImages(productId));
-  //   };
-  //   getData();
-  //   if (!newData) {
-  //     // setTimeout(() => {
-  //     return history.push("/");
-  //     // }, 100);
-  //     // return;
-  //   }
-  //   console.log("Hello");
-  // }, [dispatch, productId, product?.previewImage]);
+  useEffect(() => {
+    let sum = 0.0;
+    if (reviews) {
+      for (const review of reviews) {
+        sum += parseInt(review?.stars);
+      }
+      setAverage(sum / reviews.length);
+    }
+  }, [reviews]);
 
   useEffect(() => {
     setSource(product?.previewImage);
     dispatch(fetchProduct(productId));
     dispatch(fetchReviews(productId));
     dispatch(fetchProductImages(productId));
+    dispatch(fetchQuestions(productId));
   }, [dispatch, productId, product?.previewImage]);
 
   if (amazonDog?.department === "New" || isNaN(productId)) {
@@ -99,8 +78,11 @@ const ProductShow = () => {
   return (
     <>
       <div id="product-page">
-        <span id="product-categories">
-          {product?.department} {">"} {product?.name}
+        <span id="product-categories" onClick={handleClick}>
+          {product?.department}{" "}
+        </span>
+        <span id="product-categories-carat">
+          {">"} {product?.name}
         </span>
         <div id="product-imgs-container">
           <div id="mini-img-container">
@@ -210,10 +192,10 @@ const ProductShow = () => {
                 Add to Cart
               </button>
             </form>
-            {/* <button id="buy-cart-btn" onClick={() => setModal(true)}>
+            <button id="buy-cart-btn" onClick={() => setModal(true)}>
               Buy Now
             </button>
-            {modal && (
+            {/* {modal && (
               <Modal>
                 <form>
                   <h1>Buy now: {product?.name}</h1>
@@ -250,7 +232,10 @@ const ProductShow = () => {
                 </form>
               </Modal>
             )} */}
-            {/* <span>Secure transaction</span> */}
+            <div id="product-secure-container">
+              <i className="fa-solid fa-lock fa-xs"></i>
+              <span id="product-secure">Secure transaction</span>
+            </div>
             {/* <div id="product-form-soldby-container">
               <span id="product-form-sold">Sold by </span>
               <span id="product-form-merchant">
@@ -259,23 +244,26 @@ const ProductShow = () => {
             </div> */}
           </div>
         </div>
-        {/* <hr className="product-dividers" />
+        <hr className="product-dividers" />
         <div>
-          <h2>Looking for specific info?</h2>
-          <h2>Customer questions & answers</h2>
-          {questions?.map((question) => {
-            return (
-              <>
-                <p>Question: {question.body}</p>
-                <p>Answer: {question.Answers[0].body}</p>
-              </>
-            );
-          })}
-        </div> */}
+          <h2 id="product-question-title">Looking for specific info?</h2>
+          <h2 id="product-question-h2">Customer questions & answers</h2>
+          <div>
+            {questions?.map((question) => {
+              return <QuestionAnswerItem question={question} />;
+            })}
+          </div>
+          <div id="product-post-q-container">
+            <p id="product-no-answer">
+              Don't see the answer you're looking for?
+            </p>
+            <button id="product-post-q-btn">Post your question</button>
+          </div>
+        </div>
         <hr className="product-dividers" />
         <div id="product-reviews-container">
           <div id="review-summary-container">
-            <h2>Customer reviews</h2>
+            <h2 id="product-review-title">Customer reviews</h2>
             {checkedStarArr.length
               ? checkedStarArr.map((star, idx) => {
                   return (
@@ -298,15 +286,20 @@ const ProductShow = () => {
                   );
                 })
               : ""}
-            <h4>{reviews?.length} global ratings</h4>
-            <h4>Review this product</h4>
-            <p>Share your thoughts with other customers</p>
+            <h4 id="product-review-rating-count">
+              {reviews?.length} global ratings
+            </h4>
+            <hr id="product-review-divider" />
+            <h4 id="product-review-btn-title">Review this product</h4>
+            <p id="product-review-share">
+              Share your thoughts with other customers
+            </p>
             <NavLink to={`/products/${product?.id}/reviews/new`}>
               <button id="write-review-btn">Write a customer review</button>
             </NavLink>
           </div>
           <div id="right-product-reviews-container">
-            <h4>Reviews with images</h4>
+            <h4 id="product-reviews-w-imgs">Reviews with images</h4>
             <div id="review-images-container">
               {Object.values(reviews)?.map((review) => {
                 // return <ReviewImages key={review?.id} review={review} />;
@@ -319,7 +312,8 @@ const ProductShow = () => {
                 );
               })}
             </div>
-            <h4>Most recent reviews</h4>
+            <p id="product-see">See all customer images</p>
+            <h4 id="product-reviews-right-title">Reviews</h4>
             <div>
               {reviews?.map((review) => {
                 return <ReviewItem key={review?.id} review={review} />;

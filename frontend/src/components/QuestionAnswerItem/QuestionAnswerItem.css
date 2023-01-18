@@ -1,0 +1,80 @@
+.product-question-colon {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.product-question-text {
+  font-size: 14px;
+  color: #007185;
+  padding-left: 41px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.product-answer-colon {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.product-answer-text {
+  font-size: 14px;
+  padding-left: 46px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.product-answer-signature {
+  font-size: 14px;
+  color: gray;
+  padding-left: 46px;
+  padding-top: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.product-answer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.product-qa-container {
+  width: 800px;
+  border-left: 1px solid gainsboro;
+  margin-bottom: 26px;
+  padding-left: 10px;
+  padding-bottom: 0px;
+}
+
+.product-answer-right {
+  width: 628px;
+}
+
+.product-q-text-container {
+  width: 628px;
+}
+
+.product-question-container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+#product-review-divider {
+  border: 0px;
+  height: 1px;
+  background-color: lightgray;
+  margin-top: 0px;
+  margin-bottom: 14px;
+  width: 96%;
+  margin-left: 0;
+  margin-right: auto;
+}
