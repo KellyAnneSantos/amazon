@@ -1,0 +1,30 @@
+.edit-description-rows {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 250px;
+  align-items: center;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.description-submit-btn {
+  background-color: #ffd057;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px 0 11px;
+  width: 64px;
+  height: 29px;
+  cursor: pointer;
+  margin-top: 0px;
+  margin-left: 594px;
+  margin-bottom: 20px;
+}
+
+/* .edit-description-rows:hover {
+  background-color: lightgray;
+} */
+
+.edit-description-bullet {
+  padding-left: 10px;
+  padding-bottom: 0px;
+}

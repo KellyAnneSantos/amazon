@@ -70,8 +70,8 @@ const ImagesTab = () => {
           <p id="image-instructions">Upload additional images</p>
         </div>
         <p id="image-max">
-          Uploaded: {Object.values(images).length + 1} of 10 images. Maximum 10
-          images are allowed.
+          Uploaded: {Object.values(images).length} of 9 images. Maximum 9 images
+          are allowed.
         </p>
         <form>
           <div className="edit-product-rows">
@@ -99,7 +99,7 @@ const ImagesTab = () => {
           </ul>
         </form>
         <div id="image-inner-div">
-          <div className="product-cards">
+          {/* <div className="product-cards">
             <img
               src={product?.previewImage}
               alt="Product"
@@ -110,7 +110,7 @@ const ImagesTab = () => {
                 <i class="fa-solid fa-trash"></i>
               </span>
             </NavLink>
-          </div>
+          </div> */}
           <>
             {Object.values(images)?.map((image) => {
               return <ImageItem key={image?.id} image={image} />;

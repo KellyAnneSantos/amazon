@@ -67,7 +67,7 @@ const DescriptionTab = () => {
         <hr className="edit-long-hr" />
       </div>
       <div className="edit-product-form">
-        <div className="edit-product-rows">
+        {/* <div className="edit-product-rows">
           <span className="edit-green-asterisk">*</span>
           <span className="edit-product-labels">Description</span>
           <p>{product?.description}</p>
@@ -77,17 +77,7 @@ const DescriptionTab = () => {
           <NavLink to={`/products/${product?.id}/edit`}>
             <button>Delete</button>
           </NavLink>
-        </div>
-        <div>
-          {descriptions?.map((description) => {
-            return (
-              <DescriptionForms
-                key={description?.id}
-                description={description}
-              />
-            );
-          })}
-        </div>
+        </div> */}
         <form onSubmit={handleSubmit}>
           <div className="edit-product-rows">
             <span className="edit-green-asterisk">*</span>
@@ -101,7 +91,7 @@ const DescriptionTab = () => {
             />
           </div>
           <button type="submit" className="description-submit-btn">
-            Submit
+            Add
           </button>
           <ul className="error-ul">
             {errors?.map((error, idx) => (
@@ -109,6 +99,16 @@ const DescriptionTab = () => {
             ))}
           </ul>
         </form>
+        <div>
+          {descriptions?.map((description) => {
+            return (
+              <DescriptionForms
+                key={description?.id}
+                description={description}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

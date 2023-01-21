@@ -4,6 +4,7 @@ import {
   fetchDeleteDescription,
   fetchEditDescription,
 } from "../../store/descriptionReducer";
+import "./DescriptionForms.css";
 
 const DescriptionForms = ({ description }) => {
   const dispatch = useDispatch();
@@ -11,21 +12,21 @@ const DescriptionForms = ({ description }) => {
   const [bulletPoint, setBulletPoint] = useState(description.bulletPoint);
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    description = {
-      ...description,
-      bulletPoint,
-    };
-    setErrors([]);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   description = {
+  //     ...description,
+  //     bulletPoint,
+  //   };
+  //   setErrors([]);
 
-    const response = await dispatch(
-      fetchEditDescription(description, description.productId)
-    ).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
-  };
+  //   const response = await dispatch(
+  //     fetchEditDescription(description, description.productId)
+  //   ).catch(async (res) => {
+  //     const data = await res.json();
+  //     if (data && data.errors) setErrors(data.errors);
+  //   });
+  // };
 
   const deleteDescription = async (e) => {
     e.preventDefault();
@@ -35,7 +36,18 @@ const DescriptionForms = ({ description }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <div className="edit-description-rows">
+        <span className="edit-green-asterisk">*</span>
+        <span className="edit-product-labels">Description</span>
+        <p className="edit-description-bullet">{bulletPoint}</p>
+        {/* <NavLink to={`/products/${product?.id}/edit`}>
+          <button>Edit</button>
+        </NavLink>
+        <NavLink to={`/products/${product?.id}/edit`}>
+          <button>Delete</button>
+        </NavLink> */}
+      </div>
+      {/* <form onSubmit={handleSubmit}>
         <div className="edit-product-rows">
           <span className="edit-green-asterisk">*</span>
           <span className="edit-product-labels">Description</span>
@@ -47,9 +59,13 @@ const DescriptionForms = ({ description }) => {
             className="edit-product-input"
           />
         </div>
-        <button type="submit">Save</button>
-      </form>
-      <button onClick={deleteDescription}>Delete</button>
+        <button type="submit" className="description-save-btn">
+          Save
+        </button>
+      </form> */}
+      <button onClick={deleteDescription} className="description-submit-btn">
+        Delete
+      </button>
     </>
   );
 };
