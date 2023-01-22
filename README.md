@@ -13,7 +13,7 @@
 
 ## About
 
-This project is a web application inspired by the website Amazon. Currently, the project includes two CRUD features: orders and reviews. It also has partial CRUD for products, images and descriptions. One must log in to access the site. Demo user login is available. In addition to products, orders, images and reviews, the backend has working migrations, models and seeders for descriptions, wishlists, idea lists, questions, answers, upvotes, downvotes, helpfuls, follower relationships, posts and likes.
+This project is a web application inspired by the website Amazon. Currently, the project includes two CRUD features: orders and reviews. It also has a functioning search feature and partial CRUD for products, images and descriptions. One must log in to access the site. Demo user login is available. In addition to products, orders, images and reviews, the backend has working migrations, models and seeders for descriptions, wishlists, idea lists, questions, answers, upvotes, downvotes, helpfuls, follower relationships, posts and likes.
 
 ## Landing Page Screenshot
 
