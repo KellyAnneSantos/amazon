@@ -31,6 +31,7 @@
   margin-left: 10px;
   font-size: 12px;
   cursor: pointer;
+  width: 121px;
 }
 
 #search-dep-form {
@@ -42,10 +43,12 @@
   border-radius: 5px;
   border: 1px solid gray;
   height: 20px;
+  width: 170px;
 }
 
 .search-price-input {
   width: 74px;
+  height: 14px;
 }
 
 .search-price-input:focus {

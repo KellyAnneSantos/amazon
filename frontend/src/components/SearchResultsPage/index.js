@@ -176,7 +176,7 @@ const SearchResultsPage = ({ location }) => {
               onChange={(e) => setMaxPrice(e.target.value)}
               className="search-price-input"
             />
-            <button type="submit" className="cart-update-btn">
+            <button type="submit" id="search-filter-btn">
               Filter Price
             </button>
           </form>
