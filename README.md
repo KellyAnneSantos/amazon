@@ -19,6 +19,10 @@ This project is a web application inspired by the website Amazon. Currently, the
 
 <img width="1792" alt="Screen Shot 2023-01-16 at 9 45 35 PM" src="https://user-images.githubusercontent.com/76859444/212806149-bc974cf2-4251-483a-b3a4-27770952910d.png">
 
+## Search Results Screenshot
+
+<img width="1792" alt="Screen Shot 2023-01-22 at 12 44 39 AM" src="https://user-images.githubusercontent.com/76859444/213904129-e18d0006-e213-492f-a8c9-a146891c8711.png">
+
 ## Product Detail Screenshot
 
 <img width="1792" alt="Screen Shot 2023-01-16 at 9 46 07 PM" src="https://user-images.githubusercontent.com/76859444/212806336-98378a43-b2cf-4601-9eec-aa3f99cc417c.png">
