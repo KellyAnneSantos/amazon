@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { fetchSearchProducts } from "../../store/productReducer";
 import { fetchSearchResults } from "../../store/searchReducer";
 import SearchResultsProducts from "../SearchResultsProducts";
+import "./SearchResultsPage.css";
 
 const SearchResultsPage = ({ location }) => {
   const dispatch = useDispatch();
@@ -100,10 +101,17 @@ const SearchResultsPage = ({ location }) => {
   }, [location.search]);
 
   return (
-    <>
-      <p>
-        1 - {products.length} of {products.length} results for "{substring}"
-      </p>
+    <div>
+      <div id="search-top">
+        <span id="search-title">
+          1 - {products.length} of {products.length} results for
+        </span>
+        <span id="search-substring"> "{substring}"</span>
+      </div>
+      <div id="edit-product-hr-section">
+        {/* <hr className="edit-short-hr" /> */}
+        <hr className="edit-long-hr" />
+      </div>
       {/* <form onClick={handleChange}>
         <label>
           Prime
@@ -128,47 +136,61 @@ const SearchResultsPage = ({ location }) => {
         </select>
         <button type="Submit">Filter by Delivery</button>
       </form> */}
-      {depSubstring !== "department" && (
-        <form onSubmit={handleDepartment}>
-          <select
-            name="type"
-            onChange={(e) => setDepartment(e.target.value)}
-            value={department}
-          >
-            <option value="" disabled>
-              Select a department
-            </option>
-            {arr?.map((ele) => {
-              return (
-                <option key={ele} value={ele}>
-                  {ele}
+      <div id="search-results-container">
+        <div id="search-form">
+          {depSubstring !== "department" && (
+            <form onSubmit={handleDepartment}>
+              <select
+                name="type"
+                onChange={(e) => setDepartment(e.target.value)}
+                value={department}
+                id="search-dep-form"
+              >
+                <option value="" disabled>
+                  Select a department
                 </option>
-              );
-            })}
-          </select>
-          <button type="Submit">Filter by Department</button>
-        </form>
-      )}
-      <form onSubmit={handlePrice}>
-        <input
-          type="number"
-          value={minPrice}
-          onChange={(e) => setMinPrice(e.target.value)}
-        />
-        -
-        <input
-          type="number"
-          value={maxPrice}
-          onChange={(e) => setMaxPrice(e.target.value)}
-        />
-        <button type="submit">Filter Price</button>
-      </form>
-      <div>
-        {products?.map((product) => {
-          return <SearchResultsProducts key={product?.id} product={product} />;
-        })}
+                {arr?.map((ele) => {
+                  return (
+                    <option key={ele} value={ele}>
+                      {ele}
+                    </option>
+                  );
+                })}
+              </select>
+              <button type="Submit" id="search-filter-btn">
+                Filter by Department
+              </button>
+            </form>
+          )}
+          <form onSubmit={handlePrice}>
+            <input
+              type="number"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+              className="search-price-input"
+            />
+            -
+            <input
+              type="number"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+              className="search-price-input"
+            />
+            <button type="submit" className="cart-update-btn">
+              Filter Price
+            </button>
+          </form>
+        </div>
+        <div>
+          <h1 id="search-right-title">RESULTS</h1>
+          {products?.map((product) => {
+            return (
+              <SearchResultsProducts key={product?.id} product={product} />
+            );
+          })}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

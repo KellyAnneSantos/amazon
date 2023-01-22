@@ -1,0 +1,51 @@
+.search-product-imgs {
+  height: 218px;
+  width: 345px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  padding: 0px 0px;
+  margin: 0px 8px 0px 0px;
+  background-color: whitesmoke;
+}
+
+.search-product-rows {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid whitesmoke;
+  width: 1463px;
+  margin-top: 4px;
+  margin-right: 4px;
+  background-color: white;
+}
+
+.search-rating-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-rating-num {
+  color: #007185;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.search-product-name {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 26px;
+  padding-top: 0px;
+  margin-bottom: 4px;
+}
+
+.search-star {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 14px;
+}
+
+.search-price {
+  margin: 4px 0px;
+}
