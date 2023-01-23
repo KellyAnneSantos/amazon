@@ -4,7 +4,7 @@ import { Redirect, useHistory, useParams } from "react-router-dom";
 import { fetchReviewImages } from "../../store/imageReducer";
 import { fetchEditReview } from "../../store/reviewReducer";
 import AddReviewImage from "../AddReviewImage";
-import ReviewProductItem from "../ReviewProductItem";
+import EditReviewProductItem from "../EditReviewProductItem";
 import "./EditReviewForm.css";
 
 const EditReviewForm = () => {
@@ -67,7 +67,7 @@ const EditReviewForm = () => {
       )} */}
       <div id="review-form">
         <h1 className="review-form-title">Create Review</h1>
-        <ReviewProductItem productId={productId} />
+        <EditReviewProductItem productId={productId} />
         <hr className="review-lightgray-hr" />
         <p className="review-section-title">Add a photo</p>
         <p className="review-photo-p">
