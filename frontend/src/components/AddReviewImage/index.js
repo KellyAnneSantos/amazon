@@ -35,11 +35,6 @@ const AddReviewImage = ({ reviewId }) => {
 
   return (
     <>
-      <div>
-        {Object.values(images)?.map((image) => {
-          return <ImageItem key={image?.id} image={image} />;
-        })}
-      </div>
       <form onSubmit={handleSubmit}>
         <label>
           Image URL
@@ -52,6 +47,11 @@ const AddReviewImage = ({ reviewId }) => {
         </label>
         <button type="submit">Add Image</button>
       </form>
+      <div>
+        {Object.values(images)?.map((image) => {
+          return <ImageItem key={image?.id} image={image} />;
+        })}
+      </div>
     </>
   );
 };
