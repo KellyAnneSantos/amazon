@@ -12,6 +12,7 @@ const EditReviewForm = () => {
 
   const user = useSelector((state) => state.session.user);
   let review = useSelector((state) => state.reviews[reviewId]);
+  const productId = review?.productId;
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -66,9 +67,27 @@ const EditReviewForm = () => {
       )} */}
       <div id="review-form">
         <h1 className="review-form-title">Create Review</h1>
-        <ReviewProductItem productId={review?.productId} />
+        <ReviewProductItem productId={productId} />
         <hr className="review-lightgray-hr" />
+        <p className="review-section-title">Add a photo</p>
+        <p className="review-photo-p">
+          Shoppers find images and videos more helpful than text alone.
+        </p>
+        <AddReviewImage reviewId={reviewId} />
         <form onSubmit={handleSubmit}>
+          <label>
+            Preview Image URL
+            <input
+              type="text"
+              value={previewImage}
+              onChange={(e) => setPreviewImage(e.target.value)}
+              className="review-headline"
+              placeholder="Paste image address here."
+              required
+            />
+          </label>
+          <img src={review?.previewImage} id="review-preview-img" />
+          <hr className="review-lightgray-hr" />
           <p className="review-section-title">Overall rating</p>
           <div className="review-stars">
             <i
@@ -123,20 +142,6 @@ const EditReviewForm = () => {
             className="review-headline"
           />
           <hr className="review-lightgray-hr" />
-          <p className="review-section-title">Add a photo</p>
-          <p className="review-photo-p">
-            Shoppers find images and videos more helpful than text alone.
-          </p>
-          <input
-            type="text"
-            value={previewImage}
-            onChange={(e) => setPreviewImage(e.target.value)}
-            className="review-headline"
-            placeholder="Paste image address here."
-            required
-          />
-          <img src={review?.previewImage} id="review-preview-img" />
-          <hr className="review-lightgray-hr" />
           <p className="review-section-title">Add a written review</p>
           <textarea
             type="text"
@@ -151,7 +156,6 @@ const EditReviewForm = () => {
             Submit
           </button>
         </form>
-        {/* <AddReviewImage reviewId={reviewId} /> */}
         <ul className="error-ul">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
