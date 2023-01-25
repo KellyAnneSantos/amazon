@@ -1,0 +1,8 @@
+.edit-review-add-img-card {
+  aspect-ratio: 1 /1.5;
+  border: 1px solid black;
+}
+
+.edit-add-review-img {
+  max-width: 100%;
+}

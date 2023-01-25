@@ -4,7 +4,8 @@ import {
   fetchAddReviewImage,
   fetchReviewImages,
 } from "../../store/imageReducer";
-import ImageItem from "../ImageItem";
+import AddReviewImageItem from "../AddReviewImageItem";
+import "./AddReviewImage.css";
 
 const AddReviewImage = ({ reviewId }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const AddReviewImage = ({ reviewId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let image = { mediaUrl };
+    let image = { mediaUrl, imageableType: "review" };
     setErrors([]);
 
     const response = await dispatch(fetchAddReviewImage(image, reviewId)).catch(
@@ -35,7 +36,7 @@ const AddReviewImage = ({ reviewId }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <label>
           Image URL
           <input
@@ -46,10 +47,30 @@ const AddReviewImage = ({ reviewId }) => {
           />
         </label>
         <button type="submit">Add Image</button>
+      </form> */}
+      {/* <p className="review-photo-p">
+        Uploaded: {Object.values(images).length} of 9 images. Maximum 9 images
+        are allowed.
+      </p> */}
+      <form>
+        {/* <label>
+          Image URL */}
+        <input
+          type="text"
+          value={mediaUrl}
+          onChange={(e) => setMediaUrl(e.target.value)}
+          className="review-headline"
+          placeholder="Paste image address here."
+          required
+        />
+        {/* </label> */}
+        <button type="submit" onClick={handleSubmit} className="image-add-btn">
+          Add Image
+        </button>
       </form>
-      <div>
+      <div id="edit-review-add-container">
         {Object.values(images)?.map((image) => {
-          return <ImageItem key={image?.id} image={image} />;
+          return <AddReviewImageItem key={image?.id} image={image} />;
         })}
       </div>
     </>
