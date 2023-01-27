@@ -135,13 +135,23 @@ router.post(
     reviewId = parseInt(reviewId);
     const { user } = req;
 
-    const review = await Review.findByPk(reviewId);
+    const review = await Review.findByPk(reviewId, {
+      include: [{ model: Image }],
+    });
 
     if (!review) {
       res.status(404);
       return res.json({
         message: "Review couldn't be found",
         statusCode: 404,
+      });
+    }
+
+    if (review.Images.length >= 9) {
+      res.status(400);
+      return res.json({
+        message: "Maximum 10 images are allowed",
+        statusCode: 400,
       });
     }
 

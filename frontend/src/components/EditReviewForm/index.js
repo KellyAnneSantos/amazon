@@ -84,7 +84,11 @@ const EditReviewForm = () => {
             placeholder="Paste preview image address here."
             required
           />
-          <img src={review?.previewImage} id="review-preview-img" />
+          <div id="edit-review-preview-img-container">
+            <div className="edit-review-add-img-card">
+              <img src={previewImage} className="edit-add-review-img" />
+            </div>
+          </div>
           <hr className="review-lightgray-hr" />
           <p className="review-section-title">Overall rating</p>
           <div className="review-stars">
