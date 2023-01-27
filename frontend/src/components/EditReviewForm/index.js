@@ -70,22 +70,20 @@ const EditReviewForm = () => {
         <EditReviewProductItem productId={productId} />
         <hr className="review-lightgray-hr" />
         <p className="review-section-title">Add a photo</p>
-        <p className="review-photo-p">
+        {/* <p className="review-photo-p">
           Shoppers find images and videos more helpful than text alone.
-        </p>
+        </p> */}
         <AddReviewImage reviewId={reviewId} />
         <form onSubmit={handleSubmit}>
-          <label>
-            Preview Image URL
-            <input
-              type="text"
-              value={previewImage}
-              onChange={(e) => setPreviewImage(e.target.value)}
-              className="review-headline"
-              placeholder="Paste image address here."
-              required
-            />
-          </label>
+          <p className="review-section-title">Preview Image URL</p>
+          <input
+            type="text"
+            value={previewImage}
+            onChange={(e) => setPreviewImage(e.target.value)}
+            className="review-headline"
+            placeholder="Paste preview image address here."
+            required
+          />
           <img src={review?.previewImage} id="review-preview-img" />
           <hr className="review-lightgray-hr" />
           <p className="review-section-title">Overall rating</p>

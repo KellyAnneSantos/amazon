@@ -48,10 +48,11 @@ const AddReviewImage = ({ reviewId }) => {
         </label>
         <button type="submit">Add Image</button>
       </form> */}
-      {/* <p className="review-photo-p">
-        Uploaded: {Object.values(images).length} of 9 images. Maximum 9 images
-        are allowed.
-      </p> */}
+      <p className="review-photo-p">
+        Shoppers find images and videos more helpful than text alone. Uploaded:{" "}
+        {Object.values(images).length + 1} of 10 images. Maximum 10 images are
+        allowed.
+      </p>
       <form>
         {/* <label>
           Image URL */}
@@ -64,7 +65,7 @@ const AddReviewImage = ({ reviewId }) => {
           required
         />
         {/* </label> */}
-        <button type="submit" onClick={handleSubmit} className="image-add-btn">
+        <button type="submit" onClick={handleSubmit} id="edit-review-add-btn">
           Add Image
         </button>
       </form>
