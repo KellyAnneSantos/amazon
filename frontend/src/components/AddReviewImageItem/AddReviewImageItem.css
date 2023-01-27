@@ -1,8 +1,19 @@
-.edit-review-add-img-card {
-  aspect-ratio: 1 /1.5;
+/* .edit-review-add-img-card {
+  aspect-ratio: 1 / 1;
   border: 1px solid black;
-}
+} */
 
 .edit-add-review-img {
   max-width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+.edit-review-trash {
+  position: absolute;
+  transform: translate(-100%, 100%);
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
 }

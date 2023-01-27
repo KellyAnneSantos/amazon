@@ -18,7 +18,7 @@ const AddReviewImageItem = ({ image }) => {
         alt="Product"
         className="edit-add-review-img"
       />
-      <span className="image-map-trash">
+      <span className="edit-review-trash">
         <i class="fa-solid fa-trash" onClick={deleteImage}></i>
       </span>
     </div>

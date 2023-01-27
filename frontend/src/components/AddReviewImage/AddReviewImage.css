@@ -3,3 +3,16 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   max-width: 100%;
 }
+
+#edit-review-add-btn {
+  background-color: #ffd057;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px 0 11px;
+  width: 128px;
+  height: 29px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 580px;
+  margin-bottom: 20px;
+}
