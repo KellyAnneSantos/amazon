@@ -91,6 +91,18 @@ const AddReviewForm = () => {
         <ReviewProductItem productId={productId} />
         <hr className="review-lightgray-hr" />
         <form onSubmit={handleSubmit}>
+          <p className="review-section-title">Add a photo</p>
+          <p className="review-photo-p">
+            Shoppers find images and videos more helpful than text alone.
+          </p>
+          <input
+            type="text"
+            value={previewImage}
+            onChange={(e) => setPreviewImage(e.target.value)}
+            className="review-headline"
+            placeholder="Paste image address here."
+          />
+          <hr className="review-lightgray-hr" />
           <p className="review-section-title">Overall rating</p>
           <div className="review-stars">
             <i
@@ -149,18 +161,6 @@ const AddReviewForm = () => {
             placeholder="What's most important to know?"
             required
             className="review-headline"
-          />
-          <hr className="review-lightgray-hr" />
-          <p className="review-section-title">Add a photo</p>
-          <p className="review-photo-p">
-            Shoppers find images and videos more helpful than text alone.
-          </p>
-          <input
-            type="text"
-            value={previewImage}
-            onChange={(e) => setPreviewImage(e.target.value)}
-            className="review-headline"
-            placeholder="Paste image address here."
           />
           <hr className="review-lightgray-hr" />
           <p className="review-section-title">Add a written review</p>
