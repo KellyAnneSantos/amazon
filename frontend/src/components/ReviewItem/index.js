@@ -133,8 +133,13 @@ const ReviewItem = ({ review }) => {
         ""
       )} */}
       {/* <HelpfulCount review={review} /> */}
-      {feedback && <p>Thank you for your feedback.</p>}
-      {!feedback && (
+      {feedback && (
+        <>
+          <i class="fa-solid fa-circle-check"></i>
+          <span className="feedback"> Thank you for your feedback.</span>
+        </>
+      )}
+      {!feedback && user?.id !== review.userId && (
         <button id="review-helpful-btn" onClick={handleClick}>
           Helpful
         </button>

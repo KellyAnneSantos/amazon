@@ -109,3 +109,12 @@
   font-size: 14px;
   color: dimgray;
 }
+
+.feedback {
+  font-size: 14px;
+  color: #067d62;
+}
+
+.fa-circle-check {
+  color: #067d62;
+}

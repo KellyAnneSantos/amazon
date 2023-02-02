@@ -21,7 +21,10 @@ const ProductOrderItem = ({ productOrder }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    let newProductOrder = { productId: productOrder?.productId, quantity: 1 };
+    let newProductOrder = {
+      productId: productOrder?.productId,
+      quantity: parseInt(1),
+    };
 
     await dispatch(fetchAddProductOrder(newProductOrder)).then(
       setIsLoaded(true)
