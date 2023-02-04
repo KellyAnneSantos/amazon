@@ -96,7 +96,7 @@ const CartItem = ({ productOrder }) => {
           </div>
         </div>
       </div>
-      <span className="cart-price">${product?.price}</span>
+      <span className="cart-price">${product?.price.toFixed(2)}</span>
     </div>
   );
 };

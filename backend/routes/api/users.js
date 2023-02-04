@@ -303,6 +303,11 @@ router.post(
             "createdAt",
             "updatedAt",
           ],
+          include: [
+            {
+              model: Product,
+            },
+          ],
         });
 
         createdProductOrder.dataValues.quantity = quantity;
@@ -328,6 +333,11 @@ router.post(
             "quantity",
             "createdAt",
             "updatedAt",
+          ],
+          include: [
+            {
+              model: Product,
+            },
           ],
         });
 
@@ -363,6 +373,11 @@ router.post(
             "createdAt",
             "updatedAt",
           ],
+          include: [
+            {
+              model: Product,
+            },
+          ],
         });
 
         createdProductOrder.dataValues.quantity = quantity;
@@ -388,6 +403,11 @@ router.post(
             "quantity",
             "createdAt",
             "updatedAt",
+          ],
+          include: [
+            {
+              model: Product,
+            },
           ],
         });
 

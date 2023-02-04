@@ -23,7 +23,7 @@ const ProductShow = () => {
   const questions = Object.values(useSelector((state) => state.questions));
   let amazonDog = useSelector((state) => state?.products[999999999]);
 
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(parseInt(1));
   let [source, setSource] = useState(product?.previewImage);
   const [modal, setModal] = useState(false);
   const [average, setAverage] = useState(product?.avgStarRating);

@@ -24,7 +24,7 @@ const MyCartPage = () => {
 
   useEffect(() => {
     const getTotal = async () => {
-      let newSum = 0.0;
+      let newSum = 0;
       let newQuantity = 0;
       if (productOrders) {
         for await (const productOrder of productOrders) {
