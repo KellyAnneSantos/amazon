@@ -12,16 +12,16 @@ const ReviewProductItem = ({ productId }) => {
   const reviews = product?.Reviews;
   const review = reviews?.find((review) => review?.userId === user?.id);
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await dispatch(fetchProduct(productId));
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const data = await dispatch(fetchProduct(productId));
 
-      if (!data) {
-        return history.push("/");
-      }
-    };
-    // dispatch(fetchProduct(productId));
-  }, [dispatch, productId]);
+  //     if (!data) {
+  //       return history.push("/");
+  //     }
+  //   };
+  //   // dispatch(fetchProduct(productId));
+  // }, [dispatch, productId]);
 
   // if (!product) {
   //   return <Redirect to="/" />;

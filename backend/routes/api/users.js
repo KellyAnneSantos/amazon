@@ -491,6 +491,9 @@ router.get("/:userId/reviews", async (req, res) => {
     },
     include: [
       {
+        model: Helpful,
+      },
+      {
         model: Image,
       },
       {

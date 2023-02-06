@@ -9,7 +9,7 @@ import ProductShow from "./components/ProductShow";
 import LandingPage from "./components/LandingPage";
 import CreateProductForm from "./components/CreateProductForm";
 import AddReviewForm from "./components/AddReviewForm";
-import EditReviewForm from "./components/EditReviewForm";
+import EditReviewPage from "./components/EditReviewPage";
 import AccountPage from "./components/AccountPage";
 import ProfilePage from "./components/ProfilePage";
 import ImagesTab from "./components/ImagesTab";
@@ -66,7 +66,7 @@ function App() {
                 <ProductShow />
               </Route>
               <Route path="/reviews/:reviewId/edit">
-                <EditReviewForm />
+                <EditReviewPage />
               </Route>
               <Route path="/profile/:userId">
                 <ProfilePage />

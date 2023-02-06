@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const { Helpful, Image, Review } = require("../../db/models");
+const { Helpful, Image, Review, User } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -173,6 +173,37 @@ router.post(
     }
   }
 );
+
+router.get("/:reviewId", async (req, res) => {
+  let { reviewId } = req.params;
+  reviewId = parseInt(reviewId);
+
+  let review = await Review.findByPk(reviewId);
+
+  if (!review) {
+    res.status(404);
+    return res.json({
+      message: "Review couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  review = await Review.findByPk(reviewId, {
+    include: [
+      {
+        model: Helpful,
+      },
+      {
+        model: Image,
+      },
+      {
+        model: User,
+      },
+    ],
+  });
+
+  return res.json(review);
+});
 
 router.put("/:reviewId", requireAuth, validateReview, async (req, res) => {
   let { reviewId } = req.params;

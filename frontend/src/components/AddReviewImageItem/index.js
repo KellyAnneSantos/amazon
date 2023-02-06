@@ -19,7 +19,7 @@ const AddReviewImageItem = ({ image }) => {
         className="edit-add-review-img"
       />
       <span className="edit-review-trash">
-        <i class="fa-solid fa-trash" onClick={deleteImage}></i>
+        <i className="fa-solid fa-trash" onClick={deleteImage}></i>
       </span>
     </div>
   );

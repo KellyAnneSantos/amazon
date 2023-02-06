@@ -47,7 +47,7 @@ const ProductOrderItem = ({ productOrder }) => {
         </div>
         <div>
           <NavLink
-            to={`/products/${productOrder.productid}`}
+            to={`/products/${productOrder.productId}`}
             className="po-name"
           >
             <p className="po-name">{product?.name}</p>

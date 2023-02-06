@@ -14,7 +14,7 @@ const MyCartPage = () => {
     useSelector((state) => state?.productOrders)
   );
 
-  const [sum, setSum] = useState(0.0);
+  const [sum, setSum] = useState(0);
   const [number, setNumber] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   let [arr, setArr] = useState(
