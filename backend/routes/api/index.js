@@ -7,6 +7,7 @@ const imagesRouter = require("./images.js");
 const descriptionsRouter = require("./descriptions.js");
 const productOrdersRouter = require("./productorders.js");
 const ordersRouter = require("./orders.js");
+const questionsRouter = require("./questions.js");
 const { restoreUser } = require("../../utils/auth.js");
 
 router.use(restoreUser);
@@ -26,6 +27,8 @@ router.use("/descriptions", descriptionsRouter);
 router.use("/productorders", productOrdersRouter);
 
 router.use("/orders", ordersRouter);
+
+router.use("/questions", questionsRouter);
 
 router.post("/test", (req, res) => {
   res.json({ requestBody: req.body });

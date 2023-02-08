@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "./QuestionAnswerItem.css";
 
 const QuestionAnswerItem = ({ question }) => {
@@ -8,7 +9,12 @@ const QuestionAnswerItem = ({ question }) => {
       <div className="product-question-container">
         <span className="product-question-colon">Question: </span>
         <div className="product-q-text-container">
-          <p className="product-question-text">{question?.body}</p>
+          <NavLink
+            to={`/questions/${question.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <p className="product-question-text">{question?.body}</p>
+          </NavLink>
         </div>
       </div>
       <div className="product-answer-container">

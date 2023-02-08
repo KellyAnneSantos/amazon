@@ -19,6 +19,7 @@ import DescriptionTab from "./components/DescriptionTab";
 import MyOrdersPage from "./components/MyOrdersPage";
 import SearchResultsPage from "./components/SearchResultsPage";
 import MyCartPage from "./components/MyCartPage";
+import AnswerForm from "./components/AnswerForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,9 @@ function App() {
               </Route>
               <Route path="/products/:productId">
                 <ProductShow />
+              </Route>
+              <Route path="/questions/:questionId">
+                <AnswerForm />
               </Route>
               <Route path="/reviews/:reviewId/edit">
                 <EditReviewPage />
