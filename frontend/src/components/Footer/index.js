@@ -3,11 +3,11 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <div id="footer">
-      <a href="https://github.com/KellyAnneSantos/SoundCloud" target={"_blank"}>
+      <a href="https://github.com/KellyAnneSantos/amazon" target={"_blank"}>
         <img src="/images/githublogo.png" alt="Link to Github" id="git-hub" />
       </a>
       <a
-        href="https://github.com/KellyAnneSantos/SoundCloud"
+        href="https://github.com/KellyAnneSantos/amazon"
         target={"_blank"}
         id="Kelly-Anne-Santos"
       >
