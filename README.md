@@ -1,4 +1,4 @@
-# `Amazon Project`
+# `amazonian`
 
 ## Technologies
 
