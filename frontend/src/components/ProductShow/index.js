@@ -192,9 +192,9 @@ const ProductShow = () => {
                 Add to Cart
               </button>
             </form>
-            <button id="buy-cart-btn" onClick={() => setModal(true)}>
+            {/* <button id="buy-cart-btn" onClick={() => setModal(true)}>
               Buy Now
-            </button>
+            </button> */}
             {/* {modal && (
               <Modal>
                 <form>
@@ -232,10 +232,10 @@ const ProductShow = () => {
                 </form>
               </Modal>
             )} */}
-            <div id="product-secure-container">
+            {/* <div id="product-secure-container">
               <i className="fa-solid fa-lock fa-xs"></i>
               <span id="product-secure">Secure transaction</span>
-            </div>
+            </div> */}
             {/* <div id="product-form-soldby-container">
               <span id="product-form-sold">Sold by </span>
               <span id="product-form-merchant">
@@ -245,7 +245,7 @@ const ProductShow = () => {
           </div>
         </div>
         <hr className="product-dividers" />
-        <div>
+        {/* <div>
           <h2 id="product-question-title">Looking for specific info?</h2>
           <h2 id="product-question-h2">Customer questions & answers</h2>
           <div>
@@ -260,7 +260,7 @@ const ProductShow = () => {
             <button id="product-post-q-btn">Post your question</button>
           </div>
         </div>
-        <hr className="product-dividers" />
+        <hr className="product-dividers" /> */}
         <div id="product-reviews-container">
           <div id="review-summary-container">
             <h2 id="product-review-title">Customer reviews</h2>
@@ -299,7 +299,7 @@ const ProductShow = () => {
             </NavLink>
           </div>
           <div id="right-product-reviews-container">
-            <h4 id="product-reviews-w-imgs">Reviews with images</h4>
+            {/* <h4 id="product-reviews-w-imgs">Reviews with images</h4>
             <div id="review-images-container">
               {Object.values(reviews)?.map((review) => {
                 // return <ReviewImages key={review?.id} review={review} />;
@@ -312,7 +312,7 @@ const ProductShow = () => {
                 );
               })}
             </div>
-            <p id="product-see">See all customer images</p>
+            <p id="product-see">See all customer images</p> */}
             <h4 id="product-reviews-right-title">Reviews</h4>
             <div>
               {reviews?.map((review) => {
