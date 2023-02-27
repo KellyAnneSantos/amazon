@@ -18,11 +18,12 @@
   font-weight: bold;
 }
 
-#nav-bar-cart {
+.nav-bar-cart {
   color: white;
   text-decoration: none;
   font-weight: bold;
   position: relative;
+  /* z-index: -1; */
 }
 
 #second-nav-bar {
@@ -41,16 +42,23 @@
 }
 
 .remove-text-dec {
-  text-decoration: none !important;
+  /* text-decoration: none !important; */
+  text-decoration: none;
+  /* position: relative; */
 }
 
-#nav-bar-count {
+.count {
   z-index: 1;
   color: black;
   position: absolute;
-  top: 6.6%;
-  left: 96.1%;
+  top: -550%;
+  left: 55%;
   transform: translate(-50%, -50%);
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 900;
+}
+
+.fa-cart-shopping {
+  position: relative;
+  /* z-index: -1; */
 }

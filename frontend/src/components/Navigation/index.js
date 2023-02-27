@@ -78,9 +78,11 @@ function Navigation() {
             <p id="nav-bar-orders">Orders</p>
           </NavLink>
           <NavLink to="/my/cart" className="remove-text-dec">
-            <div id="nav-bar-count">{number}</div>
-            <p id="nav-bar-cart">
-              <i className="fa-solid fa-cart-shopping fa-2xl"></i> Cart
+            <p className="nav-bar-cart">
+              <i className="fa-solid fa-cart-shopping fa-2xl">
+                <div className="nav-bar-cart count">{number}</div>
+              </i>{" "}
+              Cart
             </p>
           </NavLink>
         </nav>
