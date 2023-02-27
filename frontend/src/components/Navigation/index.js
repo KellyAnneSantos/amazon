@@ -1,13 +1,21 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "./Navigation.css";
 import SearchBar from "../SearchBar";
 import NavigationDropdown from "../NavigationDropdown";
 import DepartmentItem from "../DepartmentItem";
+import { fetchLoadCart } from "../../store/productOrderReducer";
 
-function Navigation({ isLoaded }) {
+// function Navigation({ isLoaded }) {
+function Navigation() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const sessionUser = useSelector((state) => state.session.user);
+  const productOrders = Object.values(
+    useSelector((state) => state?.productOrders)
+  );
 
   const departments = [
     "Baby",
@@ -23,6 +31,36 @@ function Navigation({ isLoaded }) {
     "Sports",
     "Toys",
   ];
+
+  const [sum, setSum] = useState(0);
+  const [number, setNumber] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  let [arr, setArr] = useState(
+    productOrders?.map((productOrder) => productOrder?.quantity).join("")
+  );
+  let [newArr, setNewArr] = useState([]);
+
+  useEffect(() => {
+    const getTotal = async () => {
+      let newSum = 0;
+      let newQuantity = 0;
+      if (productOrders) {
+        for await (const productOrder of productOrders) {
+          newSum +=
+            parseInt(productOrder?.quantity) *
+            parseInt(productOrder?.Product?.price);
+          newQuantity += parseInt(productOrder?.quantity);
+        }
+        setSum(newSum);
+        setNumber(newQuantity);
+      }
+    };
+    getTotal();
+    setArr(
+      productOrders?.map((productOrder) => productOrder?.quantity)?.join("")
+    );
+    dispatch(fetchLoadCart()).then(() => setIsLoaded(true));
+  }, [productOrders?.map((productOrder) => productOrder?.quantity)?.join("")]);
 
   return (
     isLoaded && (
@@ -40,6 +78,7 @@ function Navigation({ isLoaded }) {
             <p id="nav-bar-orders">Orders</p>
           </NavLink>
           <NavLink to="/my/cart" className="remove-text-dec">
+            <div id="nav-bar-count">{number}</div>
             <p id="nav-bar-cart">
               <i className="fa-solid fa-cart-shopping fa-2xl"></i> Cart
             </p>

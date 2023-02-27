@@ -44,7 +44,8 @@ function App() {
           </Route>
         </Switch>
       )}
-      {sessionUser && <Navigation isLoaded={isLoaded} />}
+      {sessionUser && <Navigation />}
+      {/* {sessionUser && <Navigation isLoaded={isLoaded} />} */}
       {sessionUser
         ? isLoaded && (
             <Switch>

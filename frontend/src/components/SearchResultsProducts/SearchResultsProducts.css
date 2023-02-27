@@ -49,3 +49,8 @@
 .search-price {
   margin: 4px 0px;
 }
+
+.search-rating-avg {
+  margin-right: 5px;
+  font-size: 14px;
+}

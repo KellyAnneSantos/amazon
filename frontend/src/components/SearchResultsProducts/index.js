@@ -32,6 +32,7 @@ const SearchResultsProducts = ({ product }) => {
           <p className="search-product-name">{product?.name}</p>
         </NavLink>
         <div className="search-rating-row">
+          {/* <div className="search-rating-avg">{product?.avgStarRating}</div> */}
           <div className="search-star">
             {checkedStarArr.length
               ? checkedStarArr.map((star, idx) => {
