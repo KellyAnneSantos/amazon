@@ -7,7 +7,7 @@ import "./MyOrdersPage.css";
 const MyOrdersPage = () => {
   const dispatch = useDispatch();
 
-  const orders = Object.values(useSelector((state) => state.orders));
+  const orders = Object.values(useSelector((state) => state.orders)).reverse();
 
   const [isLoaded, setIsLoaded] = useState(false);
 
