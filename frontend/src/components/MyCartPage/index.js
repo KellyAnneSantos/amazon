@@ -30,7 +30,7 @@ const MyCartPage = () => {
         for await (const productOrder of productOrders) {
           newSum +=
             parseInt(productOrder?.quantity) *
-            parseInt(productOrder?.Product?.price);
+            parseFloat(productOrder?.Product?.price);
           newQuantity += parseInt(productOrder?.quantity);
         }
         setSum(newSum);
